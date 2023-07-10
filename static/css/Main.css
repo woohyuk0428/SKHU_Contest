@@ -1,0 +1,85 @@
+/* 가로 폭이 850px 보다 작을때 실행 */
+@media (max-width: 850px) {
+    /* 서비스 소개 카드 컨테이너 내부 요소 중앙 정렬 */
+    .text_center_800 {
+        text-align: center;
+    }
+
+    /* 서비스 소개 카드 이미지 그라데이션(Top) */
+    .jb_img_left {
+        background: linear-gradient(
+                to top,
+                rgba(226, 226, 226, 0) 5%,
+                rgba(226, 226, 226, 0.25) 15%,
+                rgba(226, 226, 226, 0.5) 30%,
+                rgba(226, 226, 226, 0.75) 50%,
+                rgb(226, 226, 226) 100%
+            ),
+            url(Main_GoogleMap_img.PNG);
+    }
+
+    /* 서비스 소개 카드 이미지 그라데이션(Top) */
+    .jb_img_right {
+        background: linear-gradient(
+                to top,
+                rgba(226, 226, 226, 0) 5%,
+                rgba(226, 226, 226, 0.25) 15%,
+                rgba(226, 226, 226, 0.5) 30%,
+                rgba(226, 226, 226, 0.75) 50%,
+                rgb(226, 226, 226) 100%
+            ),
+            url(Main_GoogleMap_img.PNG);
+    }
+}
+
+/* 가로 폭이 850px 보다 클때 실행 */
+@media (min-width: 850px) {
+    /* 서비스 소개 카드 이미지 그라데이션(left) */
+    .jb_img_left {
+        background: linear-gradient(
+                to left,
+                rgba(226, 226, 226, 0) 5%,
+                rgba(226, 226, 226, 0.25) 15%,
+                rgba(226, 226, 226, 0.5) 30%,
+                rgba(226, 226, 226, 0.75) 50%,
+                rgb(226, 226, 226) 100%
+            ),
+            url(Main_GoogleMap_img.PNG);
+    }
+
+    /* 서비스 소개 카드 이미지 그라데이션(right) */
+    .jb_img_right {
+        background: linear-gradient(
+                to right,
+                rgba(226, 226, 226, 0) 5%,
+                rgba(226, 226, 226, 0.25) 15%,
+                rgba(226, 226, 226, 0.5) 30%,
+                rgba(226, 226, 226, 0.75) 50%,
+                rgb(226, 226, 226) 100%
+            ),
+            url(Main_GoogleMap_img.PNG);
+    }
+
+    /* content내부 요소 왼쪽으로 3rem 이동 */
+    .content_left {
+        padding-right: 3rem;
+    }
+
+    /* content내부 요소 오른쪽으로 3rem 이동 */
+    .content_right {
+        padding-left: 3rem;
+    }
+}
+
+/* 가로 폭이 1450px 보다 클때 실행 */
+@media (min-width: 1450px) {
+    /* content내부 요소 왼쪽으로 10rem 이동 */
+    .content_left {
+        padding-right: 10rem;
+    }
+
+    /* content내부 요소 오른쪽으로 10rem 이동 */
+    .content_right {
+        padding-left: 10rem;
+    }
+}
