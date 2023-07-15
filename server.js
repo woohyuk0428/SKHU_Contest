@@ -30,7 +30,10 @@ app.listen(port, () => {
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/template/Main.html");
 });
-
+//http://localhost:8080/detail 경로로 요청 시 Detail.html파일 반환
+app.get("/detail", (req, res) => {
+    res.sendFile(__dirname + "/template/Detail.html");
+});
 //http://localhost:8080/halfway 경로로 요청 시 Halfway.html파일 반환
 app.get("/halfway", (req, res) => {
     res.sendFile(__dirname + "/template/Halfway.html");
