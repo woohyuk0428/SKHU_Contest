@@ -55,7 +55,10 @@ app.get("/mapping", (req, res) => {
 app.get("/suggestion", (req, res) => {
     res.render("Suggestion");
 });
-
+//http://localhost:8080/detail 경로로 요청 시 Detail.html파일 반환
+app.get("/detail", (req, res) => {
+    res.render("Detail");
+});
 //http://localhost:8080/post 경로로 요청 시 Suggestion.html파일 반환
 app.get("/post", (req, res) => {
     // 쿠키가 있는지 검사
