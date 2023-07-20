@@ -5,7 +5,8 @@ const fs = require("fs"); // fs 모듈
 const app = express(); //express 객체 생성
 const port = 8080; // 포트 번호 지정
 const today = new Date(); // 서버 오픈 시 기록용 현재 시간 저장
-
+var XMLHttpRequest = require('xhr2');
+var xhr = new XMLHttpRequest();
 const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저장
 
 // #region 파일 경로 지정, 옵션 설정
@@ -217,6 +218,7 @@ app.post("/XSS", (req, res) => {
         },
         function (error, response, body) {
             try {
+                console.log(url);
                 const obj = JSON.parse(body); // body의 데이터는 string으로 전송되기 때문에 json형식으로 변환
                 const data = obj.realtimeArrivalList[0]; // 필요한 데이터 경로 압축
 
@@ -249,3 +251,47 @@ app.post("/XSS", (req, res) => {
     );
 });
 // #endregion
+
+
+
+
+/* ***************** 여기서부터는 지하철 정보를 가져오기 위한 API를 통해 데이터를 Json 형식으로 파일을 제작하는 과정입니다. ******************* */
+const key_new = "XXsK%2F1XwVTPaVFfkrpoBQapqSlNiziqMMJJRcS549BH3B2gH1ph4mkRwBJgDbI20uZDnt9SiLbsVlFT5%2FAHCBQ%3D%3D";
+
+//지하철 역 API(new)에서 가져올 데이터
+var url = 'http://apis.data.go.kr/1613000/SubwayInfoService/getKwrdFndSubwaySttnList'; /*URL*/
+var queryParams = '?' + encodeURIComponent('serviceKey') + '='+ key_new; /*Service Key*/
+queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*한 번에 데이터들을 가져오기 위해 1페이지로 지정*/
+queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('1063'); /*모든 데이터들을 조회한 경우 1063개로 집계됨*/
+queryParams += '&' + encodeURIComponent('_type') + '=' + encodeURIComponent('json'); /**/
+
+console.log(url + queryParams);
+request({
+    url: url + queryParams,
+    method: 'GET'
+}, function (error, response, body) {
+
+    fs.writeFileSync("test_new.json", body);
+    console.log('Status', response.statusCode);
+    console.log('Headers', JSON.stringify(response.headers));
+    console.log('Reponse received', body);
+});
+
+/* ***************** 여기서부터는 지하철 출구 근처의 명소 내역을 가져오기 위한 API를 통해 데이터를 Json 형식으로 파일을 제작하는 과정입니다. ******************* */
+
+var url = 'http://apis.data.go.kr/1613000/SubwayInfoService/getSubwaySttnExitAcctoCfrFcltyList';
+var queryParams_sights = '?' + encodeURIComponent('serviceKey') + '=' + key_new; /* Service Key*/
+queryParams_sights += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('100090'); /* */
+queryParams_sights += '&' + encodeURIComponent('_type') + '=' + encodeURIComponent('json'); /* */
+queryParams_sights += '&' + encodeURIComponent('subwayStationId') + '=' + encodeURIComponent('MTRS11133'); /* */
+
+
+request({
+    url: url + queryParams_sights,
+    method: 'GET'
+}, function (error, response, body) {
+    fs.writeFileSync("test_sights.json", body);
+    console.log('\n\n\n\n\nStatus', response.statusCode);
+    console.log('Headers', JSON.stringify(response.headers));
+    console.log('Reponse received', body);
+});
