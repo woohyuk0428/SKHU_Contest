@@ -6,6 +6,7 @@ const app = express(); //express 객체 생성
 const port = 8080; // 포트 번호 지정
 const today = new Date(); // 서버 오픈 시 기록용 현재 시간 저장
 var XMLHttpRequest = require('xhr2');
+const bodyParser = require("body-parser");
 var xhr = new XMLHttpRequest();
 const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저장
 
@@ -21,6 +22,7 @@ app.set("view engine", "ejs"); // 뷰 엔진을 ejs로 설정
 app.set("views", "./views"); // 뷰 파일 경로 지정
 
 app.use(cookieParser("SHKU_Cookie")); // 쿠키 시크릿 키 지정
+app.use(bodyParser.json());
 
 // const cookieConfig = {
 //     httpOnly: true,
@@ -50,6 +52,13 @@ app.get("/halfway", (req, res) => {
 //http://localhost:8080/mapping 경로로 요청 시 Mapping.html파일 반환
 app.get("/mapping", (req, res) => {
     res.render("Mapping");
+});
+
+app.post("/mapping",(req,res) => {
+    const {latitude, longitude} = req.body;
+
+    
+    res.send("xxx");
 });
 
 //http://localhost:8080/suggestion 경로로 요청 시 Suggestion.html파일 반환
