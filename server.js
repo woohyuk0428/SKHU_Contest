@@ -290,8 +290,9 @@ request({
     url: url + queryParams_sights,
     method: 'GET'
 }, function (error, response, body) {
-    fs.writeFileSync("test_sights.json", body);
+
     console.log('\n\n\n\n\nStatus', response.statusCode);
     console.log('Headers', JSON.stringify(response.headers));
     console.log('Reponse received', body);
+    fs.writeFileSync("test_sights.json", body);
 });
