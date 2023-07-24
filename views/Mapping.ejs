@@ -28,7 +28,7 @@
                     <div id="map"></div>
                     <div class="input-group mt-4">
                         <input type="text" class="form-control" placeholder="위치 검색" />
-                        <button class="btn btn-primary" type="button">검색</button>
+                        <button id="btn" class="btn btn-primary" type="button">검색</button>
                     </div>
                 </div>
             </div>
@@ -65,6 +65,41 @@
                     });
                 });
             }
+
+            if("geolocation" in navigator){
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+
+                        sendLocation(latitude,longitude);
+                    },
+                    error => {
+
+                    }
+                );
+            }
+            else{
+
+            }
+            function sendLocation(){
+                const latitude = 37.5665; // 서울
+                const longitude = 126.978;
+
+                fetch('/mapping',{method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({latitude,longitude})
+            })
+            
+            .then(response => response.text())
+            .catch(
+ 
+                )
+            }
+
+            document.getElementById("btn").addEventListener('click',sendLocation(latitude,longitude));
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI&callback=initMap" async defer></script>
     </body>
