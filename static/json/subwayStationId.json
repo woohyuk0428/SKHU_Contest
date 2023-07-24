@@ -1,19 +1,68 @@
 {
-    "1호선" : "MTRKR1140",
-    "2호선" : "MTRS12234",
-    "3호선" : "MTRS13321",
-    "4호선" : "MTRS14423",
-    "5호선" : "MTRS152530",
-    "6호선" : "MTRS162627",
-    "7호선" : "MTRIC7751",
-    "8호선" : "MTRS182816",
-    "9호선" : "MTRS99932",
-    "경의중앙선" : "MTRKRK4K114",
-    "공항철도" : "MTRARA1A05",
-    "경춘선" : "MTRKRK2P140",
-    "수인분당선" : "MTRKRK1K245",
-    "신분당선" : "MTRDXD14311",
-    "우이신설선" : "MTRUIUIS120",
-    "서해선" :  "MTRSWWSS16",
-    "김포골드라인" : "MTRGMG1G109"
+    "SearchSTNTimeTableByFRCodeService": {
+        "list_total_count": 38,
+        "RESULT": {
+            "CODE": "INFO-000",
+            "MESSAGE": "정상 처리되었습니다"
+        },
+        "row": [
+            {
+                "LINE_NUM": "01호선",
+                "FR_CODE": "100",
+                "STATION_CD": "1916",
+                "STATION_NM": "소요산",
+                "TRAIN_NO": "K976",
+                "ARRIVETIME": "18:13:00",
+                "LEFTTIME": "00:00:00",
+                "ORIGINSTATION": "1019",
+                "DESTSTATION": "1916",
+                "SUBWAYSNAME": "광운대",
+                "SUBWAYENAME": "소요산",
+                "WEEK_TAG": "1",
+                "INOUT_TAG": "1",
+                "FL_FLAG": "",
+                "DESTSTATION2": "",
+                "EXPRESS_YN": "G",
+                "BRANCH_LINE": ""
+            },
+            {
+                "LINE_NUM": "01호선",
+                "FR_CODE": "100",
+                "STATION_CD": "1916",
+                "STATION_NM": "소요산",
+                "TRAIN_NO": "K968",
+                "ARRIVETIME": "07:40:30",
+                "LEFTTIME": "00:00:00",
+                "ORIGINSTATION": "1019",
+                "DESTSTATION": "1916",
+                "SUBWAYSNAME": "광운대",
+                "SUBWAYENAME": "소요산",
+                "WEEK_TAG": "1",
+                "INOUT_TAG": "1",
+                "FL_FLAG": "",
+                "DESTSTATION2": "",
+                "EXPRESS_YN": "G",
+                "BRANCH_LINE": ""
+            },
+            {
+                "LINE_NUM": "01호선",
+                "FR_CODE": "100",
+                "STATION_CD": "1916",
+                "STATION_NM": "소요산",
+                "TRAIN_NO": "K962",
+                "ARRIVETIME": "06:52:00",
+                "LEFTTIME": "00:00:00",
+                "ORIGINSTATION": "1019",
+                "DESTSTATION": "1916",
+                "SUBWAYSNAME": "광운대",
+                "SUBWAYENAME": "소요산",
+                "WEEK_TAG": "1",
+                "INOUT_TAG": "1",
+                "FL_FLAG": "",
+                "DESTSTATION2": "",
+                "EXPRESS_YN": "G",
+                "BRANCH_LINE": ""
+            }
+        ]
+    }
 }
