@@ -1,3 +1,6 @@
+process.setMaxListeners(60); //Listener 확장을 통해 메모리 누수 방지처리(웹 크롤링에 의한 누수방지)
+
+const puppeteer = require('puppeteer');
 const express = require("express"); // express 프레임워크
 const request = require("request"); // request 모듈
 const cookieParser = require("cookie-parser");
@@ -8,8 +11,8 @@ const today = new Date(); // 서버 오픈 시 기록용 현재 시간 저장
 var XMLHttpRequest = require('xhr2');
 const bodyParser = require("body-parser");
 var xhr = new XMLHttpRequest();
-const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저장
-
+const key = "72594c566a77686b3536686666694f";
+const axios = require("axios")
 // #region 파일 경로 지정, 옵션 설정
 app.use(express.static("static/image"));
 app.use(express.static("static/css"));
@@ -57,7 +60,7 @@ app.get("/mapping", (req, res) => {
 app.post("/mapping",(req,res) => {
     const {latitude, longitude} = req.body;
 
-    
+
     res.send("xxx");
 });
 
@@ -305,3 +308,43 @@ request({
     console.log('Reponse received', body);
     fs.writeFileSync("test_sights.json", body);
 });
+
+
+/*************** 여기서부터는 명소를 찾은 결과를 통해 Google에서 웹크롤링하여 결과(사진)를 반환하는 코드입니다. *********/
+// var sightsData = fs.readFileSync("test_sights.json", "utf8");
+// var sightsDataParse = JSON.parse(sightsData);
+// var sightsDataResultTmp = sightsDataParse["response"]["body"]["items"]["item"];
+
+// var ResultArr = [];
+// for(i=0; i<sightsDataResultTmp.length; i++) {
+//     ResultArr.push(sightsDataResultTmp[i].dirDesc);
+// }
+
+
+// for(i=0; i<sightsDataResultTmp.length; i++) {
+
+//     (async () => {
+//         const searchTerm = ResultArr[i] + " 건물"; // 검색어
+//         const browser = await puppeteer.launch({ headless: true }); // headless 모드를 true로 설정하면 브라우저가 실제로 실행되지 않습니다.
+//         const page = await browser.newPage();
+
+//         // Google 이미지 검색 페이지로 이동
+//         await page.goto(`https://www.google.com/search?q=${searchTerm}&tbm=isch`);
+
+//         // 이미지 로드를 위해 적절한 시간 대기 (충분한 시간을 주어야 할 수 있습니다.)
+//         await page.waitForTimeout(2500);
+
+//         // 첫 번째 이미지 선택
+//         const firstImage = await page.evaluate(() => {
+//           const imgElement = document.querySelector('.rg_i');
+//           return imgElement ? imgElement.src : null;
+//         });
+//         const response = await axios.get(firstImage, { responseType: 'arraybuffer' });
+//         const imageBuffer = Buffer.from(response.data, 'binary');
+//         fs.writeFileSync("image/" + searchTerm + ".png", imageBuffer);
+//         await browser.close();
+//       })();
+
+// }
+
+
