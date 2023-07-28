@@ -1,0 +1,16 @@
+.input-group {
+    display: flex;
+    justify-content: space-between;
+}
+.input-group .btn {
+    flex-shrink: 0;
+}
+
+.plus_btn {
+    margin-top: 10px;
+}
+
+/* 지도 크기 */
+#map {
+    height: 450px;
+}

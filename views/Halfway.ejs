@@ -3,10 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="Halfway.css" />
         <!-- 부트스트랩 CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
         <title>SKHU ROAD</title>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI&libraries=places"></script>
     </head>
     <body>
         <%- include('./__GNB') %>
@@ -14,14 +16,46 @@
         <!-- #region 헤더 -->
         <header class="jumbotron">
             <div class="container text-center">
-                <h1 class="display-4">Halfwau Point</h1>
+                <h1 class="display-4">Halfway</h1>
                 <p class="lead">아직 기능이 완성되지 않았습니다.</p>
             </div>
         </header>
         <!-- #endregion 헤더 -->
 
-        <span style="line-height: 1000px"><br /></span>
+        <!-- #region 지도 표시 -->
+        <div class="container mt-4">
+            <div id="map"></div>
+        </div>
+        <!-- #endregion 지도 표시 -->
+
+        <!-- #region 출발지점 입력 및 중간지점 찾기 -->
+        <div class="container mt-4">
+            <div class="form-group">
+                <!-- input 박스를 그룹으로 묶음 -->
+                <div id="address-container">
+                    <div class="input-group mt-2">
+                        <input id="address-input" type="text" class="form-control" name="address[]" placeholder="출발지점을 입력하세요." />
+                        <div class="input-group-append">
+                            <button class="btn btn-danger remove-address" type="button">삭제</button>
+                        </div>
+                    </div>
+                    <div class="input-group mt-2">
+                        <input id="address-input" type="text" class="form-control" name="address[]" placeholder="출발지점을 입력하세요." />
+                        <div class="input-group-append">
+                            <button class="btn btn-danger remove-address" type="button">삭제</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success add-address plus_btn btn-block" type="button">출발지점 추가</button>
+                <button class="btn btn add-address plus_btn btn-block" id="mid_btn" type="button">중간지점 찾기</button>
+            </div>
+        </div>
+        <!-- #endregion 출발지점 입력 및 중간지점 찾기  -->
+
+        <span style="line-height: 300px"><br /></span>
 
         <%- include('./__Footer') %>
+
+        <script src="Halfway.js"></script>
     </body>
 </html>
