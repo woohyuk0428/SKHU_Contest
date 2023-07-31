@@ -76,24 +76,7 @@ request(
 
 /* ***************** 여기서부터는 지하철 출구 근처의 명소 내역을 가져오기 위한 API를 통해 데이터를 Json 형식으로 파일을 제작하는 과정입니다. ******************* */
 
-var url = "http://apis.data.go.kr/1613000/SubwayInfoService/getSubwaySttnExitAcctoCfrFcltyList";
-var queryParams_sights = "?" + encodeURIComponent("serviceKey") + "=" + key_new; /* Service Key*/
-queryParams_sights += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("100090"); /* */
-queryParams_sights += "&" + encodeURIComponent("_type") + "=" + encodeURIComponent("json"); /* */
-queryParams_sights += "&" + encodeURIComponent("subwayStationId") + "=" + encodeURIComponent("MTRS11133"); /* */
 
-request(
-    {
-        url: url + queryParams_sights,
-        method: "GET",
-    },
-    function (error, response, body) {
-        // console.log("\n\n\n\n\nStatus", response.statusCode);
-        // console.log("Headers", JSON.stringify(response.headers));
-        // console.log("Reponse received", body);
-        fs.writeFileSync("test_sights.json", body);
-    }
-);
 
 /*************** 여기서부터는 명소를 찾은 결과를 통해 Google에서 웹크롤링하여 결과(사진)를 반환하는 코드입니다. *********/
 // var sightsData = fs.readFileSync("test_sights.json", "utf8");
