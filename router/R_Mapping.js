@@ -7,11 +7,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+    console.log(req.body);
     const { latitude, longitude } = req.body;
     console.log(latitude, longitude);
 
-    res.render("s");
-    
+    res.json({ lat: latitude, lng: longitude }); //todo render가 없는 파일을 찾고 있어서 json데이터로 수정했습니다.
 });
 
 module.exports = router;
