@@ -10,7 +10,8 @@ router.post("/", (req, res) => {
     const { latitude, longitude } = req.body;
     console.log(latitude, longitude);
 
-    res.send("xxx");
+    res.render("s");
+    
 });
 
 module.exports = router;

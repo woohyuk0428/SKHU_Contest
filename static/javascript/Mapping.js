@@ -1,32 +1,44 @@
 var map;
 function initMap() {
-    var map = new google.maps.Map(document.getElementById("map"), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 37.5665, lng: 126.978 }, // 초기 위치 설정 (서울)
         zoom: 12, // 확대/축소 레벨
     });
 }
 initMap();
 
-function search() {
-    // 위치 검색 버튼 클릭 시 이벤트 처리
-    document.querySelector(".btn").addEventListener("click", function () {
-    var input = document.querySelector(".form-control").value;//검색위치
-    var geocoder = new google.maps.Geocoder();
+document.addEventListener("DOMContentLoaded",function(){
+    button = document.getElementById("btn");
 
-    geocoder.geocode({ address: input }, function (results, status) {
-    if (status == "OK") {
-        //지도 초기화
-        map.setCenter(results.geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results.geometry.location,
+    button.addEventListener("click",function(){
+        // 위치 검색 버튼 클릭 시 이벤트 처리
+        var input = document.querySelector(".form-control").value;//검색위치
+        var geocoder = new google.maps.Geocoder();
+        var map;
+
+        geocoder.geocode({ address: input }, function (results, status) {
+        if (status == "OK") {
+            //지도 초기화
+            if(map){
+                map.setMap(null);
+            }
+            
+            map = new google.maps.Map(document.getElementById("map")),{
+                center : {lat:results.geometry.location.lat(),lng:results.geometry.location.lng()},
+                zoom : 10
+            }
+
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results.geometry.location,
+            });
+
+            } else {
+                alert("요청을 완료하지 못했습니다. 상태: " + status);
+            }
         });
-        } else {
-            alert("요청을 완료하지 못했습니다. 상태: " + status);
-        }
-        });
-    });
-}
+    })
+})
        
 if("geolocation" in navigator){
     navigator.geolocation.getCurrentPosition(
