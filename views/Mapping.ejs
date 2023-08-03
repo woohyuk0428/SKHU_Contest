@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
         <title>SKHU ROAD</title>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI&libraries=places"></script>
     </head>
     <body>
         <%- include('./__GNB') %>
@@ -27,8 +28,8 @@
                 <div class="col-md-12">
                     <div id="map"></div>
                     <div class="input-group mt-4">
-                        <input type="text" class="form-control" placeholder="위치 검색" />
-                        <button id="btn" class="btn btn-primary" type="button">검색</button>
+                        <input type="text" class="form-control" name="address" placeholder="위치 검색" />
+                        <button onclick="search()" id="btn" class="btn btn-primary" type="button">검색</button>
                     </div>
                 </div>
             </div>
@@ -38,69 +39,6 @@
         <span style="line-height: 300px"><br /></span>
 
         <%- include('./__Footer') %>
-
-        <script>
-            function initMap() {
-                // 지도 초기화
-                var map = new google.maps.Map(document.getElementById("map"), {
-                    center: { lat: 37.5665, lng: 126.978 }, // 초기 위치 설정 (서울)
-                    zoom: 12, // 확대/축소 레벨
-                });
-
-                // 위치 검색 버튼 클릭 시 이벤트 처리
-                document.querySelector(".btn").addEventListener("click", function () {
-                    var input = document.querySelector(".form-control").value;
-                    var geocoder = new google.maps.Geocoder();
-
-                    geocoder.geocode({ address: input }, function (results, status) {
-                        if (status === "OK") {
-                            map.setCenter(results[0].geometry.location);
-                            var marker = new google.maps.Marker({
-                                map: map,
-                                position: results[0].geometry.location,
-                            });
-                        } else {
-                            alert("요청을 완료하지 못했습니다. 상태: " + status);
-                        }
-                    });
-                });
-            }
-
-            if("geolocation" in navigator){
-                navigator.geolocation.getCurrentPosition(
-                    position => {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-
-                        sendLocation(latitude,longitude);
-                    },
-                    error => {
-
-                    }
-                );
-            }
-            else{
-
-            }
-            function sendLocation(){
-                const latitude = 37.5665; // 서울
-                const longitude = 126.978;
-
-                fetch('/mapping',{method:'POST',
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                body:JSON.stringify({latitude,longitude})
-            })
-
-            .then(response => response.text())
-            .catch(
-
-                )
-            }
-
-            document.getElementById("btn").addEventListener('click',sendLocation(latitude,longitude));
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI&callback=initMap" async defer></script>
+        <script src="Mapping.js"></script>
     </body>
 </html>
