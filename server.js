@@ -7,6 +7,7 @@ const request = require("request"); // request 모듈
 const cookieParser = require("cookie-parser");
 const fs = require("fs"); // fs 모듈
 const bodyParser = require("body-parser");
+
 const XMLHttpRequest = require("xhr2");
 const cors = require("cors");
 
