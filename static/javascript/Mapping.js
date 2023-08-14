@@ -157,6 +157,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     travelMode: google.maps.TravelMode.TRANSIT,
                 };
 
+                directionsService.route(request, function (response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsRenderer.setDirections(response);
+        
+                        // 걸리는 시간 표시
+                        const route = response.routes[0];
+                        const duration = route.legs[0].duration.text; // 걸리는 시간 정보
+                        const distance = route.legs[0].distance.text; // 거리 정보
+        
+                        // 결과 표시 (예: 경로 및 걸리는 시간)
+                        const resultText = `경로 정보:<br>
+                                           걸리는 시간: ${duration}, 거리: ${distance}`;
+                        infoWindow.setContent(resultText);
+                        infoWindow.open(map, marker);
+                    } else {
+                        alert(markerInfo.title + " 경로를 찾을 수 없습니다: " + status);
+                    }
+                });
+                
                 var directionsRenderer = new google.maps.DirectionsRenderer({
                     map: map,
                     suppressMarkers: true,
