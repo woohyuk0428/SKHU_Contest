@@ -42,7 +42,7 @@ var infoWindow;
 function initMap(data) {
     map = new google.maps.Map(document.getElementById("map"), {
         center: data,
-        zoom: 12,
+        zoom: 15,
     });
 
     directionsService = new google.maps.DirectionsService();
@@ -127,7 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 map = new google.maps.Map(document.getElementById("map"), {
                     center: location,
-                    zoom: 13,
                 });
 
                 var marker = new google.maps.Marker({
