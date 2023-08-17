@@ -34,8 +34,8 @@
                     "lat": 37.5079603,
                     "lng": 126.9609313
                 },
-                "opening": true,
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "opening": false,
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "rating": 3.5,
                 "vicinity": "105 Heukseok-ro, Dongjak-gu"
             },
@@ -47,7 +47,7 @@
                     "lat": 37.5090529,
                     "lng": 126.9631466
                 },
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "vicinity": "111-1 Heukseok-dong, 번지 1층, Dongjak-gu"
             },
             {
@@ -69,7 +69,7 @@
                     "lat": 37.5098338,
                     "lng": 126.9639423
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["cafe", "food", "point_of_interest", "establishment"],
                 "rating": 4.1,
                 "vicinity": "75 Hyeonchung-ro, Heukseok-dong, Dongjak-gu"
@@ -82,8 +82,8 @@
                     "lat": 37.5084759,
                     "lng": 126.9640414
                 },
-                "opening": true,
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "opening": false,
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "vicinity": "지하 90 현충로, Dongjak-gu"
             },
             {
@@ -116,7 +116,7 @@
                     "lat": 37.5083633,
                     "lng": 126.9640897
                 },
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "rating": 5,
                 "vicinity": "4 Heukseok-dong, Dongjak-gu"
             },
@@ -129,7 +129,7 @@
                     "lng": 126.9648112
                 },
                 "opening": false,
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "rating": 4.3,
                 "vicinity": "99 1F Hyeonchung-ro, Dongjak-gu"
             },
@@ -154,7 +154,7 @@
                     "lat": 37.50777250000001,
                     "lng": 126.9647111
                 },
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "vicinity": "9-67 Heukseok-dong, Dongjak-gu"
             },
             {
@@ -189,7 +189,7 @@
                     "lat": 37.5077304,
                     "lng": 126.9631751
                 },
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "vicinity": "1 Seodal-ro 14ga-gil, Dongjak-gu"
             },
             {
@@ -200,7 +200,7 @@
                     "lat": 37.5077304,
                     "lng": 126.9631751
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["cafe", "food", "point_of_interest", "establishment"],
                 "rating": 4.1,
                 "vicinity": "1 Seodal-ro 14ga-gil, Heukseok-dong, Dongjak-gu"
@@ -213,7 +213,7 @@
                     "lat": 37.5076141,
                     "lng": 126.9647161
                 },
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "vicinity": "100-1 Hyeonchung-ro, Dongjak-gu"
             },
             {
@@ -237,7 +237,7 @@
                     "lat": 37.5078433,
                     "lng": 126.9624847
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["cafe", "food", "point_of_interest", "establishment"],
                 "rating": 2.7,
                 "vicinity": "163 Seodal-ro, Dongjak-gu"
@@ -250,7 +250,7 @@
                     "lat": 37.50752419999999,
                     "lng": 126.9630909
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["cafe", "food", "point_of_interest", "establishment"],
                 "rating": 4.4,
                 "vicinity": "52-30 Heukseok-dong, Dongjak-gu"
@@ -263,8 +263,8 @@
                     "lat": 37.50857579999999,
                     "lng": 126.9618104
                 },
-                "opening": true,
-                "types": ["cafe", "store", "food", "point_of_interest", "establishment"],
+                "opening": false,
+                "types": ["cafe", "food", "point_of_interest", "store", "establishment"],
                 "rating": 5,
                 "vicinity": "23 Seodal-ro 15-gil, Dongjak-gu"
             }
@@ -429,7 +429,7 @@
                     "lat": 37.5080208,
                     "lng": 126.9638453
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4.3,
                 "vicinity": "6-22 Heukseok-dong, Dongjak-gu"
@@ -442,7 +442,7 @@
                     "lat": 37.5070171,
                     "lng": 126.9630108
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4,
                 "vicinity": "28 Seodal-ro 14na-gil, 흑석동, Dongjak-gu"
@@ -455,7 +455,7 @@
                     "lat": 37.50724719999999,
                     "lng": 126.9621926
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "vicinity": "97-2 흑석동, Dongjak-gu"
             },
@@ -467,7 +467,7 @@
                     "lat": 37.5073684,
                     "lng": 126.9663978
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4.2,
                 "vicinity": "10 흑석동, Dongjak-gu"
@@ -480,7 +480,7 @@
                     "lat": 37.5083663,
                     "lng": 126.9638845
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4.3,
                 "vicinity": "Heukseok-dong, Dongjak-gu"
@@ -517,7 +517,7 @@
                     "lat": 37.5079434,
                     "lng": 126.9641471
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["meal_takeaway", "restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 3.7,
                 "vicinity": "19 Seodal-ro 14-gil, Dongjak-gu"
@@ -530,7 +530,7 @@
                     "lat": 37.5079434,
                     "lng": 126.9641471
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4.7,
                 "vicinity": "19 Seodal-ro 14-gil, Dongjak-gu"
@@ -543,7 +543,7 @@
                     "lat": 37.50944880000001,
                     "lng": 126.9623743
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 5,
                 "vicinity": "52 Hyeonchung-ro, Dongjak-gu"
@@ -556,7 +556,7 @@
                     "lat": 37.5078918,
                     "lng": 126.9637022
                 },
-                "opening": false,
+                "opening": true,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4.6,
                 "vicinity": "2층, 12 Seodal-ro 14-gil, Dongjak-gu"
@@ -580,7 +580,7 @@
                     "lat": 37.5078918,
                     "lng": 126.9637022
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 3.9,
                 "vicinity": "12 Seodal-ro 14-gil, Dongjak-gu"
@@ -619,7 +619,7 @@
                     "lat": 37.5084305,
                     "lng": 126.962556
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4.1,
                 "vicinity": "106-32 흑석동, Dongjak-gu"
@@ -644,7 +644,7 @@
                     "lat": 37.50783690000001,
                     "lng": 126.9638183
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 3.8,
                 "vicinity": "50-24 Heukseok-dong, Dongjak-gu"
@@ -657,7 +657,7 @@
                     "lat": 37.5078321,
                     "lng": 126.9642766
                 },
-                "opening": true,
+                "opening": false,
                 "types": ["restaurant", "food", "point_of_interest", "establishment"],
                 "rating": 4,
                 "vicinity": "8-30 Heukseok-dong, Dongjak-gu"

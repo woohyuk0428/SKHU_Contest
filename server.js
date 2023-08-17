@@ -23,6 +23,7 @@ app.use(express.static("static/image"));
 app.use(express.static("static/image/Marker_icon"));
 app.use(express.static("static/css"));
 app.use(express.static("static/javascript"));
+app.use(express.static("static/javascript/Halfway_functions"));
 
 app.use(express.json()); // json형태로 body 파싱
 app.use(express.urlencoded({ extended: false })); // 파싱 할 때 querystring모듈 사용

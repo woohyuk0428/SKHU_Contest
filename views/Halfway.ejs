@@ -58,13 +58,13 @@
                 <!-- input 박스를 그룹으로 묶음 -->
                 <div id="address-container">
                     <div class="input-group mt-2">
-                        <input id="address-input" type="text" class="form-control" name="address[]" placeholder="출발지점을 입력하세요." />
+                        <input id="address-input" type="text" class="form-control" name="address" placeholder="출발지점을 입력하세요." />
                         <div class="input-group-append">
                             <button class="btn btn-danger remove-address" type="button">삭제</button>
                         </div>
                     </div>
                     <div class="input-group mt-2">
-                        <input id="address-input" type="text" class="form-control" name="address[]" placeholder="출발지점을 입력하세요." />
+                        <input id="address-input" type="text" class="form-control" name="address" placeholder="출발지점을 입력하세요." />
                         <div class="input-group-append">
                             <button class="btn btn-danger remove-address" type="button">삭제</button>
                         </div>
@@ -80,6 +80,6 @@
 
         <%- include('./__Footer') %>
 
-        <script src="Halfway.js"></script>
+        <script type="module" src="Halfway.js"></script>
     </body>
 </html>
