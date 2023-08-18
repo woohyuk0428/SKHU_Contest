@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
 
 // 중간지점 찾기 버튼 누를 시 주소값 받아 데이터 가공
 router.post("/", async (req, res) => {
+    let midpoint;
     const data = req.body;
     console.log("받은 데이터:", data);
 
@@ -33,7 +34,13 @@ router.post("/", async (req, res) => {
         return;
     }
 
-    const midpoint = await FindMidpoint(jsonData.startpoint); // 출발지점들의 위도와 경도를 findMidpoint 함수에 전달하여 중간지점 계산
+    // 주변 장소를 중간지점으로 선택했는지 여부
+    if (data.middata) {
+        midpoint = data.middata.address;
+    } else {
+        midpoint = await FindMidpoint(jsonData.startpoint); // 출발지점들의 위도와 경도를 findMidpoint 함수에 전달하여 중간지점 계산
+    }
+
     const midname = await geocoder.reverse({ lat: midpoint.lat, lon: midpoint.lng }); // 중간지점의 위도 경도를 실제 주소로 변환
     jsonData.midpoint = {
         name: midname[0].formattedAddress,
