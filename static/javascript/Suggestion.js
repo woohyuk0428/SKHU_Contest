@@ -14,14 +14,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         alert("시작");
 
-        var key_new = "XXsK%2F1XwVTPaVFfkrpoBQapqSlNiziqMMJJRcS549BH3B2gH1ph4mkRwBJgDbI20uZDnt9SiLbsVlFT5%2FAHCBQ%3D%3D";
+        var key_new =
+            "XXsK%2F1XwVTPaVFfkrpoBQapqSlNiziqMMJJRcS549BH3B2gH1ph4mkRwBJgDbI20uZDnt9SiLbsVlFT5%2FAHCBQ%3D%3D";
 
         var url_alr = "http://apis.data.go.kr/1613000/SubwayInfoService/getKwrdFndSubwaySttnList";
         var queryParams_alr = "?" + encodeURIComponent("serviceKey") + "=" + key_new;
         queryParams_alr += "&" + encodeURIComponent("pageNo") + "=" + encodeURIComponent("1");
         queryParams_alr += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("10");
         queryParams_alr += "&" + encodeURIComponent("_type") + "=" + encodeURIComponent("json");
-        queryParams_alr += "&" + encodeURIComponent("subwayStationName") + "=" + encodeURIComponent(sug_input_arr[0]);
+        queryParams_alr += "&" + encodeURIComponent("subwayStationName") + "=" + encodeURIComponent(
+            sug_input_arr[0]);
 
         console.log("1번째 api 주소:" + url_alr + queryParams_alr);
 
@@ -29,28 +31,33 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr_alr.open("GET", url_alr + queryParams_alr);
         xhr_alr.onreadystatechange = function () {
             if (xhr_alr.readyState === 4) {
-                var result = JSON.parse(xhr_alr.responseText);
-                var sugDataResult = result["response"]["body"]["items"]["item"];
+                let result = JSON.parse(xhr_alr.responseText);
+
+                let sugDataResult = result["response"]["body"]["items"]["item"];
                 console.log("1번째 api 결과값: " + JSON.stringify(sugDataResult));
 
                 var code = "";
-                for (i = 0; i < sugDataResult.length; i++) {
-                    if (sugDataResult[i]["subwayStationName"] === sug_input_arr[0] && sugDataResult[i]["subwayRouteName"] === sug_input_arr[1]) {
-                        code = sugDataResult[i]["subwayStationId"];
+                for (let i = 0; i < JSON.stringify(sugDataResult).length; i++) {
+                    if (sugDataResult["subwayStationName"] === sug_input_arr[0] && sugDataResult["subwayRouteName"] === sug_input_arr[1]) {
+                        code = sugDataResult["subwayStationId"];
+                        console.log("code값: ", code);
                         break;
                     }
                 }
 
                 console.log("2번째 api에서 검색할 코드: " + code);
                 var xhr_sights = new XMLHttpRequest();
-                var url_sights = "http://apis.data.go.kr/1613000/SubwayInfoService/getSubwaySttnExitAcctoCfrFcltyList";
+                var url_sights =
+                    "http://apis.data.go.kr/1613000/SubwayInfoService/getSubwaySttnExitAcctoCfrFcltyList";
                 var queryParams_sights =
                     "?" +
                     encodeURIComponent("serviceKey") +
                     "=" +
                     "XXsK%2F1XwVTPaVFfkrpoBQapqSlNiziqMMJJRcS549BH3B2gH1ph4mkRwBJgDbI20uZDnt9SiLbsVlFT5%2FAHCBQ%3D%3D";
-                queryParams_sights += "&" + encodeURIComponent("_type") + "=" + encodeURIComponent("json");
-                queryParams_sights += "&" + encodeURIComponent("subwayStationId") + "=" + encodeURIComponent(`${code}`);
+                queryParams_sights += "&" + encodeURIComponent("_type") + "=" + encodeURIComponent(
+                    "json");
+                queryParams_sights += "&" + encodeURIComponent("subwayStationId") + "=" +
+                    encodeURIComponent(`${code}`);
 
                 console.log("2번째 api 주소: " + JSON.stringify(url_sights + queryParams_sights));
 
@@ -58,20 +65,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (xhr_sights.readyState === 4) {
                         var result = JSON.parse(this.responseText);
                         console.log("2번째 api 결과값: " + JSON.stringify(result));
-                        // var sugDataResult = result["response"]["body"]["items"]["item"];
 
-                        // var ResultArr = [];
-                        // for (i = 0; i < sugDataResult.length; i++) {
-                        //     ResultArr.push(sugDataResult[i]["dirDesc"]);
-                        // }
-
-                        var ResultArr = ["용산"];
+                        let ResultArr = initData(result);
 
                         var imageContainer = document.getElementById("imageContainer");
                         imageContainer.innerHTML = "";
 
                         for (j = 0; j < ResultArr.length; j++) {
-                            const place_image_html = await fetch(`http://localhost:8080/Suggestion/PlacePhoto?placeId=${ResultArr[0]}`);
+                            const place_image_html = await fetch(
+                                `http://localhost:8080/Suggestion/PlacePhoto?placeId=${ResultArr[0]}`
+                                );
                             const image_html = await place_image_html.json();
 
                             console.log(image_html.Html);
@@ -100,3 +103,17 @@ document.addEventListener("DOMContentLoaded", function () {
         xhr_alr.send();
     });
 });
+
+async function initData(result) {
+
+
+    const ResultArr = [];
+
+    for (i = 0; i < JSON.stringify(result).length; i++) {
+        ResultArr.push(result["dirDesc"]);
+    }
+    console.log(ResultArr);
+    return ResultArr;
+
+
+}
