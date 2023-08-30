@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const fs = require("fs"); // fs 모듈
 const bodyParser = require("body-parser");
 const XMLHttpRequest = require("xhr2");
+const jsonfile = require("jsonfile");
 
 const app = express(); //express 객체 생성
 const xhr = new XMLHttpRequest();
@@ -22,7 +23,7 @@ app.use(express.static("static/css"));
 app.use(express.static("static/javascript"));
 
 app.use(express.json()); // json형태로 body 파싱
-app.use(express.urlencoded({ extended: false })); // 파싱 할 때 querystring모듈 사용
+app.use(express.urlencoded({ extended: true })); // 파싱 할 때 querystring모듈 사용
 
 app.set("view engine", "ejs"); // 뷰 엔진을 ejs로 설정
 app.set("views", "./views"); // 뷰 파일 경로 지정
@@ -43,6 +44,7 @@ app.use("/suggestion", require("./router/R_Suggestion"));
 app.use("/mapping", require("./router/R_Mapping"));
 app.use("/detail", require("./router/R_Detail"));
 app.use("/post", require("./router/R_Post"));
+app.use("/subway", require("./router/R_Subway"));
 
 //http://localhost:8080/ 경로로 요청 시 Main.html파일 반환
 app.get("/", (req, res) => {

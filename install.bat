@@ -4,4 +4,6 @@ call npm install nodemon -g
 call npm install ejs
 call npm install cookie-parser  
 call npm install node-geocoder
+call npm install fs
+call npm install jsonfile
 echo ALL Install.
