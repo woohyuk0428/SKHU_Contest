@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="Halfway.css" />
         <!-- 부트스트랩 CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="Halfway.css" />
         <title>SKHU ROAD</title>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI&libraries=places"></script>
     </head>
@@ -22,8 +22,37 @@
         </header>
         <!-- #endregion 헤더 -->
 
+        <div class="container">
+            <input id="addressInfoOff" class="btn btn-outline-primary" type="button" value="경로 정보 끄기" />
+            <input id="addressInfoOn" class="btn btn-outline-primary" type="button" value="경로 정보 표시" />
+        </div>
+
+        <!-- #region 상단 필터 -->
+        <div class="container mt-2">
+            <div class="flex-container">
+                <div class="flex-item">
+                    <button class="btn btn-outline-danger reset-button">초기화</button>
+                    <div class="btn-group" role="group">
+                        <label class="btn btn-outline-primary radio-label"> <input type="radio" name="option" value="convenience_store" />편의점 </label>
+                        <label class="btn btn-outline-primary radio-label"> <input type="radio" name="option" value="cafe" />카페 </label>
+                        <label class="btn btn-outline-primary radio-label"> <input type="radio" name="option" value="subway_station" />지하철 </label>
+                        <label class="btn btn-outline-primary radio-label"> <input type="radio" name="option" value="bus_station" />버스 </label>
+                        <label class="btn btn-outline-primary radio-label"> <input type="radio" name="option" value="restaurant" />음식점 </label>
+                        <label class="btn btn-outline-primary radio-label"> <input type="radio" name="option" value="library" />도서관 </label>
+                    </div>
+                </div>
+                <div class="flex-item">
+                    <div class="slider-container">
+                        <input type="range" id="rangeSlider" class="form-control-range" min="100" max="1000" step="1" value="300" />
+                        <output id="sliderValue">300미터</output>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #endregion 상단 필터 -->
+
         <!-- #region 지도 표시 -->
-        <div class="container mt-4">
+        <div class="container mt-2">
             <div id="map"></div>
         </div>
         <!-- #endregion 지도 표시 -->
@@ -34,13 +63,13 @@
                 <!-- input 박스를 그룹으로 묶음 -->
                 <div id="address-container">
                     <div class="input-group mt-2">
-                        <input id="address-input" type="text" class="form-control" name="address[]" placeholder="출발지점을 입력하세요." />
+                        <input id="address-input" type="text" class="form-control" name="address" placeholder="출발지점을 입력하세요." />
                         <div class="input-group-append">
                             <button class="btn btn-danger remove-address" type="button">삭제</button>
                         </div>
                     </div>
                     <div class="input-group mt-2">
-                        <input id="address-input" type="text" class="form-control" name="address[]" placeholder="출발지점을 입력하세요." />
+                        <input id="address-input" type="text" class="form-control" name="address" placeholder="출발지점을 입력하세요." />
                         <div class="input-group-append">
                             <button class="btn btn-danger remove-address" type="button">삭제</button>
                         </div>
@@ -56,6 +85,6 @@
 
         <%- include('./__Footer') %>
 
-        <script src="Halfway.js"></script>
+        <script type="module" src="Halfway.js"></script>
     </body>
 </html>

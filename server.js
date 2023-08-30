@@ -7,6 +7,7 @@ const request = require("request"); // request 모듈
 const cookieParser = require("cookie-parser");
 const fs = require("fs"); // fs 모듈
 const bodyParser = require("body-parser");
+
 const XMLHttpRequest = require("xhr2");
 const jsonfile = require("jsonfile");
 
@@ -19,8 +20,10 @@ const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저�
 
 // #region 파일 경로 지정, 옵션 설정
 app.use(express.static("static/image"));
+app.use(express.static("static/image/Marker_icon"));
 app.use(express.static("static/css"));
 app.use(express.static("static/javascript"));
+app.use(express.static("static/javascript/Halfway_functions"));
 
 app.use(express.json()); // json형태로 body 파싱
 app.use(express.urlencoded({ extended: true })); // 파싱 할 때 querystring모듈 사용
@@ -30,6 +33,8 @@ app.set("views", "./views"); // 뷰 파일 경로 지정
 
 app.use(cookieParser("SHKU_Cookie")); // 쿠키 시크릿 키 지정
 app.use(bodyParser.json());
+
+app.use(cors());
 // #endregion
 
 //서버 오픈시 실행되는 함수. 현재 시간과 함께 서버가 실행됨(Mon Jul 03 2023 21:23:13 GMT+0900 (대한민국 표준시) | server reload)
@@ -77,25 +82,6 @@ request(
 );
 
 /* ***************** 여기서부터는 지하철 출구 근처의 명소 내역을 가져오기 위한 API를 통해 데이터를 Json 형식으로 파일을 제작하는 과정입니다. ******************* */
-
-var url = "http://apis.data.go.kr/1613000/SubwayInfoService/getSubwaySttnExitAcctoCfrFcltyList";
-var queryParams_sights = "?" + encodeURIComponent("serviceKey") + "=" + key_new; /* Service Key*/
-queryParams_sights += "&" + encodeURIComponent("numOfRows") + "=" + encodeURIComponent("100090"); /* */
-queryParams_sights += "&" + encodeURIComponent("_type") + "=" + encodeURIComponent("json"); /* */
-queryParams_sights += "&" + encodeURIComponent("subwayStationId") + "=" + encodeURIComponent("MTRS11133"); /* */
-
-request(
-    {
-        url: url + queryParams_sights,
-        method: "GET",
-    },
-    function (error, response, body) {
-        // console.log("\n\n\n\n\nStatus", response.statusCode);
-        // console.log("Headers", JSON.stringify(response.headers));
-        // console.log("Reponse received", body);
-        fs.writeFileSync("test_sights.json", body);
-    }
-);
 
 /*************** 여기서부터는 명소를 찾은 결과를 통해 Google에서 웹크롤링하여 결과(사진)를 반환하는 코드입니다. *********/
 // var sightsData = fs.readFileSync("test_sights.json", "utf8");

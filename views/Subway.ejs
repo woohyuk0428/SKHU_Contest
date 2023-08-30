@@ -42,11 +42,11 @@
     <% if (result_Data) { %>
         <div class="container">
             <div class="row">
-                <% Object.keys(result_Data).forEach(subwayLine=> { %>
+                <% Object.keys(result_Data).forEach(subwayId => { %>
                     <div class="col-md-4">
-                        <h2><%= subwayLine %></h2>
+                        <h2>호선: <%= subwayId %></h2>
                         <ul>
-                            <% result_Data[subwayLine].forEach(arrival => { %>
+                            <% result_Data[subwayId].forEach(arrival => { %>
                                 <li>
                                     <p><strong>지하철 역:</strong> <%= arrival.statnNm %>역</p>
                                     <p><strong>상행/하행:</strong> <%= arrival.updnLine %></p>
