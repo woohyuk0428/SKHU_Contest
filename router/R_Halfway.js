@@ -134,38 +134,17 @@ async function PlaceSearch(jsonData, radius, midpoint) {
 }
 
 router.get("/PlacePhoto", async (req, res) => {
-    try {
-        const placeId = req.query.placeId;
-        const photoUrl = await fetchPhotoUrl(placeId);
+    const placeId = req.query.placeId;
 
-        if (photoUrl) {
-            res.json({ photoUrl });
-        } else {
-            res.status(404).json({ error: "사진 정보를 찾을 수 없습니다." });
-        }
+    const url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(placeId)}`;
+
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+        res.json({ Html: html });
     } catch (error) {
-        res.status(500).json({ error: "에러 발생" });
+        console.error("html을 가져올 수 없습니다. :", error);
     }
 });
-
-// placeId에 맞는 이미지를 가져오는 함수
-async function fetchPhotoUrl(placeId) {
-    const photoUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=photos&key=${apiKey}`; // 장소의 이미지 리스트 검색
-
-    try {
-        const response = await fetch(photoUrl);
-        const data = await response.json();
-
-        if (data.status === "OK" && data.result.photos?.length > 0) {
-            const photoReference = data.result.photos[0].photo_reference;
-            return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1000&photoreference=${photoReference}&key=${apiKey}`; // 첫번째 이미지 반환
-        } else {
-            throw new Error("지정된 장소에 대한 사진이 없습니다.");
-        }
-    } catch (error) {
-        console.error("사진 URL을 가져오는 중 오류 발생:", error.message);
-        return null;
-    }
-}
 
 module.exports = router;

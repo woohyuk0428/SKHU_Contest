@@ -54,8 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
         AdrInfo_OnOff("on");
     });
 
-    //! ------------------------------- 현재 지점 중심으로 재검색 이벤트 ---------------------------------------
-
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
     const midBtn = document.getElementById("mid_btn"); // 중간지점 찾기 버튼
@@ -372,10 +370,9 @@ async function createPlaceMarkers(map, responseData, iconList) {
                 } else {
                     new Promise(async function (resolve, reject) {
                         try {
-                            const photoUrl = await fetchPlacePhoto(placeinfo.id);
-                            const contentWithImage = `<img src="${photoUrl}" alt="대표 사진" width="300">`;
+                            const photoUrl = await fetchPlacePhoto(placeinfo.name);
 
-                            P_infoWindow.setContent(contentsName + contentWithImage + contentsMaintext);
+                            P_infoWindow.setContent(contentsName + photoUrl + contentsMaintext);
                             P_infoWindow.open(map, P_marker);
                             self.data.get_image = true; // 저장한 this 사용
 
@@ -461,16 +458,22 @@ function createMidMarkers(responseData, midpoint, map, marker_iconList, midconte
 
 // 대표 사진을 가져오는 함수
 async function fetchPlacePhoto(placeId) {
-    try {
-        const response = await fetch(`http://localhost:8080/Halfway/PlacePhoto?placeId=${placeId}`);
-        const data = await response.json();
+    const parser = new DOMParser();
 
-        if (response.ok) {
-            return data.photoUrl;
+    const place_image_html = await fetch(`http://localhost:8080/Suggestion/PlacePhoto?placeId=${placeId}`);
+    const image_html = await place_image_html.json();
+
+    let doc = parser.parseFromString(image_html.Html, "text/html");
+    let imageElement = doc.getElementsByClassName("yWs4tf")[0];
+
+    if (imageElement) {
+        let imageUrl = imageElement.getAttribute("src");
+        if (imageUrl) {
+            return `<img src="${imageUrl}" alt="대표 사진" width="300">`;
         } else {
-            return "image_error.png";
+            alert("검색 결과 이미지를 찾을 수 없습니다.");
         }
-    } catch (error) {
-        throw new Error(`에러 발생: ${error}`);
+    } else {
+        alert("검색 결과를 찾을 수 없습니다.");
     }
 }
