@@ -1,4 +1,5 @@
 var data;
+
 if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -13,7 +14,9 @@ if ("geolocation" in navigator) {
         },
         (error) => {}
     );
-} else {
+} 
+else {
+
 }
 
 function sendLocation(latitude, longitude) {
@@ -66,6 +69,7 @@ function initMap(data) {
             infoWindow.open(map, marker);
         });
     });
+
 }
 
 // 경위도 좌표를 주소로 변환하는 함수
@@ -85,6 +89,7 @@ function getAddress(latlng, callback) {
 }
 
 var colorCode = "#" + Math.round(Math.random() * 0xffffff).toString(16); // 경로에 사용할 색상을 랜덤으로 저장
+var location;
 
 document.addEventListener("DOMContentLoaded", function () {
     let autocomplete;
@@ -117,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var directionsRenderers = [];
 
         geocoder.geocode({ address: input }, function (results, status) {
-            var location = results[0].geometry.location; //todo 위도 경도값을 변수에 저장합니다.
+            const location = results[0].geometry.location; //todo 위도 경도값을 변수에 저장합니다.
 
             if (status == "OK") {
                 //지도 초기화
@@ -163,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                            걸리는 시간: ${duration}, 거리: ${distance}`;
                         infoWindow.setContent(resultText);
                         infoWindow.open(map, marker);
+
                     } else {
                         alert(markerInfo.title + " 경로를 찾을 수 없습니다: " + status);
                     }
@@ -189,5 +195,67 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("요청을 완료하지 못했습니다. 상태: " + status);
             }
         });
+
     });
+
+    const cafeRadioButton = document.querySelector(".cafe-label input[type='radio']");
+    const convenienceStoreRadioButton = document.querySelector(".convenience-store-label input[type='radio']");
+
+    cafeRadioButton.addEventListener("click", LabelClick);
+    convenienceStoreRadioButton.addEventListener("click", LabelClick);
+
+
 });
+
+const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
+const sliderValue = document.getElementById("sliderValue"); // 슬라이더 값을 표시할 위치
+
+rangeSlider.addEventListener("input", function () { // 범위 설정 (txt만)
+    sliderValue.textContent = `${rangeSlider.value}미터`;
+});
+
+var placesService = new google.maps.places.PlacesService(map);
+
+var request = {
+    location: location,
+    radius: rangeSlider.value, 
+    type: 'cafe' 
+};
+
+var service = new google.maps.places.PlacesService(map);
+var placeMarkers = [];
+
+service.nearbySearch(request, function(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // 검색 결과를 처리합니다.
+        for (var i = 0; i < results.length; i++) {
+            var place = results[i];
+            // place 객체에서 위치 정보 추출
+            var placelocation = place.geometry.location;
+
+            var cafeMarker = new google.maps.Marker({
+                position: placelocation,
+                map: map,
+                title: place.name,
+                tags : [cafe]
+            });
+
+            placeMarkers.push(cafeMarker);
+        }
+    }
+});
+
+function LabelClick(event){
+        const selectedValue = event.target.value;
+    
+        //마커를 숨김
+        placeMarkers.forEach((marker) => {
+            marker.setVisible(false);
+        });
+
+        // 선택한 값에 해당하는 마커만 표시
+        placeMarkers.filter((marker) => marker.tags.includes(selectedValue)).forEach((marker) => {
+            marker.setVisible(true);
+        });     
+
+}
