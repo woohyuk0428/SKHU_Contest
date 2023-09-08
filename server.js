@@ -34,7 +34,7 @@ app.set("views", "./views"); // 뷰 파일 경로 지정
 app.use(cookieParser("SHKU_Cookie")); // 쿠키 시크릿 키 지정
 app.use(bodyParser.json());
 
-app.use(cors());
+// app.use(cors());
 // #endregion
 
 //서버 오픈시 실행되는 함수. 현재 시간과 함께 서버가 실행됨(Mon Jul 03 2023 21:23:13 GMT+0900 (대한민국 표준시) | server reload)
