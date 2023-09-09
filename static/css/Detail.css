@@ -119,7 +119,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    row-gap: 30px;
+    row-gap: 50px;
     column-gap: 5px;
 }
 
@@ -129,14 +129,51 @@
 
 .profile_card {
     margin: 0 auto;
-    background: ivory;
     height: 400px;
     width: 280px;
-    border: solid 1px black;
     border-radius: 1rem;
     left: 50%;
     top: 50%;
+    overflow: hidden;
+    transition: all 0.5s;
+    opacity: 0.3;
+    border: solid 4px black;
 }
+
+.gradient_filter {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.95) 100%);
+    opacity: 0;
+    transition: all 0.5s;
+    position: absolute;
+    height: 400px;
+    width: 280px;
+}
+
+.profile_card:hover > .gradient_filter {
+    opacity: 0.8;
+}
+
+.profile_card > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile_card:hover {
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+.img_cont {
+    position: relative;
+    transition: all 0.5s;
+    color: white;
+}
+
+.profile_card:hover .img_cont {
+    transform: translateY(-100%); /* 수정된 부분 */
+}
+
 /* #endregion 본문1 팀소개 */
 
 /* #region 본문2 도착알림 */

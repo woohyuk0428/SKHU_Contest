@@ -21,6 +21,7 @@ const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저�
 // #region 파일 경로 지정, 옵션 설정
 app.use(express.static("static/image"));
 app.use(express.static("static/image/Marker_icon"));
+app.use(express.static("static/image/Detail_img"));
 app.use(express.static("static/css"));
 app.use(express.static("static/javascript"));
 app.use(express.static("static/javascript/Halfway_functions"));
