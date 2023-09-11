@@ -28,7 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
     const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 
-    resetButton.addEventListener("click", resetRadioSelection); // 초기화 버튼 실행
+    resetButton.addEventListener("click", () => {
+        resetRadioSelection(radioLabels);
+    }); // 초기화 버튼 실행
 
     // 라디오 버튼들에 대해 클릭 이벤트 리스너 추가
     radioLabels.forEach((radio) => {
@@ -110,8 +112,9 @@ function activateAutoAddress() {
 
 //! ------------------------------- 상단 필터 관련 함수 ---------------------------------------
 // 버튼 선택을 초기화하는 함수
-function resetRadioSelection() {
+function resetRadioSelection(radioLabels) {
     // 모든 버튼 선택 해제
+    console.log(radioLabels);
     radioLabels.forEach((radio) => {
         radio.checked = false;
     });
@@ -464,7 +467,7 @@ async function fetchPlacePhoto(placeId) {
     const image_html = await place_image_html.json();
 
     let doc = parser.parseFromString(image_html.Html, "text/html");
-    let imageElement = doc.getElementsByClassName("yWs4tf")[0];
+    let imageElement = doc.getElementsByClassName("DS1iW")[0];
 
     if (imageElement) {
         let imageUrl = imageElement.getAttribute("src");
