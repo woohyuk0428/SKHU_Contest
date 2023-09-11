@@ -1,4 +1,75 @@
+.input-group {
+    display: flex;
+    justify-content: space-between;
+}
+.input-group .btn {
+    flex-shrink: 0;
+}
+
+.plus_btn {
+    margin-top: 10px;
+}
+
 /* 지도 크기 */
 #map {
-    height: 450px;
+    height: 600px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.selected {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.reset-button {
+    margin-bottom: 8px;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-item {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+}
+
+#sliderValue {
+    width: 20%;
+    padding-left: 1%;
+}
+
+input[type="range"] {
+    appearance: none;
+    width: 100%;
+    outline: none;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 15px;
+    background: #ccc;
+    border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 2px solid rgb(49, 162, 255);
+    box-shadow: -10007px 0 0 10000px rgb(49, 162, 255);
 }
