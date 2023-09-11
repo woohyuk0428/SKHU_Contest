@@ -1,0 +1,204 @@
+/* #region 기본 설정 */
+.m_bottom {
+    margin-bottom: 0px !important;
+}
+
+.w_textBox {
+    width: 70%;
+    margin: 0 auto;
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.mainText_Title {
+    padding-bottom: 2rem;
+}
+
+.mainText_Title > h2 {
+    color: rgb(64, 216, 117);
+    padding-bottom: 2rem;
+}
+.mainText_Title > h1 {
+    font-weight: bold;
+}
+
+.mainText_Title > p {
+    display: inline-block;
+    background: rgb(64, 216, 117);
+    height: auto;
+    color: white;
+    padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+}
+.side_img {
+    position: absolute;
+    width: 1rem;
+    transform: translate(-50%, -50%);
+    left: 92%;
+    top: 50%;
+}
+/* #endregion 기본 설정 */
+
+/* #region 이미지 and 설명 text */
+.img_textBox {
+    height: 200px;
+}
+
+.left_textFrame {
+    text-align: left;
+}
+
+.right_textFrame {
+    text-align: right;
+}
+
+.left_textFrame,
+.right_textFrame {
+    display: flex;
+    padding: 30px;
+    height: 200px;
+    justify-content: center;
+    margin: 0;
+    flex-direction: column;
+}
+
+.left_textFrame > p,
+.right_textFrame > p {
+    margin: 0;
+}
+
+.left_textFrame > p:first-child,
+.right_textFrame > p:first-child {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 2;
+}
+
+.left_imgFrame {
+    float: left;
+}
+.right_imgFrame {
+    float: right;
+}
+
+.left_imgFrame,
+.right_imgFrame {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    overflow: hidden;
+}
+
+.left_imgFrame > img,
+.right_imgFrame > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* #endregion 이미지 and 설명 text */
+
+/* #region 본문 타이틀 */
+#main_text_title {
+    height: 500px;
+    width: auto;
+    background: rgb(255, 255, 58);
+}
+/* #endregion 본문 타이틀 */
+
+/* #region 본문1 팀소개 */
+#main_text1 {
+    height: 1200px;
+    width: auto;
+    background: white;
+    position: relative;
+    /* display: inline-block; */
+}
+
+#mainText1_flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 50px;
+    column-gap: 5px;
+}
+
+#mainText1_flex > div {
+    flex: 0 0 calc(33.33% - 10px);
+}
+
+.profile_card {
+    margin: 0 auto;
+    height: 400px;
+    width: 280px;
+    border-radius: 1rem;
+    left: 50%;
+    top: 50%;
+    overflow: hidden;
+    transition: all 0.5s;
+    opacity: 0.3;
+    border: solid 4px black;
+}
+
+.gradient_filter {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.95) 100%);
+    opacity: 0;
+    transition: all 0.5s;
+    position: absolute;
+    height: 400px;
+    width: 280px;
+}
+
+.profile_card:hover > .gradient_filter {
+    opacity: 0.8;
+}
+
+.profile_card > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile_card:hover {
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+.img_cont {
+    position: relative;
+    transition: all 0.5s;
+    color: white;
+}
+
+.profile_card:hover .img_cont {
+    transform: translateY(-100%); /* 수정된 부분 */
+}
+
+/* #endregion 본문1 팀소개 */
+
+/* #region 본문2 도착알림 */
+#main_text2 {
+    height: 800px;
+    width: auto;
+    background: whitesmoke;
+    position: relative;
+}
+/* #endregion 본문2 도착알림 */
+
+/* #region 본문3 중간지점 */
+#main_text3 {
+    height: 800px;
+    width: auto;
+    background: white;
+    position: relative;
+}
+/* #endregion 본문3 중간지점 */
+
+/* #region 본문4 지연정보  */
+#main_text4 {
+    height: 800px;
+    width: auto;
+    background: whitesmoke;
+    position: relative;
+}
+/* #endregion 본문4 지연정보  */

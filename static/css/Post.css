@@ -1,0 +1,32 @@
+/* #region 열차 정보 검색 */
+.result-info {
+    margin-top: 20px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.result-info span {
+    font-weight: bold;
+}
+/* #endregion 열차 정보 검색 */
+
+/* #region 최근 검색 기록  */
+.list-group-item {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-size: 18px;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.list-group-item:hover {
+    background-color: #e2e6ea;
+}
+/* #endregion 최근 검색 기록  */

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>그라데이션 효과</title>
+        <style>
+            .gradient-box {
+                width: 200px;
+                height: 200px;
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.95) 100%);
+            }
+            .gradient-box:hover {
+                width: 200px;
+                height: 200px;
+                background-image: linear-gradient(to top, #000, transparent);
+                animation: gradientAnimation 2s ease-in-out infinite alternate;
+            }
+
+            @keyframes gradientAnimation {
+                0% {
+                    background-position: 0 100%;
+                }
+                100% {
+                    background-position: 0 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="gradient-box"></div>
+    </body>
+</html>
