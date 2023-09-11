@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="Main.css" />
+        <!-- 부트스트랩 CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <title>SKHU ROAD</title>
+    </head>
+    <body>
+        <%- include('./__GNB') %>
+
+        <!-- #region 헤더 -->
+        <!-- 부트스트랩 점보트론(큰 텍스트, 큰 여백) -->
+        <header class="jumbotron">
+            <!-- 헤더를 감싸는 컨테이너 추가(중앙 정렬, 좌우 여백) -->
+            <div class="container">
+                <div class="content_right">
+                    <h1 class="display-4">환영합니다!</h1>
+                    <p class="lead">성공회대학교 교내대회 출품작 SKHU Road(임시)입니다.</p>
+                    <!-- 기본 스타일의 가장 큰 버튼 생성 -->
+                    <a class="btn btn-primary btn-lg" href="Detail" role="button">자세히 알아보기</a>
+                </div>
+            </div>
+        </header>
+        <!-- #endregion 헤더 -->
+
+        <!-- #region 서비스 소개 메시지 섹션 -->
+        <section class="container text-center">
+            <br />
+            <h2>서비스 소개</h2>
+            <p>SKHU Road(임시)에서 지원하는 서비스 목록 입니다.</p>
+            <br />
+        </section>
+        <!-- #endregion 서비스 소개 메시지 섹션 -->
+
+        <!-- #region 서비스 카드 섹션 -->
+        <!-- 넓이 75%의 색션을 가운데 정렬 -->
+        <section class="w-75 mx-auto">
+            <!-- 상단여백 추가 -->
+            <div class="mt-4">
+                <!-- 길찾기 알림 서비스 카드 -->
+                <!-- 부트스트랩 점보트론(큰 텍스트, 큰 여백) -->
+                <div class="jumbotron mx-4 jb_img_left">
+                    <div class="container text_center_800">
+                        <div class="content_right">
+                            <h1>길찾기 알림 서비스</h1>
+                            <p>원하는 장소로 갈 수 있는 길을 찾아주고 해당 위치까지 남은 시간을 알려드립니다.</p>
+                            <!-- 기본 스타일의 보통 사이즈의 버튼 생성 -->
+                            <a class="btn btn-primary" href="/Mapping" role="button">길찾기 알림 이동하기</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 중간지점 찾기 서비스 카드 -->
+                <!-- 부트스트랩 점보트론(큰 텍스트, 큰 여백) -->
+                <div class="jumbotron mx-4 jb_img_right text-end">
+                    <div class="container text_center_800">
+                        <div class="content_left">
+                            <h1>중간지점 찾기 서비스</h1>
+                            <p>여러 사람과의 약속장소를 정할 때 중간지점을 찾아 알려드립니다.</p>
+                            <!-- 기본 스타일의 보통 사이즈의 버튼 생성 -->
+                            <a class="btn btn-primary" href="/Halfway" role="button">중간지점 찾기 이동하기</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 근처 장소추천 서비스 카드 -->
+                <!-- 부트스트랩 점보트론(큰 텍스트, 큰 여백) -->
+                <div class="jumbotron mx-4 jb_img_left">
+                    <div class="content_left container text_center_800">
+                        <div class="content_right">
+                            <h1>근처 장소추천 서비스</h1>
+                            <p>중간지점, 원하는 장소 근처의 추천하는 장소를 알려드립니다.</p>
+                            <!-- 기본 스타일의 보통 사이즈의 버튼 생성 -->
+                            <a class="btn btn-primary" href="/Suggestion" role="button">장소추천 이동하기</a>
+                        </div> 
+                    </div>
+                </div>
+                <div class="jumbotron mx-4 jb_img_right text-end">
+                    <div class="container text_center_800">
+                        <div class="content_left">
+                            <h1>지하철 지연 서비스</h1>
+                            <p>지하철을 타기 전에 지하철 지연정보를 확인해보세요.</p>
+                            <!-- 기본 스타일의 보통 사이즈의 버튼 생성 -->
+                            <a class="btn btn-primary" href="/Subway" role="button">지연정보 이동하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- #endregion 서비스 카드 섹션 -->
+
+        <%- include('./__Footer') %>
+    </body>
+</html>
