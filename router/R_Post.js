@@ -2,8 +2,10 @@ const express = require("express"); // express 프레임워크
 const router = express.Router();
 const request = require("request"); // request 모듈
 const fs = require("fs"); // fs 모듈
+const jsonFile = require("jsonfile");
 
-const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저장
+const key = fs.readFileSync("./APIKey.txt");
+const tago_key = fs.readFileSync("./tago_key.txt");
 
 //http://localhost:8080/post 경로로 요청 시 Suggestion.html파일 반환
 router.get("/", (req, res) => {
@@ -26,6 +28,8 @@ router.get("/", (req, res) => {
 // http://localhost:8080/post - post라우팅
 router.post("/", (req, res) => {
     var s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
+    var s_updnline = req.body.updnLine//상행 하행 구별
+    var s_line = req.body.subwayLine;
 
     // ""입력시 현재 운행중인 모든 역이 나오기 때문에 이를 방지
     if (s_response == "") {
@@ -44,38 +48,65 @@ router.post("/", (req, res) => {
     }
 
     // 마지막 글자가 "역"이면 역을 삭제함
-    if (s_response.slice(-1) == "역") {
+    if (s_response.slice(-1) == "역" && s_response != "서울역") {
         s_response = s_response.slice(0, -1);
     }
 
     // 지하철 API에서 가져올 데이터 - url수정
-    const url = "http://swopenapi.seoul.go.kr/api/subway/" + key + "/json/realtimeStationArrival/0/10/" + encodeURI(s_response);
-    console.log(url);
+    const realarrive_url = "http://swopenapi.seoul.go.kr/api/subway/" + key + "/json/realtimeStationArrival/0/10/" + encodeURI(s_response); //seoul realtime url
+    const tago_api =`https://apis.data.go.kr/1613000/SubwayInfoService/getKwrdFndSubwaySttnList?serviceKey=${tago_key}&pageNo=1&numOfRows=10&_type=json&subwayStationName=${encodeURI(s_response)}`;//tago_api url
+    
+
     request(
         {
-            url: url,
-            method: "GET",
+            url: realarrive_url,
+            method: "get",
         },
         function (error, response, body) {
             try {
                 const obj = JSON.parse(body); // body의 데이터는 string으로 전  송되기 때문에 json형식으로 변환
                 const data = obj.realtimeArrivalList[0]; // 필요한 데이터 경로 압축
+                const convert = jsonFile.readFileSync("./static/json/line.json");
+                const subwayId = convert[data.subwayId];
+                const btrainNo = data.btrainNo;
+                const trainLineNm = data.trainLineNm;
+                const arvlMsg2 =  data.arvlMsg2;
+                const recptnDt = data.recptnDt;
 
                 const arr = data.subwayList.split(","); // 문자열로 저장된 환승 정보를 배열로 변경
                 var Mystr = "";
                 arr.forEach((item, index) => {
-                    Mystr += `<span>환승 정보(${index + 1}):</span> ${item}<br>`; // 배열 요소만큼 문자열 생성
+                    Mystr += `<span>환승 정보(${index + 1}):</span> ${convert[item]}<br>`; // 배열 요소만큼 문자열 생성
+                });
+                request({
+                    url : tago_api,
+                    method: "get",
+                },
+                function (err, res, body){
+                    const data = JSON.parse(body);
+                    let sugDataResult = data["response"]["body"]["items"]["item"];
+                            var code = "";
+            
+                            console.log(sugDataResult);
+                            sugDataResult.forEach((data, idx) => {
+                                if (sugDataResult[idx]["subwayStationName"] == s_response && sugDataResult[idx]["subwayRouteName"] == s_line) {
+                                    code = sugDataResult[idx]["subwayStationId"];
+                                    console.log("code값: ", code);
+                                }
+                            });
+
+            
                 });
 
+
                 // post페이지로 결과 반환
-                var newHtml = `<br><h1>사용자님이 검색하신<span>"${s_response}"</span>에 대한 검색 결과입니다.</h1>
+                var newHtml = `<br><h1>${subwayId} ${s_response}역 결과입니다.</h1>
                     <div class="result-info">
-                    <span>열차 노선:</span> ${data.subwayId}<br>
-                    <span>열차 번호:</span> ${data.btrainNo}<br>
-                    <span>열차 방향:</span> ${data.trainLineNm}<br>
-                    <span>열차 위치:</span> ${data.arvlMsg2}<br>
+                    <span>열차 번호:</span> ${btrainNo}<br>
+                    <span>열차 방향:</span> ${trainLineNm}<br>
+                    <span>열차 위치:</span> ${arvlMsg2}<br>
                     ${Mystr}
-                    열차 검색 시간은 "${data.recptnDt}"입니다.</div>`;
+                    열차 검색 시간은 "${recptnDt}"입니다.</div>`;
 
                 // 쿠키가 존재하는지 확인
                 if (req.cookies.My_Station == undefined) {
