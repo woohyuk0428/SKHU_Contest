@@ -114,7 +114,6 @@ function activateAutoAddress() {
 // 버튼 선택을 초기화하는 함수
 function resetRadioSelection(radioLabels) {
     // 모든 버튼 선택 해제
-    console.log(radioLabels);
     radioLabels.forEach((radio) => {
         radio.checked = false;
     });
@@ -230,6 +229,7 @@ function HalfwaySearch(marker_iconList, midData) {
                 content: "출발지점 입니다.",
                 icon: marker_iconList.start,
                 tags: "start",
+                idx: data.index + 1,
             }));
 
             const directionsService = new google.maps.DirectionsService(); // 길찾기 서비스 인스턴스 생성
@@ -245,9 +245,9 @@ function HalfwaySearch(marker_iconList, midData) {
             });
 
             (function () {
-                let midcontent = "";
+                let midcontent = {};
 
-                const markerPromises = dynamicMarkers.map(function (markerInfo, index) {
+                const markerPromises = dynamicMarkers.map(function (markerInfo) {
                     return new Promise(function (resolve, reject) {
                         const colorCode = "#" + Math.round(Math.random() * 0xffffff).toString(16); // 경로 랜덤 색깔
                         const marker = createMarker(markerInfo.position, map, markerInfo.title, markerInfo.icon, markerInfo.tags); // 시작지점 마커 생성
@@ -271,13 +271,13 @@ function HalfwaySearch(marker_iconList, midData) {
                         // 경로 찾기
                         directionsService.route(request, function (response, status) {
                             if (status == google.maps.DirectionsStatus.OK) {
+                                let idx = markerInfo.idx;
                                 const contents_info = `
                                 <p>출발 시간: ${response.routes[0].legs[0].departure_time.text}</p>
                                 <p>도착 시간: ${response.routes[0].legs[0].arrival_time.text}</p>
                                 <p>이동 거리: ${response.routes[0].legs[0].distance.text}</p>
                                 <p>이동 시간: ${response.routes[0].legs[0].duration.text}</p>`;
-                                midcontent += `<br><p>${index + 1}. ${markerInfo.title}</p><br> ${contents_info} <br><hr>`; //  MID마커에 표시될 데이터 저장
-
+                                midcontent[idx] = `<br><p>${markerInfo.idx}. ${markerInfo.title}</p><br> ${contents_info} <br><hr>`; //  MID마커에 표시될 데이터 저장)
                                 createRoute(contents_info, response, markerInfo, map, marker, directionsRenderer); // 경로 생성
                                 resolve(); // 비동기 작업 완료
                             } else {
@@ -290,7 +290,11 @@ function HalfwaySearch(marker_iconList, midData) {
                 // 모든 비동기 작업이 완료되길 기다림
                 Promise.all(markerPromises)
                     .then(function () {
-                        createMidMarkers(responseData, midpoint, map, marker_iconList, midcontent); // 중간지점 마커 생성
+                        let midcontent_Text = "";
+                        for (let index = 1; index <= Object.keys(midcontent).length; index++) {
+                            midcontent_Text += midcontent[index];
+                        }
+                        createMidMarkers(responseData, midpoint, map, marker_iconList, midcontent_Text); // 중간지점 마커 생성
                     })
                     .catch(function (error) {
                         console.error(error);
