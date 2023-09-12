@@ -79,9 +79,43 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //! ------------------------------- 지도 초기화 ---------------------------------------
 function CreateMap(address) {
-    return new google.maps.Map(document.getElementById("map"), {
+    map = new google.maps.Map(document.getElementById("map"), {
         center: address, // 초기 위치 설정
         zoom: 12, // 확대/축소 레벨
+    });
+
+    infoWindow = new google.maps.InfoWindow();
+
+    marker = new google.maps.Marker({
+        map: map,
+        position: address,
+        title: "현재위치",
+    });
+
+    // 마커를 클릭했을 때 정보창 열기
+    marker.addListener("click", function () {
+        getAddress(address, function (address) {
+            infoWindow.setContent("현재 주소: " + address);
+            infoWindow.open(map, marker);
+        });
+    });
+
+    return map;
+}
+
+// 경위도 좌표를 주소로 변환하는 함수
+function getAddress(latlng, callback) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ location: latlng }, function (results, status) {
+        if (status === "OK") {
+            if (results[0]) {
+                callback(results[0].formatted_address);
+            } else {
+                callback("주소를 찾을 수 없습니다.");
+            }
+        } else {
+            callback("주소 변환에 실패했습니다. 상태: " + status);
+        }
     });
 }
 
