@@ -8,7 +8,9 @@ body{
     height: 100vh;
     overflow: scroll;
 }
-
+input {
+    outline: none;
+}
 /* menu 영역 */
 .menu {
     /* float: left; */
@@ -120,3 +122,57 @@ body{
   .menu.hidden {
     transform: translateX(-100%);
   }
+
+
+
+  /* __Mapping */
+  .con-main {
+    float: left;
+  }
+  .search-input {
+    border: none;
+    background-color: #EEEEEE;
+    /* border-radius: 10px; */
+
+    margin-right: 10px;
+
+    height: 40px;
+    width: 300px;
+    
+    font-size: 20px;
+
+    float: left;
+  }
+  .searchIcon{
+    width: 20px;
+    margin: 11.5px 15px;
+
+    display: inline-block;
+    float: left;
+  }
+  .con-search{
+    background-color: #EEEEEE;
+    display: inline-block;
+
+    border-radius: 10px;
+    /* width: 360px; */
+    margin-left: 20px;
+  }
+  .xMark{
+    width: 25px;
+    margin: 8.5px;
+  }
+  .xMark:hover{
+    cursor: pointer;
+}
+
+/* __Help */
+.bg-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+}
