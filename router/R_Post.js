@@ -4,8 +4,8 @@ const request = require("request"); // request 모듈
 const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 
-const key = fs.readFileSync("./APIKey.txt");
-const tago_key = fs.readFileSync("./tago_key.txt");
+const key = fs.readFileSync("./APIKey.txt","utf-8");
+const tago_key = fs.readFileSync("./tago_key.txt","utf-8");
 
 //http://localhost:8080/post 경로로 요청 시 Suggestion.html파일 반환
 router.get("/", (req, res) => {
@@ -29,7 +29,9 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
     var s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
     var s_updnline = req.body.updnLine//상행 하행 구별
-    var s_line = req.body.subwayLine;
+    var s_line = req.body.SubwayLine;
+    console.log(s_line);
+
 
     // ""입력시 현재 운행중인 모든 역이 나오기 때문에 이를 방지
     if (s_response == "") {
@@ -55,8 +57,7 @@ router.post("/", (req, res) => {
     // 지하철 API에서 가져올 데이터 - url수정
     const realarrive_url = "http://swopenapi.seoul.go.kr/api/subway/" + key + "/json/realtimeStationArrival/0/10/" + encodeURI(s_response); //seoul realtime url
     const tago_api =`https://apis.data.go.kr/1613000/SubwayInfoService/getKwrdFndSubwaySttnList?serviceKey=${tago_key}&pageNo=1&numOfRows=10&_type=json&subwayStationName=${encodeURI(s_response)}`;//tago_api url
-    
-
+    const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/50/${s_line}`
     request(
         {
             url: realarrive_url,
@@ -68,16 +69,20 @@ router.post("/", (req, res) => {
                 const data = obj.realtimeArrivalList[0]; // 필요한 데이터 경로 압축
                 const convert = jsonFile.readFileSync("./static/json/line.json");
                 const subwayId = convert[data.subwayId];
-                const btrainNo = data.btrainNo;
-                const trainLineNm = data.trainLineNm;
-                const arvlMsg2 =  data.arvlMsg2;
-                const recptnDt = data.recptnDt;
+                const btrainNo = data.btrainNo; //열차번호
+                const trainLineNm = data.trainLineNm; //도착지방면
+                const arvlMsg2 =  data.arvlMsg2; //열차 도착 정보
+                const arvlMsg3 = data.arvlMsg3; //열차 도착 정보 2
+                const recptnDt = data.recptnDt; //열차 도착 시간
 
                 const arr = data.subwayList.split(","); // 문자열로 저장된 환승 정보를 배열로 변경
                 var Mystr = "";
                 arr.forEach((item, index) => {
                     Mystr += `<span>환승 정보(${index + 1}):</span> ${convert[item]}<br>`; // 배열 요소만큼 문자열 생성
                 });
+                //api 데이터 json화
+                
+                //국토부 tago api 받아오는 request
                 request({
                     url : tago_api,
                     method: "get",
@@ -85,15 +90,24 @@ router.post("/", (req, res) => {
                 function (err, res, body){
                     const data = JSON.parse(body);
                     let sugDataResult = data["response"]["body"]["items"]["item"];
-                            var code = "";
+                            var subwayStationId = "";
             
                             console.log(sugDataResult);
                             sugDataResult.forEach((data, idx) => {
                                 if (sugDataResult[idx]["subwayStationName"] == s_response && sugDataResult[idx]["subwayRouteName"] == s_line) {
-                                    code = sugDataResult[idx]["subwayStationId"];
-                                    console.log("code값: ", code);
+                                    subwayStationId = sugDataResult[idx]["subwayStationId"];
+                                    console.log("subwayStationId값: ", subwayStationId);
                                 }
                             });
+                const tago_timetable= `https://apis.data.go.kr/1613000/SubwayInfoService/getSubwaySttnAcctoSchdulList?serviceKey=${tago_key}&pageNo=1&numOfRows=500&_type=json&subwayStationId=${subwayStationId}&dailyTypeCode=01&upDownTypeCode=${s_updnline}`    
+                            request({
+                                url: tago_timetable,
+                                method: "GET",
+                            },
+                            function(err, res, body){
+                                console.log(tago_timetable);
+                                console.log("tago_timetable: "+JSON.parse(body));
+                            })
 
             
                 });
