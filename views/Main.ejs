@@ -9,6 +9,9 @@
     </head>
     <body>
         <section class="menu">
+            <div class="folding-btn">
+                <div></div>
+            </div>
             <header class="header-bar">
                 { SKHU ROAD }
             </header>
@@ -27,15 +30,12 @@
                 </table>
             </nav>
             <main class="con-main">
-
+                <header class="search-bar">
+                    <input type="text" placeholder="위치 검색">
+                </header>
             </main>
         </section>
         <div id="map"></div>
     </body>
-    <script>
-        new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 37.5665, lng: 126.978 }, // 초기 위치 설정
-            zoom: 12, // 확대/축소 레벨
-        });
-    </script>
+    <script type="module" src="../static/javascript/Main.js"></script>
 </html>
