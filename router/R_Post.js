@@ -42,6 +42,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
     var s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
     var s_updnline = req.body.updnLine//상행 하행 구별
+    console.log(s_updnline)
     var s_line = req.body.SubwayLine; //노선 받는 변수
     var stationNm = ""; //역코드 저장
 
@@ -70,7 +71,8 @@ router.post("/", (req, res) => {
     
     // 지하철 API에서 가져올 데이터 - url수정
     const realarrive_url = "http://swopenapi.seoul.go.kr/api/subway/" + key + "/json/realtimeStationArrival/0/20/" + encodeURI(s_response); //seoul realtime url
-    const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/50/${s_line}`
+    const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/50/${encodeURI(s_line)}`
+    console.log(realarrive_url);
     request(
         {
             url: realarrive_url,
@@ -88,12 +90,13 @@ router.post("/", (req, res) => {
                 const arvlMsg2 = data.arvlMsg2; //열차 도착 정보
                 const arvlMsg3 = data.arvlMsg3; //열차 도착 정보 2
                 const recptnDt = data.recptnDt; //열차 도착 시간
-
+                
                 const arr = data.subwayList.split(","); // 문자열로 저장된 환승 정보를 배열로 변경
                 var Mystr = "";
                 arr.forEach((item, index) => {
                     Mystr += `<span>환승 정보(${index + 1}):</span> ${convert[item]}<br>`; // 배열 요소만큼 문자열 생성
                 });
+                //
                 // 역코드를 얻기 위한 작업
                 if(s_line === "1호선"){
                     var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
@@ -131,8 +134,13 @@ router.post("/", (req, res) => {
                     var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
                     stationNm = station_line[arvlMsg3];
                 }
+                else{
+                    stationNm = null;
+                }
+                console.log(`${arvlMsg3}역 역명코드${stationNm}`);
                 //arvlMsg3에서 받은 역코드명으로 api 호출
                 const SearchSTNTimeTableByFRCodeService_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/500/${stationNm}/${getDayOfWeek()}/${s_updnline}/`;
+                
                 request({
                     url: SearchSTNTimeTableByFRCodeService_url,
                     method: "GET",
@@ -140,11 +148,25 @@ router.post("/", (req, res) => {
                     if(err){
                         console.error(err);
                     }
-                    try{
-                        const obj = JSON.parse(body);
-                    }catch(e){
-                        console.log(`error: ${e}`);
+                    if(stationNm){
+                        // 열차가 도착한 역의 시간표 불러오는 request
+                        try{
+                            const obj = JSON.parse(body);
+                            const result = obj.SearchSTNTimeTableByFRCodeService.row[0];
+                            console.log(SearchSTNTimeTableByFRCodeService_url);
+                            console.log(`${arvlMsg3}의 시간표 : ${JSON.stringify(result)}`);
+                            const train_no = result.TRAIN_NO;
+                            const arriveTime = result.ARRIVETIME;
+                            var delay = ``;
+                            //열차 지연 정보 계산   
+                            if(btrainNo == train_no.substring(1)){
+                                console.log(train_no);
+                            }
+                        }catch(e){
+                            console.log(`error: ${e}`);
+                        }
                     }
+                    
                     
                 })
                 // post페이지로 결과 반환
