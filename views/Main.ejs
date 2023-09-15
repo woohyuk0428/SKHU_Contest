@@ -8,7 +8,7 @@
         <title>SKHU ROAD</title>
     </head>
     <body>
-        <section class="menu">
+        <section class="menu" id="menuSex">
             <div class="folding-btn">
                 <div></div>
             </div>
@@ -20,7 +20,7 @@
                 <div class="nav-opt">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon1.svg" alt="1">
+                            <img class="opt-icon" src="opticon1.svg" id="gotoMappingBtn">
                         </td>
                     </table>
                     <br>
@@ -29,7 +29,7 @@
                 <div class="nav-opt">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon2.svg" alt="1">
+                            <img class="opt-icon" src="opticon2.svg" id="gotoHalfWayBtn">
                         </td>
                     </table>
                     <br>
@@ -38,7 +38,7 @@
                 <div class="nav-opt">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon4.svg" alt="1">
+                            <img class="opt-icon" src="opticon4.svg" id="gotoSubwayBtn">
                         </td>
                     </table>
                     <br>
@@ -60,7 +60,6 @@
             <%- include('./__Mapping') %>
         </section>
         <div id="map"></div>
-        <!-- <%- include('./__Help') %> -->
     </body>
     <script src="Main.js"></script>
 </html>

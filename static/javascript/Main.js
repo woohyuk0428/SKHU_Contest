@@ -10,3 +10,9 @@ const menu = document.querySelector('.menu');
 foldingBtn.addEventListener('click', () => {
 menu.classList.toggle('hidden');
 });
+
+// const gotoMappingBtn = document.querySelector('#gotoMappingBtn');
+
+// gotoMappingBtn.addEventListener('click', () => {
+//   menu.append("<%- include('./__Mapping') %>");
+// })

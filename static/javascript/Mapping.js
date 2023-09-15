@@ -259,3 +259,100 @@ function LabelClick(event){
         });     
 
 }
+
+// input reset button
+const resetBtn = document.querySelectorAll('#reset-button');
+
+resetBtn.addEventListener('click', () => {
+    const addressInputs = document.querySelectorAll('input[name="address"]');
+
+    console.log(addressInputs);
+    addressInputs.value = "";
+})
+
+// // enter 키 누를 시 검색
+// document.addEventListener("keyup", function (e) {
+//     let key = e.key || e.keyCode;
+//     // 위치 검색 버튼 클릭 시 이벤트 처리
+//     if(key == 13){
+//         var input = document.querySelector(".form-control").value; //검색위치
+//         var geocoder = new google.maps.Geocoder();
+//         var map;
+//         var directionsRenderers = [];
+    
+//         geocoder.geocode({ address: input }, function (results, status) {
+//             const location = results[0].geometry.location; //todo 위도 경도값을 변수에 저장합니다.
+    
+//             if (status == "OK") {
+//                 //지도 초기화
+//                 if (map) {
+//                     map.setMap(null);
+//                 }
+    
+//                 map = new google.maps.Map(document.getElementById("map"), {
+//                     center: location,
+//                 });
+    
+//                 var marker = new google.maps.Marker({
+//                     map: map,
+//                     position: location,
+//                 });
+    
+//                 // 마커를 클릭했을 때 정보창 열기
+//                 marker.addListener("click", function () {
+//                     getAddress(location, function (address) {
+//                         infoWindow.setContent("현재 주소: " + address);
+//                         infoWindow.open(map, marker);
+//                     });
+//                 });
+    
+//                 // 출발지점에서 목적지까지의 경로표시
+//                 const request = {
+//                     origin: data,
+//                     destination: location,
+//                     travelMode: google.maps.TravelMode.TRANSIT,
+//                 };
+    
+//                 directionsService.route(request, function (response, status) {
+//                     if (status == google.maps.DirectionsStatus.OK) {
+//                         directionsRenderer.setDirections(response);
+        
+//                         // 걸리는 시간 표시
+//                         const route = response.routes[0];
+//                         const duration = route.legs[0].duration.text; // 걸리는 시간 정보
+//                         const distance = route.legs[0].distance.text; // 거리 정보
+        
+//                         // 결과 표시 (예: 경로 및 걸리는 시간)
+//                         const resultText = `경로 정보:<br>
+//                                            걸리는 시간: ${duration}, 거리: ${distance}`;
+//                         infoWindow.setContent(resultText);
+//                         infoWindow.open(map, marker);
+    
+//                     } else {
+//                         alert(markerInfo.title + " 경로를 찾을 수 없습니다: " + status);
+//                     }
+//                 });
+                
+//                 var directionsRenderer = new google.maps.DirectionsRenderer({
+//                     map: map,
+//                     suppressMarkers: true,
+//                     polylineOptions: {
+//                         strokeColor: colorCode,
+//                     },
+//                 });
+    
+//                 directionsRenderers.push(directionsRenderer);
+    
+//                 directionsService.route(request, function (response, status) {
+//                     if (status == google.maps.DirectionsStatus.OK) {
+//                         directionsRenderer.setDirections(response);
+//                     } else {
+//                         alert(markerInfo.title + " 경로를 찾을 수 없습니다: " + status);
+//                     }
+//                 });
+//             } else {
+//                 alert("요청을 완료하지 못했습니다. 상태: " + status);
+//             }
+//         });   
+//     }
+// });
