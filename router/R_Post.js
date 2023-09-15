@@ -100,7 +100,8 @@ router.post("/", (req, res) => {
                     const btrainSttus = data.btrainSttus;
                     const arvlMsg2 = data.arvlMsg2;
                     const arvlMsg3 = data.arvlMsg3;
-                    const recptnDt = data.recptnDtl
+                    const recptnDt = data.recptnDt;
+                    const bstatnNm = data.bstatnNm;
                     // 역코드를 얻기 위한 작업
                     if(s_line === "1호선"){
                         var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
@@ -199,16 +200,16 @@ router.post("/", (req, res) => {
                                                 let timeDiff = arriveTime - recptnDate;
                                                 let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                 let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
-                                                delayInfo = `${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
+                                                delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
                                             }
                                             else if(recptnDate > arriveTime_data){
                                                 let timeDiff = arriveTime - recptnDate;
                                                 let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                 let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
-                                                delayInfo = `${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
+                                                delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
                                             }
                                             else if(recptnDate == arriveTime){
-                                                delayInfo = `정시 운행중`;
+                                                delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차 정시 운행중`;
                                             }
                                         }
                                         processData.delayInfo = delayInfo;
