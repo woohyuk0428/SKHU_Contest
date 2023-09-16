@@ -50,8 +50,7 @@ router.post("/", (req, res) => {
     console.log(s_updnline)
     var s_line = req.body.SubwayLine; //노선 받는 변수
     var stationNm = ""; //역코드 저장
-    const subwayData = {};
-    let delayInfo = ``;
+
 
 
     // ""입력시 현재 운행중인 모든 역이 나오기 때문에 이를 방지
@@ -150,6 +149,7 @@ router.post("/", (req, res) => {
                         console.log(data.updnLine);
                         const subwayId = convert[data.subwayId];
                         var btrainNo = data.btrainNo;
+                        const subwayData = {};
                         if(!subwayData[subwayId]){
                             subwayData[subwayId] = [];
                         }        
@@ -159,6 +159,7 @@ router.post("/", (req, res) => {
                             btrainNo = data.btrainNo.substring(1);
                         }
                         console.log(`btrainNo: ${btrainNo}`);
+                        let delayInfo = ``;
                         //api 호출한 값 json화
                         let processData={
                             subwayId : data.subwayId,
