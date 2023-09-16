@@ -20,10 +20,27 @@ const section1 = document.querySelector('.mapping-section');
 const section2 = document.querySelector('.halfway-section');
 const section3 = document.querySelector('.subway-section');
 
+
+
+function toggleSection(sectionShow, buttonHighlight) {
+  [section1, section2, section3].forEach(section => {
+    section.classList.add('hidden');
+  });
+
+  sectionShow.classList.remove('hidden');
+
+  [gotoMappingBtn, gotoHalfWayBtn, gotoSubwayBtn].forEach(button => {
+    button.classList.remove('on');
+  });
+
+  buttonHighlight.classList.add('on');
+}
+
 gotoMappingBtn.addEventListener('click', () => {
-  section1.classList.remove('hidden');
-  section2.classList.add('hidden');
-  section3.classList.add('hidden');
+  toggleSection(section1, gotoMappingBtn);
+  // section1.classList.remove('hidden');
+  // section2.classList.add('hidden');
+  // section3.classList.add('hidden');
 
   // gotoMappingBtn.classList.add('on');
   // gotoHalfWayBtn.classList.remove('on');
@@ -31,9 +48,10 @@ gotoMappingBtn.addEventListener('click', () => {
 })
 
 gotoHalfWayBtn.addEventListener('click', () => {
-  section1.classList.add('hidden');
-  section2.classList.remove('hidden');
-  section3.classList.add('hidden');
+  toggleSection(section2, gotoHalfWayBtn);
+  // section1.classList.add('hidden');
+  // section2.classList.remove('hidden');
+  // section3.classList.add('hidden');
 
   // gotoMappingBtn.classList.remove('on');
   // gotoHalfWayBtn.classList.add('on');
@@ -41,9 +59,11 @@ gotoHalfWayBtn.addEventListener('click', () => {
 })
 
 gotoSubwayBtn.addEventListener('click', () => {
-  section1.classList.add('hidden');
-  section2.classList.add('hidden');
-  section3.classList.remove('hidden');
+
+  toggleSection(section3, gotoSubwayBtn);
+  // section1.classList.add('hidden');
+  // section2.classList.add('hidden');
+  // section3.classList.remove('hidden');
 
   // gotoMappingBtn.classList.remove('on');
   // gotoHalfWayBtn.classList.remove('on');

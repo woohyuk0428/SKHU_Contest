@@ -4,7 +4,7 @@ body{
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
-    -o-user-select: none;  
+    -o-user-select: none;
     user-select: none;
 }
 
@@ -21,7 +21,7 @@ input {
     -webkit-user-select: text;
     -khtml-user-select: text;
     -moz-user-select: text;
-    -o-user-select: text;  
+    -o-user-select: text;
     user-select: text;
 }
 /* menu 영역 */
@@ -161,7 +161,7 @@ input {
     display: none;
   }
 
-  .nav-opt.on {
+  .on {
     background-color: #8591ff;
   }
 
@@ -183,7 +183,7 @@ input {
 
     height: 40px;
     width: 230px;
-    
+
     font-size: 20px;
 
     float: left;
@@ -198,7 +198,7 @@ input {
   .con-search{
     background-color: #EEEEEE;
     /* display: inline-block; */
-    
+
 
     border-radius: 10px;
     margin-left: 20px;
