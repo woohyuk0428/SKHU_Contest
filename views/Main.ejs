@@ -17,28 +17,28 @@
                 <div class="header-hr"></div>
             </header>
             <nav class="con-nav">
-                <div class="nav-opt">
+                <div class="nav-opt on" id="gotoMappingBtn">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon1.svg" id="gotoMappingBtn">
+                            <img class="opt-icon" src="opticon1.svg" >
                         </td>
                     </table>
                     <br>
                     길찾기
                 </div>
-                <div class="nav-opt">
+                <div class="nav-opt" id="gotoHalfWayBtn">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon2.svg" id="gotoHalfWayBtn">
+                            <img class="opt-icon" src="opticon2.svg" >
                         </td>
                     </table>
                     <br>
                     중간지점
                 </div>
-                <div class="nav-opt">
+                <div class="nav-opt" id="gotoSubwayBtn">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon4.svg" id="gotoSubwayBtn">
+                            <img class="opt-icon" src="opticon4.svg">
                         </td>
                     </table>
                     <br>
@@ -52,12 +52,20 @@
                     </tr>
                     <tr>
                     <td>
-                        <div class="nav-opt-other">?</div>
+                        <div class="nav-opt-other" id="helpBtn">?</div>
                     </td>
                 </tr>
                 </table>
             </nav>
-            <%- include('./__Mapping') %>
+            <div class="mapping-section">
+                <%- include('./__Mapping') %>
+            </div>
+            <div class="halfway-section hidden">
+                <%- include('./__Halfway') %>
+            </div>
+            <div class="subway-section hidden">
+                <%- include('./__Subway') %>
+            </div>
         </section>
         <div id="map"></div>
     </body>

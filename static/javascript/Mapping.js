@@ -1,8 +1,8 @@
-const inputContainer = document.querySelector("#address-container"); // input이 들어갈 컨테이너 위치
+// const inputContainer = document.querySelector("#address-container"); // input이 들어갈 컨테이너 위치
 // const addressFunctions = new InputAddressFunctions(inputContainer);
 
-const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
-const sliderValue = document.getElementById("sliderValue"); // 슬라이더 값을 표시할 위치
+// const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
+// const sliderValue = document.getElementById("sliderValue"); // 슬라이더 값을 표시할 위치
 
 const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
 let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function CreateMap(address) {
     map = new google.maps.Map(document.getElementById("map"), {
         center: address, // 초기 위치 설정
-        zoom: 12, // 확대/축소 레벨
+        zoom: 14, // 확대/축소 레벨
     });
 
     infoWindow = new google.maps.InfoWindow();
