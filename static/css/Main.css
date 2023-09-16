@@ -150,7 +150,19 @@ input {
 
   .mapping-section.hidden{
     z-index: -100;
-    visibility: hidden;
+    display: none;
+  }
+  .halfway-section.hidden{
+    z-index: -100;
+    display: none;
+  }
+  .subway-section.hidden{
+    z-index: -100;
+    display: none;
+  }
+
+  .nav-opt.on {
+    background-color: #8591ff;
   }
 
   .con-main {
