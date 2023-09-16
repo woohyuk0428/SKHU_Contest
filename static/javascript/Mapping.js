@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function CreateMap(address) {
     map = new google.maps.Map(document.getElementById("map"), {
         center: address, // 초기 위치 설정
-        zoom: 12, // 확대/축소 레벨
+        zoom: 14, // 확대/축소 레벨
     });
 
     infoWindow = new google.maps.InfoWindow();
