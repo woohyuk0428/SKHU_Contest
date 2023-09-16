@@ -11,8 +11,7 @@ const reverse_updn = {
 const key = fs.readFileSync("./APIKey.txt", "utf-8");
 const tago_key = fs.readFileSync("./tago_key.txt", "utf-8");
 //열차 정보 저장하는 json
-const subwayData = {};
-let delayInfo = ``;
+
 //요일 구분해주는 function
 function getDayOfWeek() {
     const now = new Date();
@@ -51,6 +50,8 @@ router.post("/", (req, res) => {
     console.log(s_updnline)
     var s_line = req.body.SubwayLine; //노선 받는 변수
     var stationNm = ""; //역코드 저장
+    const subwayData = {};
+    let delayInfo = ``;
 
 
     // ""입력시 현재 운행중인 모든 역이 나오기 때문에 이를 방지
@@ -187,23 +188,25 @@ router.post("/", (req, res) => {
                                     const result = obj.SearchSTNTimeTableByFRCodeService.row;
                                     //delay 지연 정보 구현
                                     result.forEach(data=>{
-                                        const train_no = data.TRAIN_NO;
+                                        var train_no = data.TRAIN_NO;
                                         
                                         if(s_line == "1호선"||s_line == "2호선"||s_line == "3호선"||s_line == "4호선"||s_line == "9호선"){
                                             train_no = train_no.substring(1);
                                         }
-                                        if(btrainNo == train_no){
-                                            let arriveTime = data.ARRIVETIME;
-                                            let arriveTime_data = new Date("1970-01-01T"+arriveTime);
+                                        if(btrainNo === train_no){
+                                            let trainTime = data.ARRIVETIME;
+                                            let trainDate = new Date("1970-01-01T"+trainTime);
                                             let recptnDate = new Date(recptnDt);
-                                            if(recptnDate < arriveTime_data){
-                                                let timeDiff = arriveTime - recptnDate;
+                                            let currentDate = new Date();
+                                            recptnDate.setHours(trainDate.getHours(), trainDate.getMinutes(), trainDate.getSeconds());
+                                            if(currentDate > recptnDate){
+                                                let timeDiff = currentDate - recptnDate;
                                                 let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                 let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
                                                 delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
                                             }
-                                            else if(recptnDate > arriveTime_data){
-                                                let timeDiff = arriveTime - recptnDate;
+                                            else if(currentDate < recptnDate){
+                                                let timeDiff = recptnDate - recptnDate;
                                                 let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                 let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
                                                 delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
@@ -213,7 +216,13 @@ router.post("/", (req, res) => {
                                             }
                                         }
                                         processData.delayInfo = delayInfo;
+                                        
                                     });
+                                    subwayData[subwayId].push(processData);
+                                    console.log(subwayData);
+                                    res.render("post", {
+                                        result_Data : processData
+                                    })
                                 }catch(e){
                                     console.log(`error: ${e}`);
                                 }
@@ -223,8 +232,7 @@ router.post("/", (req, res) => {
                         })
                         
                         
-                        subwayData[subwayId].push(processData);
-                        console.log(subwayData);
+                        
                         var newHtml = `<br><h1>${subwayId} ${s_response}역 결과입니다.</h1>
                     <div class="result-info">
                     <span>열차 번호:</span> ${data.btrainNo}<br>
