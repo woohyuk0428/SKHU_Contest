@@ -38,36 +38,14 @@ function toggleSection(sectionShow, buttonHighlight) {
 
 gotoMappingBtn.addEventListener('click', () => {
   toggleSection(section1, gotoMappingBtn);
-  // section1.classList.remove('hidden');
-  // section2.classList.add('hidden');
-  // section3.classList.add('hidden');
-
-  // gotoMappingBtn.classList.add('on');
-  // gotoHalfWayBtn.classList.remove('on');
-  // gotoSubwayBtn.classList.remove('on');
 })
 
 gotoHalfWayBtn.addEventListener('click', () => {
   toggleSection(section2, gotoHalfWayBtn);
-  // section1.classList.add('hidden');
-  // section2.classList.remove('hidden');
-  // section3.classList.add('hidden');
-
-  // gotoMappingBtn.classList.remove('on');
-  // gotoHalfWayBtn.classList.add('on');
-  // gotoSubwayBtn.classList.remove('on');
 })
 
 gotoSubwayBtn.addEventListener('click', () => {
-
   toggleSection(section3, gotoSubwayBtn);
-  // section1.classList.add('hidden');
-  // section2.classList.add('hidden');
-  // section3.classList.remove('hidden');
-
-  // gotoMappingBtn.classList.remove('on');
-  // gotoHalfWayBtn.classList.remove('on');
-  // gotoSubwayBtn.classList.add('on');
 })
 
 // 도움말 버튼
