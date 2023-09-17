@@ -77,9 +77,9 @@ router.post("/", (req, res) => {
     
     // 지하철 API에서 가져올 데이터 - url수정
     const realarrive_url = "http://swopenapi.seoul.go.kr/api/subway/" + key + "/json/realtimeStationArrival/0/20/" + encodeURI(s_response); //seoul realtime url
-    const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/50/${encodeURI(s_line)}`
-    console.log(realTimePosition_url)
-    console.log(realarrive_url);
+    //const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/50/${encodeURI(s_line)}/${encodeURI(s_updnline)}`;
+   // console.log(realTimePosition_url)
+    console.log(`서울시 공공데이터 : ${realarrive_url}`);
     request(
         {
             url: realarrive_url,
@@ -89,85 +89,53 @@ router.post("/", (req, res) => {
             try {
                 const obj = JSON.parse(body); // body의 데이터는 string으로 전  송되기 때문에 json형식으로 변환
                 if(obj.status != "500"){ // 검색했을때 500이 뜨면 정보가 안나온다.
+                    
+                        const s_data = obj.realtimeArrivalList; // 필요한 데이터 경로 압축
+                        const convert = jsonFile.readFileSync("./static/json/line.json");
 
-                const s_data = obj.realtimeArrivalList; // 필요한 데이터 경로 압축
-                const convert = jsonFile.readFileSync("./static/json/line.json");
-
-                
-                
                     //열차 불러오는 작업
-                s_data.forEach((data,index) =>{
-                    const trainLineNm = data.trainLineNm;
-                    const btrainSttus = data.btrainSttus;
-                    const arvlMsg2 = data.arvlMsg2;
+                    s_data.forEach((data,index) =>{
+                    const subwayLine = data.subwayId;
                     const arvlMsg3 = data.arvlMsg3;
                     const recptnDt = data.recptnDt;
                     const bstatnNm = data.bstatnNm;
+                    const updnLine = data.updnLine;
+                    const trainLineNm = data.trainLineNm;
+                    let btrainNo = data.btrainNo;
+                    const arvlMsg2 = data.arvlMsg2;
+
                     
                     // 역코드를 얻기 위한 작업
-                    if(s_line === "1호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-                    }
-                    else if(s_line === "2호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-                    }
-                    else if(s_line === "3호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-                    }
-                    else if(s_line === "4호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-                    }
-                    else if(s_line === "5호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-                        
-                    }
-                    else if(s_line === "6호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-                        
-                    }
-                    else if(s_line === "7호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-                    }
-                    else if(s_line === "8호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
+                    var trainNm = jsonFile.readFileSync("./static/json/reverse_train.json");
+                        if(s_line == "1호선"||s_line == "2호선"||s_line == "3호선"||s_line == "4호선"||s_line == "5호선"||s_line == "6호선"||s_line == "7호선"||s_line == "8호선"||s_line == "9호선"){
+                            var stationNm = trainNm[s_line][s_response];
+                        }
+                        else{
+                            var stationNm = null;
+                        }
 
-
-                    }
-                    else if(s_line === "9호선"){
-                        var station_line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
-                        stationNm = station_line[arvlMsg3];
-
-
-                    }
-                    else{
-                        stationNm = null;
-                    }
+                    
+                   
                     
 
                     
-                    if(reverse[s_line] === data.subwayId && reverse_updn[s_updnline] === data.updnLine){
+                    if(reverse[s_line] === subwayLine && reverse_updn[s_updnline] === updnLine){
                         console.log(`${arvlMsg3}역 역명코드${stationNm}`);
                         console.log(data.updnLine);
+
                         const subwayId = convert[data.subwayId];
-                        var btrainNo = data.btrainNo;const subwayData = {};
+                        const subwayData = {};
                         if(!subwayData[subwayId]){
                             subwayData[subwayId] = [];
                         }
                         //api 호출한 값 json화
                         let processData={
-                            subwayId : data.subwayId,
-                            trainLineNm : data.trainLineNm,
-                            btrainNo : data.btrainNo,
-                            arvlMsg2 : data.arvlMsg2,
-                            updnLine : data.updnLine
+                            subwayId : subwayLine,
+                            trainLineNm : trainLineNm,
+                            btrainNo : btrainNo,
+                            arvlMsg2 : arvlMsg2,
+                            updnLine : updnLine,
+                            bstatnNm : bstatnNm
                             
                         }
                        
@@ -178,18 +146,18 @@ router.post("/", (req, res) => {
                             btrainNo = data.btrainNo.substring(1);
                         }
                         console.log(`btrainNo: ${btrainNo}`);
-                        let delayInfo = ``;
+                        
                         
                         var list = "";
                         arr.forEach(data=>{
                             list += `${convert[data]} `;
                         })
                         processData.subwayList = list;
-                        const SearchSTNTimeTableByFRCodeService_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/500/${stationNm}/${getDayOfWeek()}/${s_updnline}/`;
+                        const SearchSTNTimeTableByFRCodeService_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/250/${stationNm}/${getDayOfWeek()}/${s_updnline}/`;
 
                         console.log(SearchSTNTimeTableByFRCodeService_url);
                         try{
-                        if(btrainNo){    
+                        if(btrainNo && stationNm != null){    
                         request({
                             url: SearchSTNTimeTableByFRCodeService_url,
                             method: "GET",
@@ -216,41 +184,48 @@ router.post("/", (req, res) => {
                                             let recptnDate = new Date(recptnDt);
                                             let currentDate = new Date();
                                             recptnDate.setHours(trainDate.getHours(), trainDate.getMinutes(), trainDate.getSeconds());
-                                            if(currentDate > recptnDate){
+                                            if(currentDate.getTime() > recptnDate.getTime()){
                                                 let timeDiff = currentDate - recptnDate;
                                                 let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                 let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
-                                                delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
+                                                var delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
                                             }
-                                            else if(currentDate < recptnDate){
-                                                let timeDiff = recptnDate - recptnDate;
+                                            else if(currentDate.getTime() < recptnDate.getTime()){
+                                                let timeDiff = recptnDate - currentDate;
                                                 let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                 let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
-                                                delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
+                                                var delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
                                             }
-                                            else if(recptnDate == arriveTime){
-                                                delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차 정시 운행중`;
+                                            else if(currentDate.getTime() === recptnDate.getTime()){
+                                                var delayInfo = `${data.TRAIN_NO} ${bstatnNm}행 열차 정시 운행중`;
                                             }
+                                            processData.delayInfo = delayInfo;
                                         }
-                                        processData.delayInfo = delayInfo;
+
                                         
                                     });
                                     subwayData[subwayId].push(processData);
                                     console.log(processData);
                                     res.render("post", {
                                         result_Data : processData
-                                    })
+                                    });
+                                    return;   
                                 }catch(e){
                                     console.error(`error: ${e}`);
                                 }
                             }
                             
-                            
-                        })}}
+                        })}else if(stationNm == null){
+                            subwayData[subwayId].push(processData);
+                            console.log(processData);
+                        }
+                        
+                    }
                         catch(e){
                             console.log(`request 오류 : ${e}`);
                         }
                         
+                            
                         
                         
                         var newHtml = `<br><h1>${subwayId} ${s_response}역 결과입니다.</h1>
@@ -266,10 +241,16 @@ router.post("/", (req, res) => {
                     }
                     //var newHtml =`<br><p style="color:red">"${s_response}"에 대한 검색 결과가 존재하지 않거나 데이터를 가져오는 중에 오류가 발생했습니다.</p>`;
             })
+                    
+               
             
+                }
+                else if(obj.realtimeArrivalList.subwayId === undefined){
+                    console.log("운행종료");
                 }
                 else{
                     var newHtml =`<br><p style="color:red">"${s_response}"에 대한 검색 결과가 존재하지 않거나 데이터를 가져오는 중에 오류가 발생했습니다.</p>`;
+                    console.log("운행종료");
                 }
 
                 
