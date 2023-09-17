@@ -5,15 +5,7 @@ const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
 
-let reverse_updn = {
-    "1":"상행", 
-    "2":"하행",
-};
 
-const line2_updn = {
-    "1" : "내선",
-    "2" : "외선"
-};
 const key = fs.readFileSync("./APIKey.txt", "utf-8");
 const tago_key = fs.readFileSync("./tago_key.txt", "utf-8");
 //열차 정보 저장하는 json
@@ -53,13 +45,30 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
     var s_response = "온수";
     s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
-    var s_updnline = "상행";
+    var s_updnline = "상행"; 
     var s_updnline = req.body.updnLine//상행 하행 구별
     console.log(s_updnline)
     var s_line = "1호선";
     var s_line = req.body.SubwayLine; //노선 받는 변수
     var stationNm = ""; //역코드 저장
     const line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
+    if(s_line === "9호선"){
+        var reverse_updn = {
+            "1":"하행", 
+            "2":"상행",
+        }
+    }else{
+        reverse_updn = {
+            "1":"상행", 
+            "2":"하행",
+        };
+    }
+    
+    
+    const line2_updn = {
+        "1" : "내선",
+        "2" : "외선"
+    };
 
     // ""입력시 현재 운행중인 모든 역이 나오기 때문에 이를 방지
     if (s_response == "") {
@@ -124,13 +133,8 @@ router.post("/", (req, res) => {
                         else{
                             var stationNm = null;
                         }
-                        if(s_line === "9호선"){
-                            reverse_updn = {
-                                "1":"하행", 
-                                "2":"상행",
-                            }
-                        }
-                    if(reverse[s_line] === subwayLine && reverse_updn[s_updnline] === updnLine || line2_updn[s_updnline]===updnLine){
+                        
+                    if(reverse[s_line] === subwayLine && reverse_updn[s_updnline] === updnLine || line2_updn[s_updnline]===updnLine &&stationNm != undefined){
                         console.log(`${arvlMsg3}역 역명코드${stationNm}`);
                         console.log(data1.updnLine);
 
@@ -143,7 +147,7 @@ router.post("/", (req, res) => {
                         let processData={
                             subwayId : subwayLine,
                             trainLineNm : trainLineNm,
-                            btrainNo : btrainNo,
+                            btrainNo : data1.btrainNo,
                             arvlMsg2 : arvlMsg2,
                             updnLine : updnLine,
                             bstatnNm : bstatnNm
@@ -153,12 +157,12 @@ router.post("/", (req, res) => {
                                 
                         const arr = data1.subwayList.split(","); // 문자열로 저장된 환승 정보를 배열로 변경
                         //1호선 같은 경우 열차번호 앞자리가 0이 들어가기 때문에 급행열차가 아닌 열차 번호를 식별하기 위한 작업
-                        if(btrainNo && btrainNo.charAt(0) == "0"){
-                            btrainNo = data1.btrainNo.substring(1);
+                        if(s_line === "1호선" && btrainNo && btrainNo.charAt(0) != "1"){
+                            btrainNo = Number(btrainNo);
+                            btrainNo = String(btrainNo);
                         }
-                        if(btrainNo && s_line =="2호선" && btrainNo.charAt(0)=="3"||btrainNo.charAt(0)=="7"||btrainNo.charAt(0)=="8"){
-                            btrainNo = data1.btrainNo.substring(2);
-                        }
+                        
+                        
                         
                         console.log(`btrainNo: ${btrainNo}`);
                         
@@ -192,9 +196,19 @@ router.post("/", (req, res) => {
                                             train_no = train_no.substring(1);
                                         }
                                         
-                                        else if(s_line == "2호선"){
-                                            train_no = train_no.substring(2);
+                                        if(s_line === "2호선"||btrainNo.charAt(0)=="3"){
+                                            btrainNo = btrainNo.replace("3","2");
                                         }
+                                        else if(s_line === "2호선"||btrainNo.charAt(0)=="6"){
+                                            btrainNo = btrainNo.replace("6","2");
+                                        }
+                                        else if(s_line === "2호선"||btrainNo.charAt(0)=="7"){
+                                            btrainNo = btrainNo.replace("7","2");
+                                        }
+                                        else if(s_line === "2호선"||btrainNo.charAt(0)=="8"){
+                                            btrainNo = btrainNo.replace("8","2");
+                                        }
+                                        
                                         //console.log(`train_no: ${train_no}`);
 
                                         if(btrainNo == train_no){
