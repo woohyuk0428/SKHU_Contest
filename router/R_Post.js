@@ -157,10 +157,9 @@ router.post("/", (req, res) => {
                                 
                         const arr = data1.subwayList.split(","); // 문자열로 저장된 환승 정보를 배열로 변경
                         //1호선 같은 경우 열차번호 앞자리가 0이 들어가기 때문에 급행열차가 아닌 열차 번호를 식별하기 위한 작업
-                        if(s_line ==="1호선"){
                             let parse_btrainNo = parseInt(btrainNo,10);
                             btrainNo = String(parse_btrainNo);
-                        }
+
                         
                         
                         
@@ -223,7 +222,12 @@ router.post("/", (req, res) => {
                                                 let timeDiff = currentDate - recptnDate;
                                                 let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                 let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
-                                                var delayInfo = `${data2.TRAIN_NO} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
+                                                if(minuesDelayed>400){
+                                                    var delayInfo = `${data2.TRAIN_NO} ${bstatnNm}행 열차 ${data2.SUBWAYSNAME}역 출발 대기중`;
+                                                }
+                                                else{
+                                                    var delayInfo = `${data2.TRAIN_NO} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
+                                                }
                                             }
                                             else if(currentDate.getTime() < recptnDate.getTime()){
                                                 let timeDiff = recptnDate - currentDate;
