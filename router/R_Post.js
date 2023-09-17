@@ -4,6 +4,7 @@ const request = require("request"); // request 모듈
 const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
+
 let reverse_updn = {
     "1":"상행", 
     "2":"하행",
@@ -50,11 +51,15 @@ router.get("/", (req, res) => {
 
 // http://localhost:8080/post - post라우팅
 router.post("/", (req, res) => {
-    var s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
+    var s_response = "온수";
+    s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
+    var s_updnline = "상행";
     var s_updnline = req.body.updnLine//상행 하행 구별
     console.log(s_updnline)
+    var s_line = "1호선";
     var s_line = req.body.SubwayLine; //노선 받는 변수
     var stationNm = ""; //역코드 저장
+    const line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
 
     // ""입력시 현재 운행중인 모든 역이 나오기 때문에 이를 방지
     if (s_response == "") {
@@ -83,6 +88,8 @@ router.post("/", (req, res) => {
     //const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/50/${encodeURI(s_line)}/${encodeURI(s_updnline)}`;
    // console.log(realTimePosition_url)
     console.log(`서울시 공공데이터 : ${realarrive_url}`);
+    if(line[s_response] === s_line){
+
     request(
         {
             url: realarrive_url,
@@ -316,6 +323,11 @@ router.post("/", (req, res) => {
             }
         }
     );
+}
+else{
+    console.log(`${s_line}의 ${s_response}역은 없습니다. 다시 검색해주세요.`);
+}
+
 });
 
 module.exports = router;
