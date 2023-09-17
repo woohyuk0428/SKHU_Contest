@@ -7,7 +7,7 @@ const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
 
 
 const key = fs.readFileSync("./APIKey.txt", "utf-8");
-const tago_key = fs.readFileSync("./tago_key.txt", "utf-8");
+
 //열차 정보 저장하는 json
 
 //요일 구분해주는 function
@@ -147,7 +147,7 @@ router.post("/", (req, res) => {
                         let processData={
                             subwayId : subwayLine,
                             trainLineNm : trainLineNm,
-                            btrainNo : data1.btrainNo,
+                            btrainNo : btrainNo,
                             arvlMsg2 : arvlMsg2,
                             updnLine : updnLine,
                             bstatnNm : bstatnNm
@@ -157,10 +157,11 @@ router.post("/", (req, res) => {
                                 
                         const arr = data1.subwayList.split(","); // 문자열로 저장된 환승 정보를 배열로 변경
                         //1호선 같은 경우 열차번호 앞자리가 0이 들어가기 때문에 급행열차가 아닌 열차 번호를 식별하기 위한 작업
-                        if(s_line === "1호선" && btrainNo && btrainNo.charAt(0) != "1"){
-                            btrainNo = Number(btrainNo);
-                            btrainNo = String(btrainNo);
+                        if(s_line ==="1호선"){
+                            let parse_btrainNo = parseInt(btrainNo,10);
+                            btrainNo = String(parse_btrainNo);
                         }
+                        
                         
                         
                         
@@ -172,7 +173,7 @@ router.post("/", (req, res) => {
                             list += `${convert[data2]} `;
                         })
                         processData.subwayList = list;
-                        const SearchSTNTimeTableByFRCodeService_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/250/${stationNm}/${getDayOfWeek()}/${s_updnline}/`;
+                        const SearchSTNTimeTableByFRCodeService_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/253/${stationNm}/${getDayOfWeek()}/${s_updnline}/`;
 
                         console.log(SearchSTNTimeTableByFRCodeService_url);
                         try{
@@ -196,23 +197,22 @@ router.post("/", (req, res) => {
                                             train_no = train_no.substring(1);
                                         }
                                         
-                                        if(s_line === "2호선"||btrainNo.charAt(0)=="3"){
+                                        if(s_line === "2호선"&&btrainNo.charAt(0)=="3"){
                                             btrainNo = btrainNo.replace("3","2");
                                         }
-                                        else if(s_line === "2호선"||btrainNo.charAt(0)=="6"){
+                                        else if(s_line === "2호선"&&btrainNo.charAt(0)=="6"){
                                             btrainNo = btrainNo.replace("6","2");
                                         }
-                                        else if(s_line === "2호선"||btrainNo.charAt(0)=="7"){
+                                        else if(s_line === "2호선"&&btrainNo.charAt(0)=="7"){
                                             btrainNo = btrainNo.replace("7","2");
                                         }
-                                        else if(s_line === "2호선"||btrainNo.charAt(0)=="8"){
+                                        else if(s_line === "2호선"&&btrainNo.charAt(0)=="8"){
                                             btrainNo = btrainNo.replace("8","2");
                                         }
                                         
-                                        //console.log(`train_no: ${train_no}`);
+                                        
 
-                                        if(btrainNo == train_no){
-                                            //console.log(`trainN_no: ${train_no}`);
+                                        if(btrainNo === train_no){
                                             let trainTime = data2.ARRIVETIME;
                                             console.log(trainTime);
                                             let trainDate = new Date("1970-01-01T"+trainTime);
