@@ -20,52 +20,58 @@
                 <div class="nav-opt on" id="gotoMappingBtn">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon1.svg" >
+                            <img class="opt-icon" src="opticon1.svg" />
                         </td>
                     </table>
-                    <br>
+                    <br />
                     길찾기
                 </div>
                 <div class="nav-opt" id="gotoHalfWayBtn">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon2.svg" >
+                            <img class="opt-icon" src="opticon2.svg" />
                         </td>
                     </table>
-                    <br>
+                    <br />
                     중간지점
                 </div>
                 <div class="nav-opt" id="gotoSubwayBtn">
                     <table>
                         <td>
-                            <img class="opt-icon" src="opticon4.svg">
+                            <img class="opt-icon" src="opticon4.svg" />
                         </td>
                     </table>
-                    <br>
+                    <br />
                     지하철
                 </div>
                 <table class="con-oth">
                     <tr>
-                    <td>
-                        <div class="nav-opt-other">i</div>
-                    </td>
+                        <td>
+                            <div class="nav-opt-other">i</div>
+                        </td>
                     </tr>
                     <tr>
-                    <td>
-                        <div class="nav-opt-other" id="helpBtn">?</div>
-                    </td>
-                </tr>
+                        <td>
+                            <div class="nav-opt-other" id="helpBtn">?</div>
+                        </td>
+                    </tr>
                 </table>
             </nav>
-            <div class="mapping-section">
-                <%- include('./__Mapping') %>
+
+            <div id="radio_cont">
+                <div id="radio_flax">
+                    <label class="radio-label"> <input type="radio" name="option" value="convenience_store" />편의점 </label>
+                    <label class="radio-label"> <input type="radio" name="option" value="cafe" />카페 </label>
+                    <label class="radio-label"> <input type="radio" name="option" value="subway_station" />지하철 </label>
+                    <label class="radio-label"> <input type="radio" name="option" value="bus_station" />버스 </label>
+                    <label class="radio-label"> <input type="radio" name="option" value="restaurant" />음식점 </label>
+                    <label class="radio-label"> <input type="radio" name="option" value="library" />도서관 </label>
+                </div>
             </div>
-            <div class="halfway-section hidden">
-                <%- include('./__Halfway') %>
-            </div>
-            <div class="subway-section hidden">
-                <%- include('./__Subway') %>
-            </div>
+
+            <div class="mapping-section"><%- include('./__Mapping') %></div>
+            <div class="halfway-section hidden"><%- include('./__Halfway') %></div>
+            <div class="subway-section hidden"><%- include('./__Subway') %></div>
         </section>
         <div id="map"></div>
     </body>
