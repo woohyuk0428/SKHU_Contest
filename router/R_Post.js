@@ -7,13 +7,6 @@ const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
 const Korail_line1 = jsonFile.readFileSync("./static/json/Line/Korail_1호선.json");
 const Korail_line3 = jsonFile.readFileSync("./static/json/Line/Korail_3호선.json");
 const Korail_line4 = jsonFile.readFileSync("./static/json/Line/Korail_4호선.json");
-const Korail_SuinBundang = jsonFile.readFileSync("./static/json/Line/수인분당선.json");
-const Korail_GyeonguiJungang = jsonFile.readFileSync("./static/json/Line/경의중앙선.json");
-const Korail_Gyeongchun = jsonFile.readFileSync("./static/json/Line/경춘선.json");
-const Korail_seohae = jsonFile.readFileSync("./static/json/Line/서해선.json");
-const airport = jsonFile.readFileSync("./static/json/Line/공항철도.json");
-const sinBundang = jsonFile.readFileSync("./static/json/Line/신분당선.json");
-const LRT = jsonFile.readFileSync("./static/json/Line/우이신설선.json");
 
 
 
