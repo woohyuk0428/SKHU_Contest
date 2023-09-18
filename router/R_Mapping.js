@@ -2,7 +2,6 @@ let recentSearches = [];
 
 const nodeGeocoder = require("node-geocoder");
 const axios = require("axios");
-const express = require("express");
 
 const express = require("express"); // express 프레임워크
 
