@@ -26,9 +26,9 @@ input {
   user-select: text;
 }
 
-/* input[type=radio] {
+input[type=radio] {
   display: none;
-} */
+}
 
 /* menu 영역 */
 .menu {
@@ -252,7 +252,7 @@ input {
 	display:none /* Chrome , Safari , Opera */
 }
 
-.suggest-radio {
+.radio-label {
   color: white;
   display: flex;
   width: 50px;
@@ -265,7 +265,7 @@ input {
   background: #B5B9FF;
 }
 
-.suggest-radio:hover {
+.radio-label:hover {
   background-color: #8591ff;
   transition: 0.3s;
   cursor: pointer;
@@ -286,7 +286,7 @@ input {
 /* #region 근처 장소  */
 #radio_cont {
     width: 90%;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 #radio_flax {
@@ -295,8 +295,10 @@ input {
 
 #radio_flax > label {
     flex: 1px;
-    border: solid #8591ff 2px;
-    border-radius: 10px;
+    /* border: solid #8591ff 2px; */
+    border-radius: 7px;
+    margin: 3px;
+    /* padding: 2px 5px; */
     text-align: center;
 }
 
