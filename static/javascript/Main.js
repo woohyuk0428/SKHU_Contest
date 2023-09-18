@@ -34,6 +34,17 @@ function toggleSection(sectionShow, buttonHighlight) {
     buttonHighlight.classList.add("on");
 }
 
+gotoMappingBtn.addEventListener('click', () => {
+  toggleSection(section1, gotoMappingBtn);
+})
+
+gotoHalfWayBtn.addEventListener('click', () => {
+  toggleSection(section2, gotoHalfWayBtn);
+})
+
+gotoSubwayBtn.addEventListener('click', () => {
+  toggleSection(section3, gotoSubwayBtn);
+})
 //--------------------------------------
 const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 

@@ -1,133 +1,148 @@
 body {
-    margin: 0;
+  margin: 0;
 
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 #map {
-    position: relative;
-    /* z-index: 0; */
-    width: 100vw;
-    height: 100vh;
-    overflow: scroll;
+  position: relative;
+  /* z-index: 0; */
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
 }
-input {
-    outline: none;
 
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: text;
-    -o-user-select: text;
-    user-select: text;
+input {
+  outline: none;
+
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -o-user-select: text;
+  user-select: text;
 }
+
+/* input[type=radio] {
+  display: none;
+} */
+
 /* menu 영역 */
 .menu {
-    /* float: left; */
-    z-index: 1;
-    top: 0;
-    left: 0;
-    position: absolute;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px 2px gray;
-    height: 100vh;
-    width: 450px;
-    text-align: center;
-    display: inline-block;
-    transition: transform 0.3s; /* 애니메이션을 추가할 수 있습니다. */
-    animation: all 0.5s ease;
+  /* float: left; */
+  z-index: 1;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px 2px gray;
+  height: 100vh;
+  width: 450px;
+  text-align: center;
+  display: inline-block;
+  transition: transform 0.3s;
+  /* 애니메이션을 추가할 수 있습니다. */
+  animation: all 0.5s ease;
 }
 
 .header-bar {
-    position: relative;
-    color: #8591ff;
-    display: inline-block;
+  position: relative;
+  color: #8591ff;
+  display: inline-block;
 
-    font-size: 50px;
-    font-weight: bold;
-    margin: 10px;
+  font-size: 50px;
+  font-weight: bold;
+  margin: 10px;
 }
+
 .header-hr {
-    background-color: #8591ff;
+  background-color: #8591ff;
 
-    margin-top: -5px;
-    border-radius: 2px;
-    height: 2px;
+  margin-top: -5px;
+  border-radius: 2px;
+  height: 2px;
 }
+
 .con-nav {
-    height: 70px;
-    margin-bottom: 10px;
+  height: 70px;
+  margin-bottom: 10px;
 }
+
 /* menu 내 {길찾기} {중간지점} {장소추천} {지하철} 선택 사항 */
 .nav-opt {
-    background-color: #b5b9ff;
-    color: white;
-    font-size: 14px;
-    /* height: 66px; */
-    /* width: 60px; */
-    display: inline-block;
-    float: left;
-    margin-left: 20px;
-    padding: 4px 8px;
-    border-radius: 10px;
-    cursor: pointer;
+  background-color: #b5b9ff;
+  color: white;
+  font-size: 14px;
+  /* height: 66px; */
+  /* width: 60px; */
+  display: inline-block;
+  float: left;
+  margin-left: 20px;
+  padding: 4px 8px;
+  border-radius: 10px;
+  cursor: pointer;
 }
+
 .nav-opt table {
-    height: 30px;
-    margin-top: 7px;
-    margin-bottom: -8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 30px;
+  margin-top: 7px;
+  margin-bottom: -8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .con-oth {
-    /* border: 1px black solid; */
-    display: inline-block;
-    margin-right: 6px;
-    float: right;
+  /* border: 1px black solid; */
+  display: inline-block;
+  margin-right: 6px;
+  float: right;
 }
+
 .nav-opt-other {
-    background-color: #b5b9ff;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 25px;
-    width: 25px;
-    border-radius: 100%;
-    cursor: pointer;
+  background-color: #b5b9ff;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  cursor: pointer;
 }
+
 .nav-opt:hover,
 .nav-opt-other:hover,
 .search-btn:hover {
-    background-color: #8591ff;
-    transition: 0.3s;
-    cursor: pointer;
+  background-color: #8591ff;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .folding-btn {
-    z-index: 2;
-    position: absolute;
-    top: 45vh;
-    left: 450px;
+  z-index: 2;
+  position: absolute;
+  top: 45vh;
+  left: 450px;
 
-    height: 100px;
-    width: 20px;
+  height: 100px;
+  width: 20px;
 
-    border-radius: 0 10px 10px 0;
-    box-shadow: 5px 0 10px 0 gray;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 5px 0 10px 0 gray;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
+
 .folding-btn:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 .folding-btn div {
     height: 50px;
@@ -176,13 +191,13 @@ input {
     background-color: #eeeeee;
     /* border-radius: 10px; */
 
-    margin-top: 2px;
-    margin-right: 10px;
+  margin-top: 2px;
+  margin-right: 10px;
 
-    height: 40px;
-    width: 230px;
+  height: 40px;
+  width: 230px;
 
-    font-size: 20px;
+  font-size: 20px;
 
     float: left;
 }
@@ -190,12 +205,14 @@ input {
     width: 20px;
     margin: 11.5px 15px;
 
-    display: inline-block;
-    float: left;
+  display: inline-block;
+  float: left;
 }
+
 .con-search {
-    background-color: #eeeeee;
-    /* display: inline-block; */
+  background-color: #EEEEEE;
+  /* display: inline-block; */
+
 
     border-radius: 10px;
     margin-left: 20px;
@@ -207,29 +224,63 @@ input {
 .xMark:hover {
     cursor: pointer;
 }
+
 .search-btn {
-    font-size: 20px;
-    height: 48px;
-    margin-left: 10px;
+  font-size: 20px;
+  height: 48px;
+  margin-left: 10px;
 
     border: none;
     background-color: #b5b9ff;
-    color: #ffffff;
+    color: #FFFFFF;
 
-    padding: 5px 10px;
-    border-radius: 10px;
-    display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: inline-block;
 }
+
+.btn-group {
+  margin: 10px 20px;
+  display: flex;
+  height: 40px;
+  gap: 5px;
+
+  /* overflow: scroll; */
+}
+
+.btn-group::-webkit-scrollbar {
+	display:none /* Chrome , Safari , Opera */
+}
+
+.suggest-radio {
+  color: white;
+  display: flex;
+  width: 50px;
+  height: 20px;
+  padding: 2px 5px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 5px;
+  background: #B5B9FF;
+}
+
+.suggest-radio:hover {
+  background-color: #8591ff;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 
 /* __Help */
 .bg-blur {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* #region 근처 장소  */
