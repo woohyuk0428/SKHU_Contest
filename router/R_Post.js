@@ -267,7 +267,7 @@ router.post("/", (req, res) => {
                                         processData.Position = `${statnNm}역 도착 (특급) (막차)`
                                     }
                                     else if(trainSttus === "2" && directAt === "7"&& lstcarAt ==="1"){
-                                        processData.Position = `${statnNm}역 출발발 (특급) (막차)`
+                                        processData.Position = `${statnNm}역 출발 (특급) (막차)`
                                     }
                                     else if(trainSttus === "3" && directAt === "7"&& lstcarAt ==="1"){
                                         processData.Position = `${statnNm}역 전역출발 (특급) (막차)`
