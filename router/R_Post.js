@@ -139,8 +139,6 @@ router.post("/", (req, res) => {
                         }
                         else{
                             var stationNm = null;
-                        }if(s_line === Korail_line1[s_response]||s_line === Korail_line3[s_response]||s_line === Korail_line4[s_response]){
-                            var stationTime = trainNm[s_line][s_response];
                         }
                         
                     if(reverse[s_line] === subwayLine && reverse_updn[s_updnline] === updnLine || line2_updn[s_updnline]===updnLine &&stationNm != undefined){
@@ -190,8 +188,6 @@ router.post("/", (req, res) => {
                         })
                         processData.subwayList = list;
                         const SearchSTNTimeTableByFRCodeService_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/253/${stationNm}/${getDayOfWeek()}/${s_updnline}/`;
-                        const Subwaytime_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/253/${stationTime}/${getDayOfWeek()}/${s_updnline}/`;
-                        console.log(`subwayUrl : ${Subwaytime_url}`)
                         request({
                             url: realTimePosition_url,
                             method: "GET"
@@ -204,7 +200,6 @@ router.post("/", (req, res) => {
                                 const lstcarAt = data3.lstcarAt;
                                 let trainNo = data3.trainNo;
                                 const trainSttus = data3.trainSttus;
-                                console.log(`directAt : ${directAt}`);
                                 let parseInt_trainNo = parseInt(trainNo,10);
                                 trainNo = String(parseInt_trainNo);
                                 if(btrainNo === trainNo){
@@ -412,13 +407,13 @@ router.post("/", (req, res) => {
 
 
                 // post페이지로 결과 반환
-                var newHtml = `<br><h1>${subwayId} ${s_response}역 결과입니다.</h1>
+                /*var newHtml = `<br><h1>${data1.subwayId} ${s_response}역 결과입니다.</h1>
                     <div class="result-info">
-                    <span>열차 번호:</span> ${btrainNo}<br>
-                    <span>열차 방향:</span> ${trainLineNm}<br>
-                    <span>열차 위치:</span> ${arvlMsg2}<br>
-                    ${Mystr}
-                    열차 검색 시간은 "${recptnDt}"입니다.</div>`;
+                    <span>열차 번호:</span> ${data1.btrainNo}<br>
+                    <span>열차 방향:</span> ${data1.trainLineNm}<br>
+                    <span>열차 위치:</span> ${data1.arvlMsg2}<br>
+                    
+                    열차 검색 시간은 "${data1.recptnDt}"입니다.</div>`;*/
 
                 // 쿠키가 존재하는지 확인
                 if (req.cookies.My_Station == undefined) {
