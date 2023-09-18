@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
     const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 
-    resetButton.addEventListener("click", () => {
-        resetRadioSelection(radioLabels);
-    }); // 초기화 버튼 실행
+    // resetButton.addEventListener("click", () => {
+    //     resetRadioSelection(radioLabels);
+    // }); // 초기화 버튼 실행
 
     // 라디오 버튼들에 대해 클릭 이벤트 리스너 추가
     radioLabels.forEach((radio) => {
@@ -49,23 +49,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 슬라이더 값 변경
-    rangeSlider.addEventListener("input", function () {
-        sliderValue.textContent = `${rangeSlider.value}미터`;
-    });
+    // rangeSlider.addEventListener("input", function () {
+    //     sliderValue.textContent = `${rangeSlider.value}미터`;
+    // });
 
     //! ------------------------------- 경로 정보 삭제 관련 이벤트 ---------------------------------------
     const AdrOffBtn = document.getElementById("addressInfoOff"); // 경로 정보 끄기 버튼
     const AdrOnBtn = document.getElementById("addressInfoOn"); // 경로 정보 표시 버튼
 
-    // 경로 정보 끄기
-    AdrOffBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("off");
-    });
+    // // 경로 정보 끄기
+    // AdrOffBtn.addEventListener("click", () => {
+    //     AdrInfo_OnOff("off");
+    // });
 
-    // 경로 정보 표시
-    AdrOnBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("on");
-    });
+    // // 경로 정보 표시
+    // AdrOnBtn.addEventListener("click", () => {
+    //     AdrInfo_OnOff("on");
+    // });
 
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
@@ -211,14 +211,14 @@ function AdrInfoFor(adrs, displayInfo) {
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function MappingSearch(marker_iconList, Mydata) {
-    const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
+    // const rangeValue = 300;
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
     const url = "http://localhost:8080/Mapping/data"; // ajax요청 url
     let sendData = "";
 
     // 서버로 AJAX 요청을 보내기 위한 작업
-    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: rangeValue });
-
+    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: 300 });
+    console.log(sendData);
     fetch(url, {
         method: "POST",
         headers: {
@@ -227,6 +227,7 @@ function MappingSearch(marker_iconList, Mydata) {
         body: sendData,
     })
         .then(async (response) => {
+            console.log(response.ok);
             if (!response.ok) {
                 throw new Error("오류가 발생했습니다.");
             }
