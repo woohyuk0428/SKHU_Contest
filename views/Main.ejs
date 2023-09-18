@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="Main.css" />
+        <link rel="stylesheet" href="help.css" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI&libraries=places"></script>
         <title>SKHU ROAD</title>
     </head>
@@ -58,14 +59,13 @@
                 </table>
             </nav>
 
-            
-
             <div class="mapping-section"><%- include('./__Mapping') %></div>
             <div class="halfway-section hidden"><%- include('./__Halfway') %></div>
             <div class="subway-section hidden"><%- include('./__Subway') %></div>
         </section>
-        <!-- <%- include('./__Help') %> -->
+        <%- include('./__Help') %>
         <div id="map"></div>
     </body>
     <script src="Main.js"></script>
+    <script src="help.js"></script>
 </html>
