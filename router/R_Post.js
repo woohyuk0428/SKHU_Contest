@@ -4,6 +4,18 @@ const request = require("request"); // request 모듈
 const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
+const Korail_line1 = jsonFile.readFileSync("./static/json/Line/Korail_1호선.json");
+const Korail_line3 = jsonFile.readFileSync("./static/json/Line/Korail_3호선.json");
+const Korail_line4 = jsonFile.readFileSync("./static/json/Line/Korail_4호선.json");
+const Korail_SuinBundang = jsonFile.readFileSync("./static/json/Line/수인분당선.json");
+const Korail_GyeonguiJungang = jsonFile.readFileSync("./static/json/Line/경의중앙선.json");
+const Korail_Gyeongchun = jsonFile.readFileSync("./static/json/Line/경춘선.json");
+const Korail_seohae = jsonFile.readFileSync("./static/json/Line/서해선.json");
+const airport = jsonFile.readFileSync("./static/json/Line/공항철도.json");
+const sinBundang = jsonFile.readFileSync("./static/json/Line/신분당선.json");
+const LRT = jsonFile.readFileSync("./static/json/Line/우이신설선.json");
+
+
 
 
 const key = fs.readFileSync("./APIKey.txt", "utf-8");
@@ -97,7 +109,7 @@ router.post("/", (req, res) => {
     
     // 지하철 API에서 가져올 데이터 - url수정
     const realarrive_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimeStationArrival/0/20/${encodedStationName}`; //seoul realtime url
-    const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/50/${encodeURI(s_line)}`;
+    const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/100/${encodeURI(s_line)}`;
    // console.log(realTimePosition_url)
     console.log(`서울시 공공데이터 : ${realarrive_url}`);
     if(line[s_response] === s_line){
@@ -136,6 +148,8 @@ router.post("/", (req, res) => {
                         }
                         else{
                             var stationNm = null;
+                        }if(s_line === Korail_line1[s_response]||s_line === Korail_line3[s_response]||s_line === Korail_line4[s_response]){
+                            var stationTime = trainNm[s_line][s_response];
                         }
                         
                     if(reverse[s_line] === subwayLine && reverse_updn[s_updnline] === updnLine || line2_updn[s_updnline]===updnLine &&stationNm != undefined){
@@ -185,6 +199,8 @@ router.post("/", (req, res) => {
                         })
                         processData.subwayList = list;
                         const SearchSTNTimeTableByFRCodeService_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/253/${stationNm}/${getDayOfWeek()}/${s_updnline}/`;
+                        const Subwaytime_url = `http://openapi.seoul.go.kr:8088/${key}/json/SearchSTNTimeTableByFRCodeService/1/253/${stationTime}/${getDayOfWeek()}/${s_updnline}/`;
+                        console.log(`subwayUrl : ${Subwaytime_url}`)
                         request({
                             url: realTimePosition_url,
                             method: "GET"
@@ -197,6 +213,7 @@ router.post("/", (req, res) => {
                                 const lstcarAt = data3.lstcarAt;
                                 let trainNo = data3.trainNo;
                                 const trainSttus = data3.trainSttus;
+                                console.log(`directAt : ${directAt}`);
                                 let parseInt_trainNo = parseInt(trainNo,10);
                                 trainNo = String(parseInt_trainNo);
                                 if(btrainNo === trainNo){
@@ -231,7 +248,7 @@ router.post("/", (req, res) => {
                                         processData.Position = `${statnNm}역 도착 (특급)`
                                     }
                                     else if(trainSttus === "2" && directAt === "7"&& lstcarAt ==="0"){
-                                        processData.Position = `${statnNm}역 출발발 (특급)`
+                                        processData.Position = `${statnNm}역 출발 (특급)`
                                     }
                                     else if(trainSttus === "3" && directAt === "7"&& lstcarAt ==="0"){
                                         processData.Position = `${statnNm}역 전역출발 (특급)`
@@ -309,6 +326,7 @@ router.post("/", (req, res) => {
                                                 else if(s_line === "2호선"&&btrainNo.charAt(0)=="8"){
                                                     btrainNo = btrainNo.replace("8","2");
                                                 }
+                                                
                                                 if(btrainNo === train_no){
                                                     let trainTime = data2.ARRIVETIME;
                                                     console.log(trainTime);
@@ -360,10 +378,12 @@ router.post("/", (req, res) => {
                                 }
                                 
                             }
-                                catch(e){
-                                    console.log(`request 오류 : ${e}`);
-                                }
-                        
+                            catch(e){
+                                console.log(`request 오류 : ${e}`);
+                            }
+                            
+                            
+                            
                     });
                         
                         
