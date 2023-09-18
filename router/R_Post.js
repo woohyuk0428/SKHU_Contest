@@ -4,9 +4,7 @@ const request = require("request"); // request 모듈
 const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
-const Korail_line1 = jsonFile.readFileSync("./static/json/Line/Korail_1호선.json");
-const Korail_line3 = jsonFile.readFileSync("./static/json/Line/Korail_3호선.json");
-const Korail_line4 = jsonFile.readFileSync("./static/json/Line/Korail_4호선.json");
+
 
 
 
