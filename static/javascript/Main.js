@@ -53,23 +53,6 @@ radioLabels.forEach((radio) => {
     radio.addEventListener("click", handleRadioClick);
 });
 
-// 라디오 버튼 클릭 이벤트를 처리하는 함수
-function handleRadioClick(event) {
-    if (event.target.tagName === "INPUT" && event.target.type === "radio") {
-        console.log(this.value);
-        const selectedValue = this.value;
-
-        removeSelectedClassFromLabels(); // 선택된 버튼 제거
-        this.closest(".radio-label").classList.add("selected"); // 누른 버튼에 클래스 추가
-
-        responseData_place[selectedValue].length === 0 ? alert(`${selectedValue}에 대한 정보가 없습니다.`) : null; // 해당하는 정보가 없을 경우 실행
-
-        // 마커의 태그에 선택한 값이 포함되어 있으면 보이게 설정
-        placeMarkers.forEach((marker) => {
-            marker.setVisible(marker.tags.includes(selectedValue));
-        });
-    }
-}
 
 // 버튼 클래스 중 "selected"를 제거하는 함수 (선택된 버튼 초기화)
 function removeSelectedClassFromLabels() {
