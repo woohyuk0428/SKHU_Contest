@@ -1,3 +1,7 @@
+:root {
+    --color_main: #8591ff;
+}
+
 .bg-blur {
     position: absolute;
     top: 0;
@@ -5,7 +9,8 @@
     z-index: 2;
     height: 100vh;
     width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.65);
+    overflow: auto;
 }
 
 .pos {
@@ -14,6 +19,10 @@
 }
 .posdown {
     transform: translateY(0%);
+}
+
+.over_set {
+    overflow: auto;
 }
 
 /* #region 기본 설정 */
@@ -25,7 +34,7 @@
 
 .mainText_Title {
     padding-bottom: 2rem;
-    color: black;
+    color: white;
 }
 
 .mainText_Title > h2 {
@@ -33,6 +42,11 @@
 }
 .mainText_Title > h1 {
     font-weight: bold;
+}
+
+.mainText_Title > h3 {
+    margin: 0px;
+    color: var(color_main);
 }
 
 .mainText_Title > p {
@@ -151,8 +165,8 @@
     opacity: 0;
     transition: all 0.5s;
     position: absolute;
-    height: 400px;
-    width: 280px;
+    height: 300px;
+    width: 180px;
 }
 
 .profile_card:hover > .gradient_filter {
