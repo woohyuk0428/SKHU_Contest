@@ -37,6 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //! ------------------------------- 상단 필터 관련 이벤트 ---------------------------------------
     const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
+
+    // 이미지 클릭 시 입력 내용 삭제 함수
+    function deleteInputText() {
+        var inputElement = document.getElementById("textInput");
+        inputElement.value = "";
+    }
+    // 이미지를 클릭할 때 deleteInputText 함수 호출
+    var imageElement = document.getElementById("reset-button");
+    imageElement.addEventListener("click", deleteInputText);
+
     const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 
     // resetButton.addEventListener("click", () => {
