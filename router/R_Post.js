@@ -46,14 +46,10 @@ router.get("/", (req, res) => {
 
 // http://localhost:8080/post - post라우팅
 router.post("/", (req, res) => {
-    var s_response = "온수";
-    s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
-    var s_updnline = "상행"; 
+   var s_response = req.body.station.replace(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""); // XSS 공격 방어
     var s_updnline = req.body.updnLine//상행 하행 구별
     console.log(s_updnline)
-    var s_line = "1호선";
     var s_line = req.body.SubwayLine; //노선 받는 변수
-    var stationNm = ""; //역코드 저장
     const line = jsonFile.readFileSync(`./static/json/Line/${s_line}.json`);
     const rapid_line = jsonFile.readFileSync(`./static/json/Line/1호선_급행.json`);
     const express_line = jsonFile.readFileSync(`./static/json/Line/1호선_특급.json`);
@@ -93,7 +89,7 @@ router.post("/", (req, res) => {
     }
 
     // 마지막 글자가 "역"이면 역을 삭제함
-    if (s_response.slice(-1) == "역" && s_response != "서울역") {
+    if (s_response.slice(-1) == "역") {
         s_response = s_response.slice(0, -1);
     }
     const encodedStationName = encodeURI(s_response);
@@ -118,7 +114,8 @@ router.post("/", (req, res) => {
                     
                     const s_data = obj.realtimeArrivalList; // 필요한 데이터 경로 압축
                     const convert = jsonFile.readFileSync("./static/json/line.json");
-
+                    //const areaId = jsonFile.readFileSync("./static/json/areaId.json");
+                    
                     //열차 불러오는 작업
                     s_data.forEach((data1,index) =>{
                     const subwayLine = data1.subwayId;
@@ -393,9 +390,9 @@ router.post("/", (req, res) => {
                
             
                 }
-                else if(obj.realtimeArrivalList.subwayId === undefined){
-                    console.log("운행종료");
-                }
+                // else if(obj.realtimeArrivalList.subwayId === undefined){
+                //     console.log("운행종료");
+                // }
                 else{
                     var newHtml =`<br><p style="color:red">"${s_response}"에 대한 검색 결과가 존재하지 않거나 데이터를 가져오는 중에 오류가 발생했습니다.</p>`;
                     console.log("운행종료");
