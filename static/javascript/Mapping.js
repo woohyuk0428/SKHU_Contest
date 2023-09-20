@@ -484,3 +484,9 @@ async function fetchPlacePhoto(placeId) {
         alert("검색 결과를 찾을 수 없습니다.");
     }
 }
+// '지하철' 관련 함수
+ // 선택한 호선에 대한 조회 시간을 가져옴
+ var subwayTime = subwayTimeInfo[selectedLine];
+
+ // 결과를 화면에 출력
+ document.getElementById("result").innerHTML = subwayTime;
