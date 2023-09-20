@@ -1,9 +1,3 @@
-const inputContainer = document.querySelector("#address-container"); // input이 들어갈 컨테이너 위치
-// const addressFunctions = new InputAddressFunctions(inputContainer);
-
-const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
-const sliderValue = document.getElementById("sliderValue"); // 슬라이더 값을 표시할 위치
-
 const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
 let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
 let responseData_place; // 근처 장소들에 대한 json데이터를 저장
@@ -34,39 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     addressInputs.forEach(function (input) {
         new google.maps.places.Autocomplete(input);
     });
-    /*
-    //! ------------------------------- 상단 필터 관련 이벤트 ---------------------------------------
-    const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
-    const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 
-    resetButton.addEventListener("click", () => {
-        resetRadioSelection(radioLabels);
-    }); // 초기화 버튼 실행
-
-    // 라디오 버튼들에 대해 클릭 이벤트 리스너 추가
-    radioLabels.forEach((radio) => {
-        radio.addEventListener("click", handleRadioClick);
-    });
-
-    // 슬라이더 값 변경
-    rangeSlider.addEventListener("input", function () {
-        sliderValue.textContent = `${rangeSlider.value}미터`;
-    });
-
-    //! ------------------------------- 경로 정보 삭제 관련 이벤트 ---------------------------------------
-    const AdrOffBtn = document.getElementById("addressInfoOff"); // 경로 정보 끄기 버튼
-    const AdrOnBtn = document.getElementById("addressInfoOn"); // 경로 정보 표시 버튼
-
-    // 경로 정보 끄기
-    AdrOffBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("off");
-    });
-
-    // 경로 정보 표시
-    AdrOnBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("on");
-    });
-    */
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
     const Btn = document.getElementById("btn"); // 중간지점 찾기 버튼
@@ -81,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function CreateMap(address) {
     map = new google.maps.Map(document.getElementById("map"), {
         center: address, // 초기 위치 설정
+
         zoom: 12, // 확대/축소 레벨
     });
 
@@ -143,71 +106,7 @@ function activateAutoAddress() {
     const addressInputs = document.querySelectorAll('input[name="address"]');
     new google.maps.places.Autocomplete(addressInputs[addressInputs.length - 1]);
 }
-/*
-//! ------------------------------- 상단 필터 관련 함수 ---------------------------------------
-// 버튼 선택을 초기화하는 함수
-function resetRadioSelection(radioLabels) {
-    // 모든 버튼 선택 해제
-    console.log(radioLabels);
-    radioLabels.forEach((radio) => {
-        radio.checked = false;
-    });
-    // 주변 장소 마커들을 안보이게 함
-    placeMarkers.forEach((marker) => {
-        marker.setVisible(false);
-    });
-    // 라벨에서 선택된 클래스 제거
-    removeSelectedClassFromLabels();
-}
 
-// 라디오 버튼 클릭 이벤트를 처리하는 함수
-function handleRadioClick(event) {
-    if (event.target.tagName === "INPUT" && event.target.type === "radio") {
-        const selectedValue = this.value;
-        console.log(selectedValue);
-        removeSelectedClassFromLabels(); // 선택된 버튼 제거
-        this.closest(".radio-label").classList.add("selected"); // 누른 버튼에 클래스 추가
-
-        responseData_place[selectedValue].length === 0 ? alert(`${selectedValue}에 대한 정보가 없습니다.`) : null; // 해당하는 정보가 없을 경우 실행
-
-        // 마커의 태그에 선택한 값이 포함되어 있으면 보이게 설정
-        placeMarkers.forEach((marker) => {
-            marker.setVisible(marker.tags.includes(selectedValue));
-        });
-    }
-}
-
-// 버튼 클래스 중 "selected"를 제거하는 함수 (선택된 버튼 초기화)
-function removeSelectedClassFromLabels() {
-    document.querySelectorAll(".radio-label").forEach((label) => {
-        label.classList.remove("selected");
-    });
-}
-
-//! ------------------------------- 경로 정보 삭제 관련 함수 ---------------------------------------
-// 경로 정보가 들어있는 요소를 찾아 on off를 해주는 함수
-function AdrInfo_OnOff(onoff) {
-    var Ladr = document.querySelectorAll('img[src="https://maps.gstatic.com/mapfiles/tiph.png"]');
-    var Radr = document.querySelectorAll('img[src="https://maps.gstatic.com/mapfiles/tip.png"]');
-
-    if (onoff == "on") {
-        AdrInfoFor(Ladr, "block");
-        AdrInfoFor(Radr, "block");
-    } else {
-        AdrInfoFor(Ladr, "none");
-        AdrInfoFor(Radr, "none");
-    }
-}
-
-// 가져온 이미지 정보의 부모요소에 display를 수정하는 함수
-function AdrInfoFor(adrs, displayInfo) {
-    adrs.forEach(function (adr) {
-        if (adr.parentNode && adr.parentNode.tagName === "DIV") {
-            adr.parentNode.style.display = displayInfo;
-        }
-    });
-}
-*/
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function MappingSearch(marker_iconList, Mydata) {
@@ -251,7 +150,7 @@ function MappingSearch(marker_iconList, Mydata) {
                     tags: "start",
                 },
             ];
-
+            
             const directionsService = new google.maps.DirectionsService(); // 길찾기 서비스 인스턴스 생성
             const endpoint = responseData.endpoint[0].address; // 중간지점 위치
             const map = CreateMap(endpoint); // 지도 초기화

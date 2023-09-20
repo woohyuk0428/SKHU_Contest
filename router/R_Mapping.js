@@ -2,6 +2,12 @@ const nodeGeocoder = require("node-geocoder");
 const axios = require("axios");
 const express = require("express");
 
+
+const nodeGeocoder = require("node-geocoder");
+const axios = require("axios");
+
+const express = require("express"); // express 프레임워크
+
 const router = express.Router();
 const apiKey = "AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI";
 const geocoder = nodeGeocoder({
