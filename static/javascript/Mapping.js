@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     addressInputs.forEach(function (input) {
         new google.maps.places.Autocomplete(input);
     });
-
+    /*
     //! ------------------------------- 상단 필터 관련 이벤트 ---------------------------------------
     const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
     const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
     AdrOnBtn.addEventListener("click", () => {
         AdrInfo_OnOff("on");
     });
-
+    */
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
     const Btn = document.getElementById("btn"); // 중간지점 찾기 버튼
@@ -143,7 +143,7 @@ function activateAutoAddress() {
     const addressInputs = document.querySelectorAll('input[name="address"]');
     new google.maps.places.Autocomplete(addressInputs[addressInputs.length - 1]);
 }
-
+/*
 //! ------------------------------- 상단 필터 관련 함수 ---------------------------------------
 // 버튼 선택을 초기화하는 함수
 function resetRadioSelection(radioLabels) {
@@ -207,11 +207,11 @@ function AdrInfoFor(adrs, displayInfo) {
         }
     });
 }
-
+*/
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function MappingSearch(marker_iconList, Mydata) {
-    const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
+    const rangeValue = 1000; // 근처 장소 반경 저장
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
     const url = "http://localhost:8080/Mapping/data"; // ajax요청 url
     let sendData = "";

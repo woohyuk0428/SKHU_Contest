@@ -54,7 +54,11 @@ app.use("/subway", require("./router/R_Subway"));
 
 //http://localhost:8080/ 경로로 요청 시 Main.html파일 반환
 app.get("/", (req, res) => {
-    res.render("Main");
+    var data = [];
+    
+    res.render("Main",{
+        Data : data,
+    });
 });
 // #endregion
 
