@@ -99,7 +99,10 @@ input[type="radio"] {
     /* border: 1px black solid; */
     display: inline-block;
     margin-right: 6px;
+    transform: scaleY(1); /* 원하는 수치로 높이 조절 가능 현재 기본 수치 */
     float: right;
+    border-collapse: separate; /* 테이블 셀을 분리하도록 설정 */
+    border-spacing: 8px; /* 원하는 간격으로 조절 */
 }
 
 .nav-opt-other {
