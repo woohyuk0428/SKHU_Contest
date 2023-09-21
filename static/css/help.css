@@ -46,7 +46,7 @@
 
 .mainText_Title > h3 {
     margin: 0px;
-    color: var(color_main);
+    color: white;
 }
 
 .mainText_Title > p {
@@ -188,10 +188,39 @@
     position: relative;
     transition: all 0.5s;
     color: white;
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 5%;
+}
+
+.name_text {
+    position: absolute;
+    transform: translateY(-120%);
+    color: white;
+    font-weight: bold;
+    font-family: GangwonEduPowerExtraBoldA;
+    transition: all 0.5s;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+@font-face {
+    font-family: "GangwonEduPowerExtraBoldA";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.img_cont > * {
+    margin: 0px;
 }
 
 .profile_card:hover .img_cont {
-    transform: translateY(-100%); /* 수정된 부분 */
+    transform: translateY(-100%);
+}
+
+.profile_card:hover .name_text {
+    transform: translateY(-100%);
 }
 
 /* #endregion 본문1 팀소개 */
