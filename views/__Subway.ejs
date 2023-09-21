@@ -7,5 +7,22 @@
         </div>
         <button id="btn" class="search-btn" type="button">검색</button>
     </header>
+    <form>
+        <form>
+            <label for="subwayLine">호선 선택:</label>
+            <select id="subwayLine">
+                <option value="line1">1호선</option>
+                <option value="line2">2호선</option>
+                <option value="line3">3호선</option>
+                <!-- 여기에 다른 호선들 추가 예정 -->
+            </select>
+            <br>
+            <button type="button" onclick="getSubwayTime()">조회</button>
+        </form>
+        <div>행선지(종점)</div>
+        <div>열차 번호</div>
+        <div>지연 정보</div>
+        <div id="result"></div>
+    </form>
 </main>
 <script src="Mapping.js"></script>

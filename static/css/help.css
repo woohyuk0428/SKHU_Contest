@@ -1,0 +1,291 @@
+:root {
+    --color_main: #8591ff;
+}
+
+.bg-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.65);
+    overflow: auto;
+}
+
+.pos {
+    transform: translateY(-100%);
+    transition: transform 0.5s ease;
+}
+.posdown {
+    transform: translateY(0%);
+}
+
+.over_set {
+    overflow: auto;
+}
+
+/* #region 기본 설정 */
+.w_textBox {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mainText_Title {
+    padding-bottom: 2rem;
+    color: white;
+}
+
+.mainText_Title > h2 {
+    color: rgb(64, 216, 117);
+}
+.mainText_Title > h1 {
+    font-weight: bold;
+}
+
+.mainText_Title > h3 {
+    margin: 0px;
+    color: white;
+}
+
+.mainText_Title > p {
+    display: inline-block;
+    background: rgb(64, 216, 117);
+    height: auto;
+    color: white;
+    padding: 0.2rem 0.8rem 0.2rem 0.8rem;
+}
+/* #endregion 기본 설정 */
+
+/* #region 이미지 and 설명 text */
+.img_textBox {
+    height: 200px;
+}
+
+.left_textFrame {
+    text-align: left;
+}
+
+.right_textFrame {
+    text-align: right;
+}
+
+.left_textFrame,
+.right_textFrame {
+    display: flex;
+    padding: 30px;
+    height: 200px;
+    justify-content: center;
+    margin: 0;
+    flex-direction: column;
+}
+
+.left_textFrame > p,
+.right_textFrame > p {
+    margin: 0;
+}
+
+.left_textFrame > p:first-child,
+.right_textFrame > p:first-child {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 2;
+}
+
+.left_imgFrame {
+    float: left;
+}
+.right_imgFrame {
+    float: right;
+}
+
+.left_imgFrame,
+.right_imgFrame {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    background-color: black;
+    overflow: hidden;
+}
+
+.left_imgFrame > img,
+.right_imgFrame > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* #endregion 이미지 and 설명 text */
+
+/* #region 본문 타이틀 */
+#main_text_title {
+    height: 500px;
+    width: auto;
+    background: rgb(255, 255, 58);
+}
+/* #endregion 본문 타이틀 */
+
+/* #region 본문1 팀소개 */
+#main_text1 {
+    height: 1200px;
+    width: auto;
+    background: white;
+    position: relative;
+    /* display: inline-block; */
+}
+
+#mainText1_flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 50px;
+    column-gap: 5px;
+}
+
+#mainText1_flex > div {
+    flex: 0 0 calc(33.33% - 10px);
+}
+
+.profile_card {
+    margin: 0 auto;
+    height: 300px;
+    width: 180px;
+    border-radius: 1rem;
+    left: 50%;
+    top: 50%;
+    overflow: hidden;
+    transition: all 0.5s;
+    opacity: 0.3;
+    border: solid 4px black;
+}
+
+.gradient_filter {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.95) 100%);
+    opacity: 0;
+    transition: all 0.5s;
+    position: absolute;
+    height: 300px;
+    width: 180px;
+}
+
+.profile_card:hover > .gradient_filter {
+    opacity: 0.8;
+}
+
+.profile_card > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile_card:hover {
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+.img_cont {
+    position: relative;
+    transition: all 0.5s;
+    color: white;
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 5%;
+}
+
+.name_text {
+    position: absolute;
+    transform: translateY(-120%);
+    color: white;
+    font-weight: bold;
+    font-family: GangwonEduPowerExtraBoldA;
+    transition: all 0.5s;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+@font-face {
+    font-family: "GangwonEduPowerExtraBoldA";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.img_cont > * {
+    margin: 0px;
+}
+
+.profile_card:hover .img_cont {
+    transform: translateY(-100%);
+}
+
+.profile_card:hover .name_text {
+    transform: translateY(-100%);
+}
+
+/* #endregion 본문1 팀소개 */
+
+/* x버튼 */
+.X-btn {
+    position: relative;
+}
+
+.X-btn > div {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 95%;
+}
+
+.close-container {
+    position: relative;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
+    cursor: pointer;
+}
+
+.leftright {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: #f4a259;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    transition: all 0.15s ease-in;
+}
+
+.rightleft {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: #f4a259;
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    transition: all 0.15s ease-in;
+}
+.close {
+    margin: 60px 0 0 5px;
+    position: absolute;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.6em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.15s ease-in;
+    opacity: 0;
+}
+
+.close-container:hover .leftright {
+    transform: rotate(-45deg);
+    background-color: #f25c66;
+}
+.close-container:hover .rightleft {
+    transform: rotate(45deg);
+    background-color: #f25c66;
+}
+.close-container:hover label {
+    opacity: 1;
+}

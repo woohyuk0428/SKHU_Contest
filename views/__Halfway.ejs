@@ -1,9 +1,19 @@
 <main class="con-main">
+    <div id="radio_cont">
+        <div id="radio_flax">
+            <label class="radio-label"> <input type="radio" name="option" value="convenience_store" />편의점 </label>
+            <label class="radio-label"> <input type="radio" name="option" value="cafe" />카페 </label>
+            <label class="radio-label"> <input type="radio" name="option" value="subway_station" />지하철 </label>
+            <label class="radio-label"> <input type="radio" name="option" value="bus_station" />버스 </label>
+            <label class="radio-label"> <input type="radio" name="option" value="restaurant" />음식점 </label>
+            <label class="radio-label"> <input type="radio" name="option" value="library" />도서관 </label>
+        </div>
+    </div>
     <header class="search-bar">
         <div class="con-search">
             <img class="searchIcon" src="searchIcon.svg" alt="">
-            <input class="search-input" autocomplete="none" type="text" class="form-control" name="address" placeholder="중간 지점">
-            <img id="reset-button" class="xMark" src="xMark.svg" alt="" type="reset">
+            <input class="search-input" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="중간 지점">
+            <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기">
         </div>
         <button id="btn" class="search-btn" type="button">검색</button>
     </header>

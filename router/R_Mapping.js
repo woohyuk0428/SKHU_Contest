@@ -105,7 +105,7 @@ async function PlaceSearch(jsonData, radius, endpoint) {
                             lat: place.geometry.location.lat,
                             lng: place.geometry.location.lng,
                         },
-                        opening: place.opening_hours?.open_now,
+                        opening: place.opening_hours.open_now,
                         types: place.types,
                         rating: place.rating,
                         vicinity: place.vicinity,

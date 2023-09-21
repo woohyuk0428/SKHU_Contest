@@ -37,11 +37,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //! ------------------------------- 상단 필터 관련 이벤트 ---------------------------------------
     const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
+
+    // 이미지 클릭 시 입력 내용 삭제 함수
+    function deleteInputText() {
+        var inputElement = document.getElementById("textInput");
+        inputElement.value = "";
+    }
+    // 이미지를 클릭할 때 deleteInputText 함수 호출
+    var imageElement = document.getElementById("reset-button");
+    imageElement.addEventListener("click", deleteInputText);
+
     const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 
-    resetButton.addEventListener("click", () => {
-        resetRadioSelection(radioLabels);
-    }); // 초기화 버튼 실행
+    // resetButton.addEventListener("click", () => {
+    //     resetRadioSelection(radioLabels);
+    // }); // 초기화 버튼 실행
 
     // 라디오 버튼들에 대해 클릭 이벤트 리스너 추가
     radioLabels.forEach((radio) => {
@@ -49,23 +59,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 슬라이더 값 변경
-    rangeSlider.addEventListener("input", function () {
-        sliderValue.textContent = `${rangeSlider.value}미터`;
-    });
+    // rangeSlider.addEventListener("input", function () {
+    //     sliderValue.textContent = `${rangeSlider.value}미터`;
+    // });
 
     //! ------------------------------- 경로 정보 삭제 관련 이벤트 ---------------------------------------
     const AdrOffBtn = document.getElementById("addressInfoOff"); // 경로 정보 끄기 버튼
     const AdrOnBtn = document.getElementById("addressInfoOn"); // 경로 정보 표시 버튼
 
-    // 경로 정보 끄기
-    AdrOffBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("off");
-    });
+    // // 경로 정보 끄기
+    // AdrOffBtn.addEventListener("click", () => {
+    //     AdrInfo_OnOff("off");
+    // });
 
-    // 경로 정보 표시
-    AdrOnBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("on");
-    });
+    // // 경로 정보 표시
+    // AdrOnBtn.addEventListener("click", () => {
+    //     AdrInfo_OnOff("on");
+    // });
 
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
@@ -168,7 +178,7 @@ function handleRadioClick(event) {
         removeSelectedClassFromLabels(); // 선택된 버튼 제거
         this.closest(".radio-label").classList.add("selected"); // 누른 버튼에 클래스 추가
 
-        responseData_place[selectedValue].length === 0 ? alert(`${selectedValue}에 대한 정보가 없습니다.`) : null; // 해당하는 정보가 없을 경우 실행
+        responseData_place[selectedValue].length === 0 ? alert(`주변에 ${selectedValue}이(가) 없습니다.`) : null; // 해당하는 정보가 없을 경우 실행
 
         // 마커의 태그에 선택한 값이 포함되어 있으면 보이게 설정
         placeMarkers.forEach((marker) => {
@@ -211,14 +221,14 @@ function AdrInfoFor(adrs, displayInfo) {
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function MappingSearch(marker_iconList, Mydata) {
-    const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
+    // const rangeValue = 300;
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
     const url = "http://localhost:8080/Mapping/data"; // ajax요청 url
     let sendData = "";
 
     // 서버로 AJAX 요청을 보내기 위한 작업
-    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: rangeValue });
-
+    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: 300 });
+    console.log(sendData);
     fetch(url, {
         method: "POST",
         headers: {
@@ -227,6 +237,7 @@ function MappingSearch(marker_iconList, Mydata) {
         body: sendData,
     })
         .then(async (response) => {
+            console.log(response.ok);
             if (!response.ok) {
                 throw new Error("오류가 발생했습니다.");
             }
@@ -473,3 +484,9 @@ async function fetchPlacePhoto(placeId) {
         alert("검색 결과를 찾을 수 없습니다.");
     }
 }
+// '지하철' 관련 함수
+ // 선택한 호선에 대한 조회 시간을 가져옴
+ var subwayTime = subwayTimeInfo[selectedLine];
+
+ // 결과를 화면에 출력
+ document.getElementById("result").innerHTML = subwayTime;
