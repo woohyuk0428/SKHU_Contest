@@ -148,7 +148,7 @@ router.post("/", (req, res) => {
                         //api 호출한 값 json화
                         let processData={
                             trainLineNm : trainLineNm,
-                            subwayId : subwayLine,
+                            subwayId : subwayId,
                             btrainNo : btrainNo,
                             arvlMsg2 : arvlMsg2,
                             updnLine : updnLine,
@@ -306,6 +306,7 @@ router.post("/", (req, res) => {
                                                     btrainNo = btrainNo.replace("8","2");
                                                 }
                                                 
+                                                
                                                 if(btrainNo === train_no){
                                                     let trainTime = data2.arvTm;
                                                     let hours = parseInt(trainTime.slice(0,2), 10);
@@ -336,6 +337,7 @@ router.post("/", (req, res) => {
                                                     else if(currentDate.getTime() === recptnDate.getTime()){
                                                         var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 운행중`;
                                                     }
+                                                    processData.btrainNo = data2.trnNo;
                                                     processData.delayInfo = delayInfo;
                                                 }
         
