@@ -28,11 +28,11 @@ const ex_title = document.getElementById("ex_title");
 const ex_maintext = document.getElementById("ex_maintext");
 
 next_btn.addEventListener("click", () => {
-    Chapter_text(++chapter) == false ? null : (chapter = 0);
+    Chapter_text(++chapter) ? (chapter = -1) : null;
 });
 
 back_btn.addEventListener("click", () => {
-    Chapter_text(--chapter);
+    Chapter_text(--chapter) ? (chapter = 0) : null;
 });
 
 function Chapter_text(chapter) {
@@ -66,6 +66,8 @@ function Chapter_text(chapter) {
             break;
 
         default:
+            return true;
             break;
     }
+    return false;
 }
