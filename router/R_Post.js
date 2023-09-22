@@ -18,12 +18,10 @@ function getDayOfWeek() {
     const now = new Date();
     const dayOfWeek = now.getDay(); // 0은 일요일, 1은 월요일, ..., 6은 토요일
   
-    if (dayOfWeek === 0) {
-      return '8';
-    } else if (dayOfWeek === 6) {
-      return '7';
-    } else {
+    if (dayOfWeek === 6 || dayOfWeek === 0) {
       return '9';
+    } else {
+      return '8';
     }
   }
 //http://localhost:8080/post 경로로 요청 시 Suggestion.html파일 반환
@@ -97,6 +95,7 @@ router.post("/", (req, res) => {
     // 지하철 API에서 가져올 데이터 - url수정
     const realarrive_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimeStationArrival/0/20/${encodedStationName}`; //seoul realtime url
     const realTimePosition_url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimePosition/0/100/${encodeURI(s_line)}`;
+    console.log(realTimePosition_url);
    // console.log(realTimePosition_url)
     console.log(`서울시 공공데이터 : ${realarrive_url}`);
     if(line[s_response] === s_line){
@@ -132,13 +131,12 @@ router.post("/", (req, res) => {
                     // 역코드를 얻기 위한 작업
                     var r_railOprIsttCd = jsonFile.readFileSync("./static/json/railOprIsttCd.json");
                     var railOprIsttCd = r_railOprIsttCd[s_line][arvlMsg3];
-                    var r_InCd = jsonFile.readFileSync("./static/json/InCd.json");
+                    var r_InCd = jsonFile.readFileSync("./static/json/lnCd.json");
                     var InCd = r_InCd[s_line][arvlMsg3];
                     var r_stinCd = jsonFile.readFileSync("./static/json/stinCd.json");
                     var stinCd = r_stinCd[s_line][arvlMsg3];
                         
-                    if(reverse[s_line] === subwayLine && reverse_updn[s_updnline] === updnLine || line2_updn[s_updnline]===updnLine &&stationNm != undefined){
-                        console.log(`${arvlMsg3}역 역명코드${stationNm}`);
+                    if(reverse[s_line] === subwayLine  && reverse_updn[s_updnline] === updnLine || line2_updn[s_updnline]===updnLine ){
                         console.log(data1.updnLine);
                           
                         const subwayId = convert[data1.subwayId];
@@ -184,6 +182,7 @@ router.post("/", (req, res) => {
                         })
                         processData.subwayList = list;
                         const SearchSTNTimeTableByFRCodeService_url = `https://openapi.kric.go.kr/openapi/trainUseInfo/subwayTimetable?serviceKey=${fs.readFileSync("./kric_api.txt","utf-8")}&format=json&railOprIsttCd=${railOprIsttCd}&dayCd=${getDayOfWeek()}&lnCd=${InCd}&stinCd=${stinCd}`;
+                        console.log(SearchSTNTimeTableByFRCodeService_url);
                         request({
                             url: realTimePosition_url,
                             method: "GET"
@@ -279,18 +278,18 @@ router.post("/", (req, res) => {
                                 request({
                                     url: SearchSTNTimeTableByFRCodeService_url,
                                     method: "GET",
-                                }, function(err, response, body){
+                                }, function(err, response, body1){
                                     if(err){
                                         console.error(err);
                                     }
                                         // 열차가 도착한 역의 시간표 불러오는 request
                                         try{
-                                            const result = JSON.parse(body);
-                                            
+                                            const obj = JSON.parse(body1);
+                                            const result = obj.body;
                                             //delay 지연 정보 구현
                                             result.forEach(data2=>{
                                                 var train_no = data2.trnNo;
-                                                if(s_line == "1호선"||s_line == "3호선"||s_line == "4호선"||s_line == "9호선"){
+                                                if(s_line == "1호선"||s_line == "3호선"||s_line == "4호선"||s_line == "9호선"||s_line == "경의중앙선"||s_line == "경춘선"||s_line == "수인분당선"||s_line == "신분당선"||s_line == "서해선"||s_line == "우이신설선"){
                                                     train_no = train_no.substring(1);
                                                 }
                                                 
@@ -309,17 +308,20 @@ router.post("/", (req, res) => {
                                                 
                                                 if(btrainNo === train_no){
                                                     let trainTime = data2.arvTm;
-                                                    console.log(trainTime);
-                                                    let trainDate = new Date("1970-01-01T"+trainTime);
-                                                    let recptnDate = new Date(recptnDt);
+                                                    let hours = parseInt(trainTime.slice(0,2), 10);
+                                                    let minutes = parseInt(trainTime.slice(2,4), 10);
+                                                    let seconds = parseInt(trainTime.slice(4,6), 10);
                                                     let currentDate = new Date();
+                                                    let trainDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), hours, minutes, seconds);
+                                                    let recptnDate = new Date(recptnDt);
+                                                    
                                                     recptnDate.setHours(trainDate.getHours(), trainDate.getMinutes(), trainDate.getSeconds());
                                                     if(currentDate.getTime() > recptnDate.getTime()){
                                                         let timeDiff = currentDate - recptnDate;
                                                         let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                         let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
                                                         if(minuesDelayed>400){
-                                                            var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${data2.SUBWAYSNAME}역 출발 대기중`;
+                                                            var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 출발 대기중`;
                                                         }
                                                         else{
                                                             var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
