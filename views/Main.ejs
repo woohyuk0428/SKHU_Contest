@@ -5,11 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="Main.css" />
         <link rel="stylesheet" href="help.css" />
+        <link rel="stylesheet" href="explanation.css" />
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI&libraries=places"></script>
         <title>SKHU ROAD</title>
     </head>
     <body>
-        <section class="menu">
+        <section class="menu" style="z-index: 1">
             <div class="folding-btn">
                 <div></div>
             </div>
@@ -63,8 +64,8 @@
             <div class="halfway-section hidden"><%- include('./__Halfway') %></div>
             <div class="subway-section hidden"><%- include('./__Subway') %></div>
         </section>
-        <%- include('./__Info') %>
-        <div id="map"></div>
+        <%- include('./__Info') %> <%- include('./__Explanation') %>
+        <div id="map" style="z-index: 0"></div>
     </body>
     <script src="Main.js"></script>
 </html>

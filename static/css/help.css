@@ -17,6 +17,7 @@
     transform: translateY(-100%);
     transition: transform 0.5s ease;
 }
+
 .posdown {
     transform: translateY(0%);
 }
@@ -225,7 +226,7 @@
 
 /* #endregion 본문1 팀소개 */
 
-/* x버튼 */
+/* #region x버튼 */
 .X-btn {
     position: relative;
 }
@@ -289,3 +290,4 @@
 .close-container:hover label {
     opacity: 1;
 }
+/* #endregion x버튼 */
