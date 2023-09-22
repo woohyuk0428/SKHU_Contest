@@ -31,10 +31,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
-    const Btn = document.getElementById("btn"); // 중간지점 찾기 버튼
+    const searchInput = document.querySelector('.search-input');
+    const btn = document.getElementById("btn");
+
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            
+            btn.click();
+        }
+    });
 
     // 중간지점 찾기 버튼 클릭 시 실행되는 핸들러
-    Btn.addEventListener("click", () => {
+    btn.addEventListener("click", () => {
         MappingSearch(marker_iconList, Mydata);
     });
 });

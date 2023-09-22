@@ -27,19 +27,10 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
-    console.log(req.body);
-    const { latitude, longitude } = req.body;
-    console.log(latitude, longitude);
-
-    res.json({ lat: latitude, lng: longitude }); //todo render가 없는 파일을 찾고 있어서 json데이터로 수정했습니다.
-});
-
-
 router.post("/destination",(req,res) =>{ 
     // 쿠키가 존재하는지 확인
-    if (req.cookies.Destination == undefined) {
-        res.cookie("Destination", data); // 검색한 역을 쿠키 값으로 생성
+    if(req.cookies.Destination == undefined) {
+        res.cookie("Destination", req.body.data); // 검색한 목적지를 쿠키 값으로 생성
         var destination = [data]; // ejs에서 코드 실행 시 문자열이면 오류가 나기 때문에 배열로 변경
         console.log(`쿠키 없음: ${destination}`);
     } 
@@ -50,16 +41,23 @@ router.post("/destination",(req,res) =>{
         Array.isArray(destination) ? null : (destination = [destination]); // 요소가 1개일 경우 문자열을 배열로 변경
         destination.indexOf(data) + 1 ? destination.splice(destination.indexOf(data), 1) : null; // 중복된 요소가 있다면 삭제
         destination.length >= 5 ? destination.pop() : null; // 요소가 5개 이상이면 마지막 요소 삭제
-        destination.unshift(data); // 검색한 역을 배열 첫번째 요소로 추가
+        destination.unshift(data); // 검색한 목적지를 배열 첫번째 요소로 추가
 
-        res.cookie("Destination", destination); // 배열을 쿠키값으로 추가
+        res.cookie("Destination", destination);// 배열을 쿠키값으로 추가
         console.log(`쿠키 있음: ${destination}`);
-
     } 
         //결과 반환
         res.render("post", {
             Data: destination,
         });
+});
+
+router.post("/", (req, res) => {
+    console.log(req.body);
+    const { latitude, longitude } = req.body;
+    console.log(latitude, longitude);
+
+    res.json({ lat: latitude, lng: longitude }); //todo render가 없는 파일을 찾고 있어서 json데이터로 수정했습니다.
 });
 
 // 중간지점 찾기 버튼 누를 시 주소값 받아 데이터 가공
