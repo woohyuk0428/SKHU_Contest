@@ -2,19 +2,35 @@
     <header class="search-bar">
         <div class="con-search">
             <img class="searchIcon" src="searchIcon.svg" alt="">
-            <input class="search-input" autocomplete="none" type="text" class="form-control" name="address" placeholder="지하철">
+            <input class="search-input" autocomplete="none" type="text" class="form-control" name="address"
+                placeholder="지하철">
             <img id="reset-button" class="xMark" src="xMark.svg" alt="" type="reset">
         </div>
         <button id="btn" class="search-btn" type="button">검색</button>
     </header>
     <form>
+        <label for="updnLine">방향</label>
+        <input type="radio" name="updnLine" id="1" value="1" checked>상행
+        <input type="radio" name="updnLine" id="2" value="2">하행
         <form>
-            <label for="subwayLine">호선 선택:</label>
+            <label for="subwayLine">노선:</label>
             <select id="subwayLine">
-                <option value="line1">1호선</option>
-                <option value="line2">2호선</option>
-                <option value="line3">3호선</option>
-                <!-- 여기에 다른 호선들 추가 예정 -->
+                <option value="1호선" selected>1호선</option>
+                <option value="2호선">2호선</option>
+                <option value="3호선">3호선</option>
+                <option value="4호선">4호선</option>
+                <option value="5호선">5호선</option>
+                <option value="6호선">6호선</option>
+                <option value="7호선">7호선</option>
+                <option value="8호선">8호선</option>
+                <option value="9호선">9호선</option>
+                <option value="경의중앙선">경의중앙선</option>
+                <option value="공항철도">공항철도</option>
+                <option value="경춘선">경춘선</option>
+                <option value="수인분당선">수인분당선</option>
+                <option value="신분당선">신분당선</option>
+                <option value="우이신설선">우이신설선</option>
+                <option value="서해선">서해선</option>
             </select>
             <br>
             <button type="button" onclick="getSubwayTime()">조회</button>
