@@ -52,17 +52,12 @@ router.post("/", (req, res) => {
     const rapid_line = jsonFile.readFileSync(`./static/json/Line/1호선_급행.json`);
     const express_line = jsonFile.readFileSync(`./static/json/Line/1호선_특급.json`);
 
-    if(s_line === "9호선"){
-        var reverse_updn = {
-            "1":"하행", 
-            "2":"상행",
-        }
-    }else{
-        reverse_updn = {
+    
+    const reverse_updn = {
             "1":"상행", 
             "2":"하행",
-        };
-    }
+    };
+    
     
     
     const line2_updn = {
@@ -309,14 +304,18 @@ router.post("/", (req, res) => {
                                                 
                                                 if(btrainNo === train_no){
                                                     let trainTime = data2.arvTm;
-                                                    let hours = parseInt(trainTime.slice(0,2), 10);
-                                                    let minutes = parseInt(trainTime.slice(2,4), 10);
-                                                    let seconds = parseInt(trainTime.slice(4,6), 10);
+                                                    if(trainTime != null){
+                                                        let hours = parseInt(trainTime.slice(0,2), 10);
+                                                        let minutes = parseInt(trainTime.slice(2,4), 10);
+                                                        let seconds = parseInt(trainTime.slice(4,6), 10);
+                                                    
+                                                    
                                                     let currentDate = new Date();
                                                     let trainDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), hours, minutes, seconds);
                                                     let recptnDate = new Date(recptnDt);
                                                     
                                                     recptnDate.setHours(trainDate.getHours(), trainDate.getMinutes(), trainDate.getSeconds());
+                                                
                                                     if(currentDate.getTime() > recptnDate.getTime()){
                                                         let timeDiff = currentDate - recptnDate;
                                                         let minuesDelayed = Math.floor(timeDiff/(1000*60));
@@ -337,10 +336,13 @@ router.post("/", (req, res) => {
                                                     else if(currentDate.getTime() === recptnDate.getTime()){
                                                         var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 운행중`;
                                                     }
-                                                    processData.btrainNo = data2.trnNo;
-                                                    processData.delayInfo = delayInfo;
-                                                }
-        
+                                                   
+                                                }else{
+                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 출발 대기중`;
+                                                } 
+                                                processData.btrainNo = data2.trnNo;
+                                                processData.delayInfo = delayInfo;
+                                            }
                                                 
                                             });
                                             subwayData[subwayId].push(processData);
