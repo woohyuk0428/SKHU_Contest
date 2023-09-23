@@ -305,6 +305,83 @@ input[type="radio"] {
     display: inline-block;
 }
 
+/* __Subway */
+.subway-con {
+    display: inline-block;
+    height: auto;
+}
+.subway-line-con {
+    border-radius: 100px;
+    /* width: 200px; */
+
+    padding: 10px;
+    width: 250px;
+    display: inline-block;
+    float: left;
+}
+
+
+.line-info, .subway-num {
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.station-info {
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.subway-line1, .subway-line2 {
+    float: left;
+    width: 75px;
+    height: 35px;
+    margin-top: 60px;
+    margin-right: -6px;
+
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subway-line2 {
+    width: 87px;
+    margin-left: -6px;
+}
+
+.subway-time-info{
+    padding: 20px;
+    margin: 10px;
+}
+
+.subway-time-info div {
+    text-align: left;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 호선 별 색깔 style */
+/* 1호선 */
+.subway-line-con.lineNum_1 {
+    border: 15px solid #26446F;
+}
+.subway-line1.lineNum_1, .subway-line2.lineNum_1 {
+    background-color: #26446F;
+}
+
+/* 2호선 */
+.subway-line-con.lineNum_2 {
+    border: 15px solid #00A93F;
+}
+.subway-line1.lineNum_2, .subway-line2.lineNum_2{
+    background-color: #00A93F;
+}
+
 /* __Help */
 /* #region 근처 장소  */
 #radio_cont {
