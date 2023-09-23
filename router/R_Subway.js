@@ -13,7 +13,7 @@ const date =  new Date();
 // let dayCd = 0; //평일 : 8 토요일 : 7 일요일 : 6
 // let railOp0rIsttCd = ``; //철도 기관명 Korail : KR SeoulMetro : S1 
 // let lnCd = 1; //호선 
-let test= `https://openapi.kric.go.kr/openapi/convenientInfo/stationTimetable?serviceKey=${fs.readFileSync("timetableapi.txt","utf-8")}&format=json&railOprlsttCd=KR&UB+bCd=1&stinCd=144&dayCd=8`;
+//let test= `https://openapi.kric.go.kr/openapi/convenientInfo/stationTimetable?serviceKey=${fs.readFileSync("timetableapi.txt","utf-8")}&format=json&railOprlsttCd=KR&UB+bCd=1&stinCd=144&dayCd=8`;
 
 function isWeekday(date) {
     const day = date.getDay();
