@@ -179,7 +179,7 @@ input[type="radio"] {
     background-color: #8591ff;
 }
 
-.con-main {
+.con-main, .con-main-halfway {
     float: left;
 }
 .search-bar {
@@ -212,11 +212,16 @@ input[type="radio"] {
 
 .con-search {
     background-color: #eeeeee;
-    /* display: inline-block; */
 
     border-radius: 10px;
     margin-left: 20px;
+    width: 350px;
 }
+.con-search.way {
+    margin-top: 10px;
+    margin-right: 0;
+}
+
 .xMark {
     width: 25px;
     margin: 8.5px 15px;
@@ -269,6 +274,35 @@ input[type="radio"] {
     background-color: #8591ff;
     transition: 0.3s;
     cursor: pointer;
+}
+
+/* __Halfway */
+.add-address {
+    background-color: #00C92C;
+    color: white;
+    font-size: 30px;
+    border: none;
+    width: 65px;
+    height: 40px;
+    border-radius: 10px;
+    opacity: 0.7;
+    padding-bottom: 2px;
+
+    margin: 10px;
+}
+.remove-btn {
+    font-size: 20px;
+    height: 48px;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    border: none;
+    background-color: #FF7575;
+    color: #ffffff;
+
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
 }
 
 /* __Help */

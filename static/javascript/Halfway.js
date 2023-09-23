@@ -1,10 +1,8 @@
-// import InputAddressFunctions from "./addressFunctions.js";
 
-const inputContainer = document.querySelector("#address-container"); // input이 들어갈 컨테이너 위치
+console.log('halfway');
+const inputContainer = document.querySelector(".way-list"); // input이 들어갈 컨테이너 위치
 // const addressFunctions = new InputAddressFunctions(inputContainer);
 
-const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
-const sliderValue = document.getElementById("sliderValue"); // 슬라이더 값을 표시할 위치
 
 const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
 let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
@@ -22,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         new google.maps.places.Autocomplete(input);
     });
 
-    document.querySelector(".add-address").addEventListener("click", addInput); // 출발지점 추가 버튼 클릭 시 실행
+    document.querySelector(".add-address").addEventListener("click", addInput); // 추가 버튼 클릭 시 실행
 
     //! ------------------------------- 상단 필터 관련 이벤트 ---------------------------------------
     const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
@@ -46,23 +44,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 슬라이더 값 변경
-    rangeSlider.addEventListener("input", function () {
-        sliderValue.textContent = `${rangeSlider.value}미터`;
-    });
+    // rangeSlider.addEventListener("input", function () {
+    //     sliderValue.textContent = `${rangeSlider.value}미터`;
+    // });
 
     //! ------------------------------- 경로 정보 삭제 관련 이벤트 ---------------------------------------
-    const AdrOffBtn = document.getElementById("addressInfoOff"); // 경로 정보 끄기 버튼
-    const AdrOnBtn = document.getElementById("addressInfoOn"); // 경로 정보 표시 버튼
+    // const AdrOffBtn = document.getElementById("addressInfoOff"); // 경로 정보 끄기 버튼
+    // const AdrOnBtn = document.getElementById("addressInfoOn"); // 경로 정보 표시 버튼
 
-    // 경로 정보 끄기
-    AdrOffBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("off");
-    });
+    // // 경로 정보 끄기
+    // AdrOffBtn.addEventListener("click", () => {
+    //     AdrInfo_OnOff("off");
+    // });
 
-    // 경로 정보 표시
-    AdrOnBtn.addEventListener("click", () => {
-        AdrInfo_OnOff("on");
-    });
+    // // 경로 정보 표시
+    // AdrOnBtn.addEventListener("click", () => {
+    //     AdrInfo_OnOff("on");
+    // });
 
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
@@ -85,11 +83,10 @@ function CreateMap(address) {
 //! ------------------------------- 주소 입력 필드 관련 함수 ---------------------------------------
 // 새 인풋필드 추가
 function addInput() {
-    const addressInputTemplate = `<div class="input-group mt-2">
-        <input type="text" class="form-control address-input" name="address" placeholder="출발지점을 입력하세요.">
-        <div class="input-group-append">
-            <button class="btn btn-danger remove-address" type="button">삭제</button>
-        </div>
+    const addressInputTemplate = `<div class="con-search way">
+        <img class="searchIcon" src="searchIcon.svg" alt="">
+        <input class="search-input" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="지점 2">
+        <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기">
     </div>`;
 
     inputContainer.insertAdjacentHTML("beforeend", addressInputTemplate);
@@ -159,18 +156,18 @@ function removeSelectedClassFromLabels() {
 
 //! ------------------------------- 경로 정보 삭제 관련 함수 ---------------------------------------
 // 경로 정보가 들어있는 요소를 찾아 on off를 해주는 함수
-function AdrInfo_OnOff(onoff) {
-    var Ladr = document.querySelectorAll('img[src="https://maps.gstatic.com/mapfiles/tiph.png"]');
-    var Radr = document.querySelectorAll('img[src="https://maps.gstatic.com/mapfiles/tip.png"]');
+// function AdrInfo_OnOff(onoff) {
+//     var Ladr = document.querySelectorAll('img[src="https://maps.gstatic.com/mapfiles/tiph.png"]');
+//     var Radr = document.querySelectorAll('img[src="https://maps.gstatic.com/mapfiles/tip.png"]');
 
-    if (onoff == "on") {
-        AdrInfoFor(Ladr, "block");
-        AdrInfoFor(Radr, "block");
-    } else {
-        AdrInfoFor(Ladr, "none");
-        AdrInfoFor(Radr, "none");
-    }
-}
+//     if (onoff == "on") {
+//         AdrInfoFor(Ladr, "block");
+//         AdrInfoFor(Radr, "block");
+//     } else {
+//         AdrInfoFor(Ladr, "none");
+//         AdrInfoFor(Radr, "none");
+//     }
+// }
 
 // 가져온 이미지 정보의 부모요소에 display를 수정하는 함수
 function AdrInfoFor(adrs, displayInfo) {
@@ -184,7 +181,8 @@ function AdrInfoFor(adrs, displayInfo) {
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function HalfwaySearch(marker_iconList, midData) {
-    const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
+    console.log('hlafwayserch');
+    // const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
     const addressInputs = document.querySelectorAll('input[name="address"]'); // 인풋폼 저장
     const inputValues = [...addressInputs].map((input) => input.value); // 주소값 저장
     const url = "http://localhost:8080/halfway"; // ajax요청 url
@@ -204,9 +202,9 @@ function HalfwaySearch(marker_iconList, midData) {
 
     // 서버로 AJAX 요청을 보내기 위한 작업
     if (midData == undefined) {
-        sendData = JSON.stringify({ addresses: inputValues, range: rangeValue });
+        sendData = JSON.stringify({ addresses: inputValues, range: 300 });
     } else {
-        sendData = JSON.stringify({ addresses: inputValues, range: rangeValue, middata: midData });
+        sendData = JSON.stringify({ addresses: inputValues, range: 300, middata: midData });
     }
     fetch(url, {
         method: "POST",

@@ -1,4 +1,4 @@
-// const inputContainer = document.querySelector("#address-container"); // input이 들어갈 컨테이너 위치
+
 // const addressFunctions = new InputAddressFunctions(inputContainer);
 
 // const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
