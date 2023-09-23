@@ -109,6 +109,16 @@ router.post("/", (req, res) => {
                     const s_data = obj.realtimeArrivalList; // 필요한 데이터 경로 압축
                     const convert = jsonFile.readFileSync("./static/json/line.json");
                     //const areaId = jsonFile.readFileSync("./static/json/areaId.json");
+                    if(s_data.btrainNo != undefined){
+                        s_data.sort((a, b) => {
+                            // 열차 번호(btrainNo)를 비교하여 정렬
+                            a_parse = parseInt(a.btrainNo, 10);
+                            b_parse = parseInt(b.btrainNo, 10);
+                            a_str = String(a_parse);
+                            b_str = String(b_parse);
+                            return a_str.localeCompare(b_str);
+                          });
+                    }
                     
                     //열차 불러오는 작업
                     s_data.forEach((data1,index) =>{
@@ -164,7 +174,7 @@ router.post("/", (req, res) => {
                                 }
                                 
                             }
-                        
+                            
                         
                         
                         
@@ -282,11 +292,30 @@ router.post("/", (req, res) => {
                                             const obj = JSON.parse(body1);
                                             const result = obj.body;
                                             result.sort((a, b) => {
-                                                return a.trnNo.localeCompare(b.trnNo);
+                                                
+                                                if(s_line == "1호선"||s_line == "3호선"||s_line == "4호선"||s_line == "9호선"||s_line == "경의중앙선"||s_line == "경춘선"||s_line == "수인분당선"||s_line == "신분당선"||s_line == "서해선"||s_line == "우이신설선"){
+                                                    a_sub = a.trnNo.substring(1);
+                                                    b_sub = b.trnNo.substring(1);
+                                                    a_parse = parseInt(a_sub, 10);
+                                                    b_parse = parseInt(b_sub,10);
+                                                    a_str = String(a_parse);
+                                                    b_str = String(b_parse);
+                                                    return a_str.localeCompare(b_str);
+                                                }else{
+                                                    a_parse = parseInt(a, 10);
+                                                    b_parse = parseInt(b, 10);
+                                                    a_str = String(a_parse);
+                                                    b_str = String(b_parse);
+                                                    return a_str.localeCompare(b_str);
+                                                }
+                                                
                                               });
                                             //delay 지연 정보 구현
                                             result.forEach(data2=>{
-                                                var train_no = data2.trnNo;
+                                               
+                                                var train_no = data2.trnNo
+                                                
+                                                
                                                 if(s_line == "1호선"||s_line == "3호선"||s_line == "4호선"||s_line == "9호선"||s_line == "경의중앙선"||s_line == "경춘선"||s_line == "수인분당선"||s_line == "신분당선"||s_line == "서해선"||s_line == "우이신설선"){
                                                     train_no = train_no.substring(1);
                                                 }
@@ -358,11 +387,11 @@ router.post("/", (req, res) => {
                                                     else if(currentDate.getTime() == recptnDate.getTime()){
                                                         var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 출발`;
                                                     }
-                                                    else{
+                                                    else if(currentDate.getTime() > recptnDate.getTime()){
                                                         let timeDiff = currentDate - recptnDate ;
                                                         let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                         let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
-                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 출발`;
+                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed} 분 ${secondsDelayed}초 지연 출발`;
                                                     }
                                                 } 
                                                 processData.btrainNo = data2.trnNo;
