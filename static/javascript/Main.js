@@ -1,8 +1,16 @@
+function showMap() {
+    new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 37.5665, lng: 126.978 }, // 초기 위치 설정
+        zoom: 14, // 확대/축소 레벨
+    });
+
+}
+
+// 초기설정 화면(구글 지도) 적용
 new google.maps.Map(document.getElementById("map"), {
     center: { lat: 37.5665, lng: 126.978 }, // 초기 위치 설정
     zoom: 14, // 확대/축소 레벨
 });
-
 const foldingBtn = document.querySelector(".folding-btn");
 const menu = document.querySelector(".menu");
 
@@ -35,16 +43,29 @@ function toggleSection(sectionShow, buttonHighlight) {
 }
 
 gotoMappingBtn.addEventListener('click', () => {
+    showMap();
+    const imageDisplay = document.getElementById("map");
+
   toggleSection(section1, gotoMappingBtn);
+  imageDisplay.classList.remove("hidden");
+
 })
 
 gotoHalfWayBtn.addEventListener('click', () => {
+    showMap();
+    const imageDisplay = document.getElementById("map");
+
   toggleSection(section2, gotoHalfWayBtn);
+  imageDisplay.classList.remove("hidden");
+
 })
 
 gotoSubwayBtn.addEventListener('click', () => {
+    const imageDisplay = document.getElementById("map");
+    console.log("hello");
   toggleSection(section3, gotoSubwayBtn);
-})
+  imageDisplay.classList.add("hidden");
+});
 //--------------------------------------
 const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 
@@ -62,3 +83,6 @@ function removeSelectedClassFromLabels() {
 }
 
 // 도움말 버튼
+
+
+
