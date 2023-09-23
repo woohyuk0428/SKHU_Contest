@@ -281,6 +281,9 @@ router.post("/", (req, res) => {
                                         try{
                                             const obj = JSON.parse(body1);
                                             const result = obj.body;
+                                            result.sort((a, b) => {
+                                                return a.trnNo.localeCompare(b.trnNo);
+                                              });
                                             //delay 지연 정보 구현
                                             result.forEach(data2=>{
                                                 var train_no = data2.trnNo;
@@ -304,7 +307,8 @@ router.post("/", (req, res) => {
                                                 
                                                 if(btrainNo === train_no){
                                                     let trainTime = data2.arvTm;
-                                                    if(trainTime != null){
+                                                    let dptTm = data2.dptTm;
+                                                    if(trainTime != null && processData.Position){
                                                         let hours = parseInt(trainTime.slice(0,2), 10);
                                                         let minutes = parseInt(trainTime.slice(2,4), 10);
                                                         let seconds = parseInt(trainTime.slice(4,6), 10);
@@ -320,25 +324,46 @@ router.post("/", (req, res) => {
                                                         let timeDiff = currentDate - recptnDate;
                                                         let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                         let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
-                                                        if(minuesDelayed>400){
-                                                            var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 출발 대기중`;
-                                                        }
-                                                        else{
-                                                            var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
-                                                        }
+                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
+                                                        
                                                     }
                                                     else if(currentDate.getTime() < recptnDate.getTime()){
                                                         let timeDiff = recptnDate - currentDate;
                                                         let minuesDelayed = Math.floor(timeDiff/(1000*60));
                                                         let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
                                                         var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
+                                                        
+                                                        
                                                     }
                                                     else if(currentDate.getTime() === recptnDate.getTime()){
                                                         var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 운행중`;
+                                                        
                                                     }
                                                    
                                                 }else{
-                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 출발 대기중`;
+                                                    var hours = parseInt(dptTm.slice(0,2), 10);
+                                                    var minutes = parseInt(dptTm.slice(2,4), 10);
+                                                    var seconds = parseInt(dptTm.slice(4,6), 10);
+                                                    var currentDate = new Date();
+                                                    var trainDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), hours, minutes, seconds);
+                                                    var recptnDate = new Date(recptnDt);
+                                                    
+                                                    recptnDate.setHours(trainDate.getHours(), trainDate.getMinutes(), trainDate.getSeconds());
+                                                    if(currentDate.getTime() < recptnDate.getTime()){
+                                                        let timeDiff = recptnDate - currentDate;
+                                                        let minuesDelayed = Math.floor(timeDiff/(1000*60));
+                                                        let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
+                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 후 출발 예정`;
+                                                    }
+                                                    else if(currentDate.getTime() == recptnDate.getTime()){
+                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 출발`;
+                                                    }
+                                                    else{
+                                                        let timeDiff = currentDate - recptnDate ;
+                                                        let minuesDelayed = Math.floor(timeDiff/(1000*60));
+                                                        let secondsDelayed = Math.floor((timeDiff % (1000*60))/1000);
+                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 출발`;
+                                                    }
                                                 } 
                                                 processData.btrainNo = data2.trnNo;
                                                 processData.delayInfo = delayInfo;
