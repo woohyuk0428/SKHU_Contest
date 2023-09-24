@@ -49,7 +49,7 @@ app.use("/halfway", require("./router/R_Halfway"));
 app.use("/suggestion", require("./router/R_Suggestion"));
 app.use("/mapping", require("./router/R_Mapping"));
 app.use("/detail", require("./router/R_Detail"));
-app.use("/post", require("./router/R_Post"));
+//app.use("/post", require("./router/R_Post"));
 app.use("/subway", require("./router/R_Subway"));
 
 //http://localhost:8080/ 경로로 요청 시 Main.html파일 반환

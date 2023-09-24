@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
         console.log(before);
     }
 
-    res.render("Post", {
+    res.render("Subway", {
         result_Data: "",
         before_Data: before,
     });
@@ -401,7 +401,7 @@ router.post("/", (req, res) => {
                                             });
                                             subwayData[subwayId].push(processData);
                                             console.log(processData);
-                                            res.render("post", {
+                                            res.render("subway", {
                                                 result_Data : processData
                                             });
                                             return;   
@@ -489,7 +489,7 @@ router.post("/", (req, res) => {
                 }
 
                 //결과 반환
-                res.render("post", {
+                res.render("subway", {
                     result_Data: newHtml,
                     before_Data: MyCookie,
                 });
@@ -503,7 +503,7 @@ router.post("/", (req, res) => {
                     Array.isArray(before) ? null : (before = [before]); // 값이 1개면 문자열을 배열로 변경
                 }
 
-                res.render("post", {
+                res.render("subway", {
                     result_Data: `<br><p style="color:red">"${s_response}"에 대한 검색 결과가 존재하지 않거나 데이터를 가져오는 중에 오류가 발생했습니다.</p>`,
                     before_Data: before,
                 });
