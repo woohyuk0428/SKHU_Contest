@@ -47,7 +47,7 @@ gotoMappingBtn.addEventListener('click', () => {
     const imageDisplay = document.getElementById("map");
 
   toggleSection(section1, gotoMappingBtn);
-  imageDisplay.classList.remove("hidden");
+  imageDisplay.classList.remove("hiddenMap");
 
 })
 
@@ -56,15 +56,17 @@ gotoHalfWayBtn.addEventListener('click', () => {
     const imageDisplay = document.getElementById("map");
 
   toggleSection(section2, gotoHalfWayBtn);
-  imageDisplay.classList.remove("hidden");
+  imageDisplay.classList.remove("hiddenMap");
 
 })
 
 gotoSubwayBtn.addEventListener('click', () => {
     const imageDisplay = document.getElementById("map");
-    console.log("hello");
+
   toggleSection(section3, gotoSubwayBtn);
-  imageDisplay.classList.add("hidden");
+  console.log("hello");
+  imageDisplay.classList.add("hiddenMap");
+  console.log("hello11");
 });
 //--------------------------------------
 const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
