@@ -416,7 +416,7 @@ input[type="radio"] {
 
 /* #endregion 근처 장소  */
 .hidden {
-    display:none;
+    display: hidden;
 }
 
 #image-display {
