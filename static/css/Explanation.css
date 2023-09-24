@@ -1,0 +1,157 @@
+:root {
+    --color_main: #8591ff;
+}
+
+.bg_panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.set_opacity {
+    display: none;
+    /* opacity: 0;
+    transition: opacity 0.5s ease; */
+}
+/* .opacity_false {
+    display: flex;
+    opacity: 1;
+} */
+
+/* #region 설명 */
+.ex_cont {
+    background-color: white;
+    width: 300px;
+    height: 350px;
+    margin: 0 auto;
+    border-radius: 10px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ex_cont > div {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.help_select {
+    animation: blink 1s infinite alternate;
+    z-index: 100;
+}
+
+@keyframes blink {
+    0% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+    }
+}
+/* #endregion 설명 */
+
+/* #region Back&Next 버튼 */
+.btn_group {
+    display: flex;
+    gap: 10px;
+    text-align: center;
+}
+.ex_button {
+    flex: 1;
+    transition: all 200ms cubic-bezier(0.39, 0.5, 0.15, 1.36);
+    display: block;
+    width: 70px;
+    margin: 20px auto;
+    max-width: 180px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.ex_button {
+    color: rgba(30, 22, 54, 0.6);
+    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+.ex_button:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+}
+/* #endregion Back&Next 버튼 */
+
+/* #region x버튼 */
+.ex_X-btn {
+    position: relative;
+}
+
+.ex_X-btn > div {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 95%;
+}
+
+.ex_close-container {
+    position: relative;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    margin-top: 100px;
+    cursor: pointer;
+}
+
+.ex_leftright {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: #f4a259;
+    border-radius: 2px;
+    transform: rotate(45deg);
+    transition: all 0.15s ease-in;
+}
+
+.ex_rightleft {
+    height: 4px;
+    width: 50px;
+    position: absolute;
+    margin-top: 24px;
+    background-color: #f4a259;
+    border-radius: 2px;
+    transform: rotate(-45deg);
+    transition: all 0.15s ease-in;
+}
+.ex_close {
+    margin: 60px 0 0 5px;
+    position: absolute;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.6em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.15s ease-in;
+    opacity: 0;
+}
+
+.ex_close-container:hover .ex_leftright {
+    transform: rotate(-45deg);
+    background-color: #f25c66;
+}
+.ex_close-container:hover .ex_rightleft {
+    transform: rotate(45deg);
+    background-color: #f25c66;
+}
+.ex_close-container:hover label {
+    opacity: 1;
+}
+/* #endregion x버튼 */

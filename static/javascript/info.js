@@ -5,6 +5,7 @@ help_btn.addEventListener("click", () => {
 });
 
 const help_Xbtn = document.querySelector(".X-btn");
+
 help_Xbtn.addEventListener("click", () => {
     help_panel.classList.remove("posdown");
 });

@@ -1,4 +1,4 @@
-// const inputContainer = document.querySelector("#address-container"); // input이 들어갈 컨테이너 위치
+
 // const addressFunctions = new InputAddressFunctions(inputContainer);
 
 // const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
@@ -218,9 +218,30 @@ function AdrInfoFor(adrs, displayInfo) {
     });
 }
 
+let save_queue = [];
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function MappingSearch(marker_iconList, Mydata) {
+    //---------------------------------------------
+    let form_control = document.getElementById("textInput").value;
+    let ulElement = document.createElement("ol");
+
+    save_queue.length >= 5 ? save_queue.pop() : null;
+    save_queue.unshift(form_control);
+    console.log(save_queue);
+    console.log(save_queue.length);
+
+    save_queue.forEach((data) => {
+        var liElement = document.createElement("li");
+        liElement.textContent = data;
+        ulElement.appendChild(liElement);
+    });
+    form_control_element = document.getElementById("form_control_text");
+    form_control_element.removeChild(form_control_element.firstChild);
+    form_control_element.appendChild(ulElement);
+
+    //-----------------------------
+
     // const rangeValue = 300;
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
     const url = "http://localhost:8080/Mapping/data"; // ajax요청 url
@@ -485,8 +506,8 @@ async function fetchPlacePhoto(placeId) {
     }
 }
 // '지하철' 관련 함수
- // 선택한 호선에 대한 조회 시간을 가져옴
- var subwayTime = subwayTimeInfo[selectedLine];
+// 선택한 호선에 대한 조회 시간을 가져옴
+// var subwayTime = subwayTimeInfo[selectedLine];
 
- // 결과를 화면에 출력
- document.getElementById("result").innerHTML = subwayTime;
+// // 결과를 화면에 출력
+// document.getElementById("result").innerHTML = subwayTime;
