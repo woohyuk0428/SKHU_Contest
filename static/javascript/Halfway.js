@@ -77,7 +77,7 @@ function CreateMap(address) {
 function addInput() {
     const addressInputTemplate = `<div class="con-search way">
         <img class="searchIcon" src="searchIcon.svg" alt="">
-        <input class="search-input " autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="추가 지점">
+        <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="추가 지점">
         <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기">
     </div>
     `;
@@ -103,7 +103,7 @@ function removeAddress() {
 
 // 주소 자동 완성 기능 활성화
 function activateAutoAddress() {
-    const addressInputs = document.querySelectorAll('input[name="address"]');
+    const addressInputs = document.querySelectorAll('.post_input_data');
     new google.maps.places.Autocomplete(addressInputs[addressInputs.length - 1]);
 }
 
