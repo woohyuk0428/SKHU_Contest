@@ -77,9 +77,10 @@ function CreateMap(address) {
 function addInput() {
     const addressInputTemplate = `<div class="con-search way">
         <img class="searchIcon" src="searchIcon.svg" alt="">
-        <input class="search-input" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="지점 2">
+        <input class="search-input " autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="추가 지점">
         <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기">
-    </div>`;
+    </div>
+    `;
 
     inputContainer.insertAdjacentHTML("beforeend", addressInputTemplate);
     activateRemoveButtons();
@@ -97,8 +98,7 @@ function activateRemoveButtons() {
 
 // 삭제 버튼 클릭 시 실행
 function removeAddress() {
-    const parentInputGroup = this.closest(".input-group");
-    parentInputGroup.remove();
+    inputContainer.removeChild(inputContainer.lastElementChild);
 }
 
 // 주소 자동 완성 기능 활성화
