@@ -5,7 +5,6 @@ const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
 const key = fs.readFileSync("./APIKey.txt", "utf-8");
-
 //요일 구분해주는 function
 function getDayOfWeek() {
     const now = new Date();
@@ -61,7 +60,6 @@ router.post("/", (req, res_router) => {
     const convert = jsonFile.readFileSync("./static/json/line.json");
 
     console.log(`서울시 공공데이터 : ${realarrive_url}`);
-
     if (line[s_response] === s_line) {
         request(
             {
@@ -84,9 +82,13 @@ router.post("/", (req, res_router) => {
                                 return a_str.localeCompare(b_str);
                             });
                         }
-                        let subwayData = { Status: 200, body: [] };
+                        const subwayJson = {Status : 200, body : []};
                         //열차 불러오는 작업
-                        s_data.forEach((data1, index) => {
+                        let j = 0;
+                        let i_len=new Array();
+                        for(i=0; i<s_data.length;i++){
+                            
+                            const data1 = s_data[i];
                             const subwayLine = data1.subwayId;
                             const arvlMsg3 = data1.arvlMsg3;
                             const recptnDt = data1.recptnDt;
@@ -106,6 +108,7 @@ router.post("/", (req, res_router) => {
                             var stinCd = r_stinCd[s_line][arvlMsg3];
 
                             if ((reverse[s_line] === subwayLine && reverse_updn[s_updnline] === updnLine) || line2_updn[s_updnline] === updnLine) {
+
                                 //api 호출한 값 json화
                                 let processData = {
                                     trainLineNm: trainLineNm,
@@ -134,6 +137,9 @@ router.post("/", (req, res_router) => {
                                     "utf-8"
                                 )}&format=json&railOprIsttCd=${railOprIsttCd}&dayCd=${getDayOfWeek()}&lnCd=${InCd}&stinCd=${stinCd}`;
                                 console.log(SearchSTNTimeTableByFRCodeService_url);
+                                let url_array = new Array();
+                                url_array.push(SearchSTNTimeTableByFRCodeService_url);
+
                                 request(
                                     {
                                         url: realTimePosition_url,
@@ -206,6 +212,7 @@ router.post("/", (req, res_router) => {
                                             });
                                             try {
                                                 if (btrainNo != null) {
+                                                    i_len.push(i);
                                                     request(
                                                         {
                                                             url: SearchSTNTimeTableByFRCodeService_url,
@@ -248,7 +255,7 @@ router.post("/", (req, res_router) => {
                                                                     }
                                                                 });
                                                                 //delay 지연 정보 구현
-                                                                result.forEach((data2) => {
+                                                                result.forEach((data2,index1) => {
                                                                     var train_no = data2.trnNo;
                                                                     if (
                                                                         s_line == "1호선" ||
@@ -275,6 +282,7 @@ router.post("/", (req, res_router) => {
                                                                         btrainNo = btrainNo.replace("8", "2");
                                                                     }
                                                                     if (btrainNo === train_no) {
+                                                                        
                                                                         let trainTime = data2.arvTm;
                                                                         let dptTm = data2.dptTm;
                                                                         if (trainTime != null && processData.Position) {
@@ -346,21 +354,27 @@ router.post("/", (req, res_router) => {
                                                                         }
                                                                         processData.btrainNo = data2.trnNo;
                                                                         processData.delayInfo = delayInfo;
+                                                                        
+                                                                        
                                                                     }
                                                                 });
-                                                                subwayData.body.push(processData);
-
-                                                                //res_router.json(subwayData);
-
-                                                                return;
+                                                                subwayJson.body.push(processData);
+                                                                j++;
+                                                                console.log(j);
+                                                                console.log(i_len.length);
+                                                                if(j===i_len.length){
+                                                                    console.log(subwayJson);
+                                                                    res_router.json(subwayJson.body);
+                                                                }
+                                                                
+                                                               
                                                             } catch (e) {
                                                                 console.error(`error: ${e}`);
                                                             }
                                                         }
                                                     ); // request 끝
                                                 } else if (btrainNo == null) {
-                                                    subwayData.body.push(processData);
-
+                                                    subwayJson.push(processData);
                                                     //res_router.json(subwayData);
 
                                                     return;
@@ -372,12 +386,17 @@ router.post("/", (req, res_router) => {
                                         }
                                     }
                                 );
-                                res_router.json(subwayData);
+
+
                             }
-                        });
+                            
+                            
+                        }
+                        
+
                     } else {
                         console.log("운행종료");
-                        res_router.json({Status:500});
+                        
                     }
                     //결과 반환
                 } catch (error) {
@@ -390,8 +409,6 @@ router.post("/", (req, res_router) => {
 
     } else {
         console.log(`${s_line}의 ${s_response}역은 없습니다. 다시 검색해주세요.`);
-        res_router.json({Status:400});
-
         // res_router.render("/Subway", {
         //     result_Data: `${s_line}의 ${s_response}역은 없습니다. 다시 검색해주세요.`,
         // });
