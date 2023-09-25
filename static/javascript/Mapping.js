@@ -9,15 +9,15 @@ let responseData_place; // 근처 장소들에 대한 json데이터를 저장
 let Mydata;
 
 // enter키 누를 때 버튼 클릭 처리
-searchInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
+searchInput = document.getElementById("textInput");
+
+searchInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
         e.preventDefault();
 
-        btn.click();
+        MappingSearch(marker_iconList, Mydata);
     }
 });
-
-
 
 //! ------------------------------- 지도 초기화 ---------------------------------------
 if ("geolocation" in navigator) {
@@ -37,6 +37,7 @@ if ("geolocation" in navigator) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("실행");
     //! ------------------------------- 주소 입력 필드 관련 이벤트 ---------------------------------------
     const addressInputs = document.querySelectorAll('input[name="address"]'); // 주소 입력폼
 
@@ -90,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
     const Btn = document.getElementById("btn"); // 중간지점 찾기 버튼
-
+    console.log(Btn);
     // 중간지점 찾기 버튼 클릭 시 실행되는 핸들러
     Btn.addEventListener("click", () => {
         MappingSearch(marker_iconList, Mydata);
@@ -232,6 +233,7 @@ let save_queue = [];
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function MappingSearch(marker_iconList, Mydata) {
+    console.log("실행");
     //---------------------------------------------
     let form_control = document.getElementById("textInput").value;
     let ulElement = document.createElement("ol");
@@ -254,13 +256,13 @@ function MappingSearch(marker_iconList, Mydata) {
 
     // const rangeValue = 300;
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
-    const url = "http://localhost:8080/Mapping/data"; // ajax요청 url
+    const M_url = "http://localhost:8080/Mapping/data"; // ajax요청 url
     let sendData = "";
 
     // 서버로 AJAX 요청을 보내기 위한 작업
     sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: 300 });
     console.log(sendData);
-    fetch(url, {
+    fetch(M_url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=UTF-8",
@@ -298,7 +300,7 @@ function MappingSearch(marker_iconList, Mydata) {
             const endpoint = responseData.endpoint[0].address; // 중간지점 위치
             const map = CreateMap(endpoint); // 지도 초기화
             responseData_place = responseData.places; // 중간지점 근처 장소 데이터 전역변수에 저장
-            placeMarkers = await createPlaceMarkers(map, responseData, marker_iconList);
+            placeMarkers = await M_createPlaceMarkers(map, responseData, marker_iconList);
 
             // 길찾기 인스턴스 설정
             new google.maps.DirectionsRenderer({
@@ -396,7 +398,7 @@ function createMarker(position, map, title, icon, tags, data) {
 }
 
 // 중간지점 근처 장소 마커 생성 함수
-async function createPlaceMarkers(map, responseData, iconList) {
+async function M_createPlaceMarkers(map, responseData, iconList) {
     const placetypes = ["cafe", "convenience_store", "library", "bus_station", "subway_station", "restaurant"]; // 검색할 장소 타입
     const placeMarkers = []; // 동적으로 생성된 마커가 들어갈 배열
 
@@ -521,5 +523,3 @@ async function fetchPlacePhoto(placeId) {
 
 // // 결과를 화면에 출력
 // document.getElementById("result").innerHTML = subwayTime;
-
-
