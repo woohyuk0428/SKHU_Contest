@@ -8,6 +8,17 @@ let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
 let responseData_place; // 근처 장소들에 대한 json데이터를 저장
 let Mydata;
 
+// enter키 누를 때 버튼 클릭 처리
+searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+
+        btn.click();
+    }
+});
+
+
+
 //! ------------------------------- 지도 초기화 ---------------------------------------
 if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(
@@ -510,3 +521,5 @@ async function fetchPlacePhoto(placeId) {
 
 // // 결과를 화면에 출력
 // document.getElementById("result").innerHTML = subwayTime;
+
+
