@@ -1,4 +1,3 @@
-
 // const addressFunctions = new InputAddressFunctions(inputContainer);
 
 // const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치

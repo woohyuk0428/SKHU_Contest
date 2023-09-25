@@ -1,14 +1,6 @@
-
-console.log('halfway');
+console.log("halfway");
 const inputContainer = document.querySelector(".way-list"); // input이 들어갈 컨테이너 위치
 // const addressFunctions = new InputAddressFunctions(inputContainer);
-
-
-const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
-let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
-let responseData_place; // 근처 장소들에 대한 json데이터를 저장
-
-CreateMap({ lat: 37.5665, lng: 126.978 }); // 지도 초기화
 
 document.addEventListener("DOMContentLoaded", function () {
     //! ------------------------------- 주소 입력 필드 관련 이벤트 ---------------------------------------
@@ -181,10 +173,11 @@ function AdrInfoFor(adrs, displayInfo) {
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function HalfwaySearch(marker_iconList, midData) {
-    console.log('hlafwayserch');
+    console.log("hlafwayserch");
     // const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
-    const addressInputs = document.querySelectorAll('input[name="address"]'); // 인풋폼 저장
+    const addressInputs = document.querySelectorAll(".post_input_data"); // 인풋폼 저장
     const inputValues = [...addressInputs].map((input) => input.value); // 주소값 저장
+    console.log(inputValues);
     const url = "http://localhost:8080/halfway"; // ajax요청 url
     let sendData = "";
 
