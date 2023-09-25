@@ -1,16 +1,16 @@
 <main class="con-main">
-    <form style="display: inline-block;" id="SubwayForm" method="post" action="/Subway">
+    <form style="display: inline-block" id="SubwayForm" method="post" action="/Subway">
         <div class="search-bar">
             <div class="con-search">
-                <img class="searchIcon" src="searchIcon.svg" alt="">
-                <input class="search-input" autocomplete="off" id="station" type="text" class="form-control" placeholder="역 검색">
-                <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기" type="reset">
+                <img class="searchIcon" src="searchIcon.svg" alt="" />
+                <input class="search-input" autocomplete="off" id="station" type="text" class="form-control" placeholder="역 검색" />
+                <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기" type="reset" />
             </div>
             <button class="search-btn" type="submit">검색</button>
         </div>
         <div class="subway-con">
-            <div style="text-align: left; padding: 10px 22px;">
-                <select id="SubwayLine" style="font-size: 20px;" name="subwayLine">
+            <div style="text-align: left; padding: 10px 22px">
+                <select id="SubwayLine" style="font-size: 20px" name="subwayLine">
                     <option value="1호선">1호선</option>
                     <option value="2호선">2호선</option>
                     <option value="3호선">3호선</option>
@@ -28,8 +28,8 @@
                     <option value="우이신설선">우이신설선</option>
                 </select>
             </div>
-            <div style="text-align: left; padding: 10px 22px;">
-                <select id="updnLine" style="font-size: 20px;" name="updnLine">
+            <div style="text-align: left; padding: 10px 22px">
+                <select id="updnLine" style="font-size: 20px" name="updnLine">
                     <option value="1">상행</option>
                     <option value="2">하행</option>
                 </select>
@@ -39,24 +39,16 @@
     <div class="subway-line1 lineNum_3"></div>
 
     <div class="subway-line-con lineNum_3">
-        <div class="line-info">
-            호선 정보
-        </div>
-        <div class="station-info">
-            현재 역
-        </div>
-        <div class="subway-num">
-            열차 번호
-        </div>
+        <div class="line-info">호선 정보</div>
+        <div class="station-info">현재 역</div>
+        <div class="subway-num">열차 번호</div>
     </div>
 
-    <div class="subway-line2 lineNum_3">
-        행선지
-    </div>
+    <div class="subway-line2 lineNum_3">행선지</div>
     <div class="subway-time-info">
-        <div>조회 시간 : </div>
-        <div>지연 시간 : </div>
+        <div>조회 시간 :</div>
+        <div>지연 시간 :</div>
     </div>
-    <br>
+    <br />
 </main>
 <script src="Subway.js"></script>
