@@ -9,7 +9,6 @@
             <button class="search-btn" type="submit">검색</button>
         </div>
         <div class="subway-con">
-            <div style="text-align: left; padding: 10px 22px">
                 <select id="SubwayLine" style="font-size: 20px" name="subwayLine">
                     <option value="1호선">1호선</option>
                     <option value="2호선">2호선</option>
@@ -27,28 +26,30 @@
                     <option value="신분당선">신분당선</option>
                     <option value="우이신설선">우이신설선</option>
                 </select>
-            </div>
-            <div style="text-align: left; padding: 10px 22px">
                 <select id="updnLine" style="font-size: 20px" name="updnLine">
                     <option value="1">상행</option>
                     <option value="2">하행</option>
                 </select>
-            </div>
         </div>
     </form>
-    <div class="subway-line1 lineNum_3"></div>
+    <div class="resultSubway">
+        <div id="leftcon" class=""></div>
+        <div id="midcon" class="">
+            <div id=subwayId class="line-info">호선 정보</div>
+            <div id="stationNm" class="station-info">현재 역</div>
+        </div>
+    
 
-    <div class="subway-line-con lineNum_3">
-        <div class="line-info">호선 정보</div>
-        <div class="station-info">현재 역</div>
-        <div class="subway-num">열차 번호</div>
-    </div>
+        <div id="trainLineNm" class="">행선지</div>
 
-    <div class="subway-line2 lineNum_3">행선지</div>
+    <br>
     <div class="subway-time-info">
-        <div>조회 시간 :</div>
-        <div>지연 시간 :</div>
+        <div>열차 번호: <span id="btrainNo"></span></div>
+        <div>위치 :<span id="position"></span></div>
+        <div>도착예정: <span id="arvlMsg2"></span></div>
+        <div>지연정보 :<span id="delayinfo"></span></div>
     </div>
-    <br />
+</div>
+    <br>
 </main>
 <script src="Subway.js"></script>

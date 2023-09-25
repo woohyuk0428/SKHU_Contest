@@ -520,3 +520,6 @@ input[type="radio"] {
 #image-display {
     position:absolute;
 }
+.resultSubway{
+    display: none;
+}
