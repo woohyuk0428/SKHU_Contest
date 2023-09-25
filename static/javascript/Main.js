@@ -28,6 +28,9 @@ const section1 = document.querySelector(".mapping-section");
 const section2 = document.querySelector(".halfway-section");
 const section3 = document.querySelector(".subway-section");
 
+const imageDisplay = document.getElementById("map");
+const subwayMap = document.querySelector("#image-display");
+
 function toggleSection(sectionShow, buttonHighlight) {
     [section1, section2, section3].forEach((section) => {
         section.classList.add("hidden");
@@ -44,29 +47,25 @@ function toggleSection(sectionShow, buttonHighlight) {
 
 gotoMappingBtn.addEventListener('click', () => {
     showMap();
-    const imageDisplay = document.getElementById("map");
 
   toggleSection(section1, gotoMappingBtn);
   imageDisplay.classList.remove("hiddenMap");
-
+  subwayMap.classList.add("hiddenMap");
 })
 
 gotoHalfWayBtn.addEventListener('click', () => {
     showMap();
-    const imageDisplay = document.getElementById("map");
 
   toggleSection(section2, gotoHalfWayBtn);
   imageDisplay.classList.remove("hiddenMap");
-
+  subwayMap.classList.add("hiddenMap");
 })
 
 gotoSubwayBtn.addEventListener('click', () => {
-    const imageDisplay = document.getElementById("map");
 
   toggleSection(section3, gotoSubwayBtn);
-  console.log("hello");
   imageDisplay.classList.add("hiddenMap");
-  console.log("hello11");
+  subwayMap.classList.remove("hiddenMap");
 });
 //--------------------------------------
 const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
