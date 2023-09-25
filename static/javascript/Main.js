@@ -3,7 +3,6 @@ function showMap() {
         center: { lat: 37.5665, lng: 126.978 }, // 초기 위치 설정
         zoom: 14, // 확대/축소 레벨
     });
-
 }
 
 // 초기설정 화면(구글 지도) 적용
@@ -45,27 +44,26 @@ function toggleSection(sectionShow, buttonHighlight) {
     buttonHighlight.classList.add("on");
 }
 
-gotoMappingBtn.addEventListener('click', () => {
+gotoMappingBtn.addEventListener("click", () => {
     showMap();
 
-  toggleSection(section1, gotoMappingBtn);
-  imageDisplay.classList.remove("hiddenMap");
-  subwayMap.classList.add("hiddenMap");
-})
+    toggleSection(section1, gotoMappingBtn);
+    imageDisplay.classList.remove("hiddenMap");
+    subwayMap.classList.add("hiddenMap");
+});
 
-gotoHalfWayBtn.addEventListener('click', () => {
+gotoHalfWayBtn.addEventListener("click", () => {
     showMap();
 
-  toggleSection(section2, gotoHalfWayBtn);
-  imageDisplay.classList.remove("hiddenMap");
-  subwayMap.classList.add("hiddenMap");
-})
+    toggleSection(section2, gotoHalfWayBtn);
+    imageDisplay.classList.remove("hiddenMap");
+    subwayMap.classList.add("hiddenMap");
+});
 
-gotoSubwayBtn.addEventListener('click', () => {
-
-  toggleSection(section3, gotoSubwayBtn);
-  imageDisplay.classList.add("hiddenMap");
-  subwayMap.classList.remove("hiddenMap");
+gotoSubwayBtn.addEventListener("click", () => {
+    toggleSection(section3, gotoSubwayBtn);
+    imageDisplay.classList.add("hiddenMap");
+    subwayMap.classList.remove("hiddenMap");
 });
 //--------------------------------------
 const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
@@ -75,7 +73,6 @@ radioLabels.forEach((radio) => {
     radio.addEventListener("click", handleRadioClick);
 });
 
-
 // 버튼 클래스 중 "selected"를 제거하는 함수 (선택된 버튼 초기화)
 function removeSelectedClassFromLabels() {
     document.querySelectorAll(".radio-label").forEach((label) => {
@@ -84,6 +81,3 @@ function removeSelectedClassFromLabels() {
 }
 
 // 도움말 버튼
-
-
-

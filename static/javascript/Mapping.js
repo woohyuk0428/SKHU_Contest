@@ -6,7 +6,7 @@
 const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
 let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
 let responseData_place; // 근처 장소들에 대한 json데이터를 저장
-let Mydata;
+let Mydata = { lat: 37.4877347563341, lng: 126.82516487456813 };
 
 // enter키 누를 때 버튼 클릭 처리
 searchInput = document.getElementById("textInput");
@@ -29,6 +29,7 @@ if ("geolocation" in navigator) {
             Mydata = { lat: latitude, lng: longitude };
 
             sendLocation(latitude, longitude).then((data) => {
+                console.log("실행");
                 CreateMap(Mydata);
             });
         },
@@ -260,7 +261,7 @@ function MappingSearch(marker_iconList, Mydata) {
     let sendData = "";
 
     // 서버로 AJAX 요청을 보내기 위한 작업
-    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: 300 });
+    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: 1000 });
     console.log(sendData);
     fetch(M_url, {
         method: "POST",
@@ -430,7 +431,7 @@ async function M_createPlaceMarkers(map, responseData, iconList) {
                 } else {
                     new Promise(async function (resolve, reject) {
                         try {
-                            const photoUrl = await fetchPlacePhoto(placeinfo.name);
+                            const photoUrl = await M_fetchPlacePhoto(placeinfo.name);
 
                             P_infoWindow.setContent(contentsName + photoUrl + contentsMaintext);
                             P_infoWindow.open(map, P_marker);
@@ -497,9 +498,8 @@ function createEndMarkers(responseData, endpoint, map, marker_iconList, midconte
 }
 
 // 대표 사진을 가져오는 함수
-async function fetchPlacePhoto(placeId) {
+async function M_fetchPlacePhoto(placeId) {
     const parser = new DOMParser();
-
     const place_image_html = await fetch(`http://localhost:8080/Mapping/PlacePhoto?placeId=${placeId}`);
     const image_html = await place_image_html.json();
 

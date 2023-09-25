@@ -134,6 +134,7 @@ async function PlaceSearch(jsonData, radius, midpoint) {
 }
 
 router.get("/PlacePhoto", async (req, res) => {
+    console.log("실행");
     const placeId = req.query.placeId;
 
     const url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(placeId)}`;

@@ -103,7 +103,7 @@ function removeAddress() {
 
 // 주소 자동 완성 기능 활성화
 function activateAutoAddress() {
-    const addressInputs = document.querySelectorAll('.post_input_data');
+    const addressInputs = document.querySelectorAll(".post_input_data");
     new google.maps.places.Autocomplete(addressInputs[addressInputs.length - 1]);
 }
 
@@ -195,9 +195,9 @@ function HalfwaySearch(marker_iconList, midData) {
 
     // 서버로 AJAX 요청을 보내기 위한 작업
     if (midData == undefined) {
-        sendData = JSON.stringify({ addresses: inputValues, range: 300 });
+        sendData = JSON.stringify({ addresses: inputValues, range: 1000 });
     } else {
-        sendData = JSON.stringify({ addresses: inputValues, range: 300, middata: midData });
+        sendData = JSON.stringify({ addresses: inputValues, range: 1000, middata: midData });
     }
     fetch(url, {
         method: "POST",
@@ -371,7 +371,7 @@ async function createPlaceMarkers(map, responseData, iconList) {
                 } else {
                     new Promise(async function (resolve, reject) {
                         try {
-                            const photoUrl = await fetchPlacePhoto(placeinfo.name);
+                            const photoUrl = await H_fetchPlacePhoto(placeinfo.name);
 
                             P_infoWindow.setContent(contentsName + photoUrl + contentsMaintext);
                             P_infoWindow.open(map, P_marker);
@@ -458,14 +458,14 @@ function createMidMarkers(responseData, midpoint, map, marker_iconList, midconte
 }
 
 // 대표 사진을 가져오는 함수
-async function fetchPlacePhoto(placeId) {
+async function H_fetchPlacePhoto(placeId) {
     const parser = new DOMParser();
 
     const place_image_html = await fetch(`http://localhost:8080/Suggestion/PlacePhoto?placeId=${placeId}`);
     const image_html = await place_image_html.json();
 
     let doc = parser.parseFromString(image_html.Html, "text/html");
-    let imageElement = doc.getElementsByClassName("yWs4tf")[0];
+    let imageElement = doc.getElementsByClassName("DS1iW")[0];
 
     if (imageElement) {
         let imageUrl = imageElement.getAttribute("src");
