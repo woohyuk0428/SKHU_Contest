@@ -1,6 +1,7 @@
 const ex_help_btn = document.getElementById("helpBtn");
 const ex_help_panel = document.querySelector(".bg_panel");
 const ex_help_Xbtn = document.querySelector(".ex_X-btn");
+const ex_close_panel = document.querySelector(".close_panel");
 
 ex_help_btn.addEventListener("click", () => {
     const map_zidx = document.getElementById("map");
@@ -12,6 +13,15 @@ ex_help_btn.addEventListener("click", () => {
 });
 
 ex_help_Xbtn.addEventListener("click", () => {
+    const map_zidx = document.getElementById("map");
+    const menu_zidx = document.querySelector(".menu");
+    ex_help_panel.classList.add("set_opacity");
+    map_zidx.style.zIndex = 0;
+    menu_zidx.style.zIndex = 1;
+    chapter = 0;
+});
+
+ex_close_panel.addEventListener("click", () => {
     const map_zidx = document.getElementById("map");
     const menu_zidx = document.querySelector(".menu");
     ex_help_panel.classList.add("set_opacity");
