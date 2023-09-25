@@ -28,7 +28,7 @@ const ex_title = document.getElementById("ex_title");
 const ex_maintext = document.getElementById("ex_maintext");
 
 next_btn.addEventListener("click", () => {
-    Chapter_text(++chapter) ? (chapter = -1) : null;
+    Chapter_text(++chapter) ? Chapter_text((chapter = 0)) : null;
 });
 
 back_btn.addEventListener("click", () => {
@@ -38,29 +38,27 @@ back_btn.addEventListener("click", () => {
 function Chapter_text(chapter) {
     switch (chapter) {
         case 0:
-            document.querySelector(".con-search").classList.remove("help_select");
-            document.querySelector(".search-btn").classList.remove("help_select");
+            remove_select();
             ex_title.innerHTML = "길찾기 서비스";
             ex_maintext.innerHTML = "반갑습니다.";
             break;
 
         case 1:
-            document.querySelector(".search-btn").classList.remove("help_select");
-            document.querySelector(".con-search").classList.add("help_select");
+            remove_select();
+            add_select("con-search");
             ex_title.innerHTML = "1단계";
             ex_maintext.innerHTML = "설명";
             break;
 
         case 2:
-            document.querySelector(".con-search").classList.remove("help_select");
-            document.querySelector(".search-btn").classList.add("help_select");
+            remove_select();
+            add_select("search-btn");
             ex_title.innerHTML = "2단계";
             ex_maintext.innerHTML = "설명";
             break;
 
         case 3:
-            document.querySelector(".con-search").classList.remove("help_select");
-            document.querySelector(".search-btn").classList.remove("help_select");
+            remove_select();
             ex_title.innerHTML = "3단계";
             ex_maintext.innerHTML = "설명";
             break;
@@ -70,4 +68,18 @@ function Chapter_text(chapter) {
             break;
     }
     return false;
+}
+
+function remove_select() {
+    let tags = document.querySelectorAll(".help_select");
+    tags.forEach((tag) => {
+        tag.classList.remove("help_select");
+    });
+}
+
+function add_select(class_name) {
+    let tags = document.querySelectorAll(`.${class_name}`);
+    tags.forEach((tag) => {
+        tag.classList.add("help_select");
+    });
 }
