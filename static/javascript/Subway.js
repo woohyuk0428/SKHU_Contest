@@ -96,7 +96,7 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                     subway_group[0].insertAdjacentHTML("beforeend", s_Template);
                 });
             } else if (data == 400) {
-                alert(`${a_subwayLine}의 ${a_response}역은 없습니다. 다시 검색해주세요.`);
+                alert(`${a_subwayLine}에 ${a_response}은 없습니다. 다시 검색해주세요.`);
             } else if (data == 500) {
                 alert(`${a_response}역의 운행이 종료되었습니다.`);
             }
