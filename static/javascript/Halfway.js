@@ -339,10 +339,7 @@ async function createPlaceMarkers(map, responseData, iconList) {
         for (const placeinfo of responseData.midplaces[placename]) {
             const contentsName = `<h5>${placeinfo.name}</h5><br>`;
             let contentsMaintext = `
-                <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
-                <p>점포 id: ${placeinfo.id}</p>
-                <p>주소: ${placeinfo.vicinity}</p>
-                <p>태그: ${placeinfo.types}</p>
+                <hr><p>주소: ${placeinfo.vicinity}</p>
                 <p>평점: ${placeinfo.rating}</p>
                 <button class="btn btn-outline-primary btn-sm midRediscover" value='{
                     "name":"${placeinfo.vicinity}", 
@@ -476,3 +473,11 @@ async function H_fetchPlacePhoto(placeId) {
         alert("검색 결과를 찾을 수 없습니다.");
     }
 }
+
+// 복원 가능하게 남겨 놓았습니다.
+// let contentsMaintext = `
+//                 <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
+//                 <p>점포 id: ${placeinfo.id}</p>
+//                 <p>주소: ${placeinfo.vicinity}</p>
+//                 <p>태그: ${placeinfo.types}</p>
+//                 <p>평점: ${placeinfo.rating}</p>`;

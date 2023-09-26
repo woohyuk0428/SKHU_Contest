@@ -400,10 +400,7 @@ async function M_createPlaceMarkers(map, responseData, iconList) {
         for (const placeinfo of responseData.places[placename]) {
             const contentsName = `<h5>${placeinfo.name}</h5><br>`;
             let contentsMaintext = `
-                <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
-                <p>점포 id: ${placeinfo.id}</p>
-                <p>주소: ${placeinfo.vicinity}</p>
-                <p>태그: ${placeinfo.types}</p>
+                <hr><p>주소: ${placeinfo.vicinity}</p>
                 <p>평점: ${placeinfo.rating}</p>`;
 
             contentsMaintext += placename === "subway_station" ? '<h6><a href="/Post">지하철 정보 검색 페이지로 이동하시겠습니까?</a></h6>' : "";
@@ -515,3 +512,11 @@ async function M_fetchPlacePhoto(placeId) {
 
 // // 결과를 화면에 출력
 // document.getElementById("result").innerHTML = subwayTime;
+
+// 복원 가능하게 남겨 놓았습니다.
+// let contentsMaintext = `
+//                 <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
+//                 <p>점포 id: ${placeinfo.id}</p>
+//                 <p>주소: ${placeinfo.vicinity}</p>
+//                 <p>태그: ${placeinfo.types}</p>
+//                 <p>평점: ${placeinfo.rating}</p>`;
