@@ -4,7 +4,7 @@ const request = require("request"); // request 모듈
 const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
-const key = fs.readFileSync("./APIKey.txt", "utf-8");
+const key = "527078486174656e3131335074454453"
 //요일 구분해주는 function
 function getDayOfWeek() {
     const now = new Date();
