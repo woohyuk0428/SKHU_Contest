@@ -59,7 +59,10 @@ router.post("/", (req, res_router) => {
     const convert = jsonFile.readFileSync("./static/json/line.json");
 
     console.log(`서울시 공공데이터 : ${realarrive_url}`);
+    const subwayJson = { Status: 200, body: [] };
+
     if (line[s_response] === s_line) {
+
         request(
             {
                 url: realarrive_url,
@@ -81,7 +84,6 @@ router.post("/", (req, res_router) => {
                                 return a_str.localeCompare(b_str);
                             });
                         }
-                        const subwayJson = { Status: 200, body: [] };
                         //열차 불러오는 작업
                         let j = 0;
                         let i_len = new Array();
@@ -370,7 +372,10 @@ router.post("/", (req, res_router) => {
                                                         ); // request 끝
                                                     } else if (btrainNo == null) {
                                                         subwayJson.push(processData);
-                                                        //res_router.json(subwayData);
+                                                        if (j === i_len.length) {
+                                                            console.log(subwayJson);
+                                                            res_router.json(subwayJson);
+                                                        }
 
                                                         return;
                                                     }
@@ -385,6 +390,8 @@ router.post("/", (req, res_router) => {
                         });
                     } else {
                         console.log("운행종료");
+                        req_router.json(subwayJson.Status = 500);
+
                     }
                     //결과 반환
                 } catch (error) {
@@ -394,6 +401,7 @@ router.post("/", (req, res_router) => {
         );
     } else {
         console.log(`${s_line}의 ${s_response}역은 없습니다. 다시 검색해주세요.`);
+        res_router.json(subwayJson.Status = 400);
         // res_router.render("/Subway", {
         //     result_Data: `${s_line}의 ${s_response}역은 없습니다. 다시 검색해주세요.`,
         // });
