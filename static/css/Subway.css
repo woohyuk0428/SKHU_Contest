@@ -1,3 +1,18 @@
-.form-text{
-     text-align: center;
+/* .form-text {
+    text-align: center;
+} */
+
+.subway_img_group {
+    height: 150px;
+}
+
+.subway_text_group {
+    height: 40vh;
+    position: relative;
+    overflow: auto;
+}
+
+.subway-time-info > p {
+    text-align: left;
+    font-size: 14px;
 }

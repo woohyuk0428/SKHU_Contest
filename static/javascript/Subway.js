@@ -4,10 +4,10 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
     var a_subwayLine = document.getElementById("SubwayLine").value;
     var a_updnLine = document.getElementById("updnLine").value;
     var a_response = document.getElementById("station").value;
-
+    console.log(a_response);
     let url = "http://localhost:8080/Subway";
     var data = { response: a_response, subwayLine: a_subwayLine, updnLine: a_updnLine }; // 보낼 데이터를 객체로 정의
-
+    console.log(data);
     fetch(url, {
         method: "POST",
         headers: {
@@ -25,217 +25,84 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
             // 데이터 처리
             console.log(data);
             console.log(a_subwayLine);
-            console.log(data.Status)
+            console.log(data.Status);
             if (data.Status == 200) {
+                let resurt_tag;
                 if (a_subwayLine == "1호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_1"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_1");
-                    rightcon.classList.add("subway-line2", "lineNum_1");
-                    resultSubway.classList.remove("resultSubway");
+                    resurt_tag = "1";
+                } else if (a_subwayLine == "2호선") {
+                    resurt_tag = "2";
+                } else if (a_subwayLine == "3호선") {
+                    resurt_tag = "3";
+                } else if (a_subwayLine == "4호선") {
+                    resurt_tag = "4";
+                } else if (a_subwayLine == "5호선") {
+                    resurt_tag = "5";
+                } else if (a_subwayLine == "6호선") {
+                    resurt_tag = "6";
+                } else if (a_subwayLine == "7호선") {
+                    resurt_tag = "7";
+                } else if (a_subwayLine == "8호선") {
+                    resurt_tag = "8";
+                } else if (a_subwayLine == "9호선") {
+                    resurt_tag = "9";
+                } else if (a_subwayLine == "경의중앙선") {
+                    resurt_tag = "gj";
+                } else if (a_subwayLine == "경춘선") {
+                    resurt_tag = "gc";
+                } else if (a_subwayLine == "공항철도") {
+                    resurt_tag = "ar";
+                } else if (a_subwayLine == "서해선") {
+                    resurt_tag = "sh";
+                } else if (a_subwayLine == "수인분당선") {
+                    resurt_tag = "sb";
+                } else if (a_subwayLine == "신분당선") {
+                    resurt_tag = "ssb";
+                } else if (a_subwayLine == "우이신설선") {
+                    resurt_tag = "ui";
                 }
-                else if (a_subwayLine == "2호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_2"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_2");
-                    rightcon.classList.add("subway-line2", "lineNum_2");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "3호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_3"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_3");
-                    rightcon.classList.add("subway-line2", "lineNum_3");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "4호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_4"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_4");
-                    rightcon.classList.add("subway-line2", "lineNum_4");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "5호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_5"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_5");
-                    rightcon.classList.add("subway-line2", "lineNum_5");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "6호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_6"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_6");
-                    rightcon.classList.add("subway-line2", "lineNum_6");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "7호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_7"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_7");
-                    rightcon.classList.add("subway-line2", "lineNum_7");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "8호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_8"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_8");
-                    rightcon.classList.add("subway-line2", "lineNum_8");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "9호선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_9"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_9");
-                    rightcon.classList.add("subway-line2", "lineNum_9");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "경의중앙선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_gj"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_gj");
-                    rightcon.classList.add("subway-line2", "lineNum_gj");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "경춘선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_gc"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_gc");
-                    rightcon.classList.add("subway-line2", "lineNum_gc");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "공항철도") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_ar"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_ar");
-                    rightcon.classList.add("subway-line2", "lineNum_ar");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "서해선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_sh"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_sh");
-                    rightcon.classList.add("subway-line2", "lineNum_sh");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "수인분당선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_sb"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_sb");
-                    rightcon.classList.add("subway-line2", "lineNum_sb");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "신분당선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_ssb"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_ssb");
-                    rightcon.classList.add("subway-line2", "lineNum_ssb");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
-                else if (a_subwayLine == "우이신설선") {
-                    let leftcon = document.getElementById('leftcon');
-                    let midcon = document.getElementById('midcon');
-                    let rightcon = document.getElementById('ringthcon');
-                    let resultSubway = document.getElementById("resultSubway");
-                    leftcon.classList.add("subway-line1", "lineNum_ui"); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                    midcon.classList.add("subway-line-con", "lineNum_ui");
-                    rightcon.classList.add("subway-line2", "lineNum_ui");
-                    resultSubway.classList.remove("resultSubway");
-
-                }
+                let leftcon = document.getElementById("leftcon");
+                let midcon = document.getElementById("midcon");
+                let rightcon = document.getElementById("ringthcon");
+                let resultSubway = document.getElementById("resultSubway");
+                leftcon.classList.add("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
+                midcon.classList.add("subway-line-con", `lineNum_${resurt_tag}`);
+                rightcon.classList.add("subway-line2", `lineNum_${resurt_tag}`);
+                resultSubway.classList.remove("resultSubway");
+                //-----------------------------------
                 const result = data.body;
                 let subwayId = document.getElementById("subwayId");
                 let stationNm = document.getElementById("stationNm");
-                let btrainNo = document.getElementById("btrainNo");
-                let bstatnNm = document.getElementById("bstatnNm");
-                let position = document.getElementById("position");
-                let arvlMsg2 = document.getElementById("arvlMsg2");
-                let delayinfo = document.getElementById("delayinfo");
                 stationNm.innerHTML = a_response;
                 subwayId.innerHTML = a_subwayLine;
 
-                result.forEach(subway => {
+                const subway_group = document.getElementsByClassName("subway_text_group");
+                let s_Template = "";
+                subway_group[0].innerHTML = "";
+                result.forEach((subway) => {
                     let s_bstatnNm = subway.bstatnNm;
                     let s_delayinfo = subway.delayInfo;
                     let s_position = subway.Position;
                     let s_arvlMsg2 = subway.arvlMsg2;
                     let s_btrainNo = subway.btrainNo;
-                    btrainNo.innerHTML = s_btrainNo;
-                    delayinfo.innerHTML = s_delayinfo;
-                    position.innerHTML = s_position;
-                    arvlMsg2.innerHTML = s_arvlMsg2;
-                    bstatnNm.innerHTML = s_bstatnNm
+
+                    s_Template = `
+                    <div class="subway-time-info">
+                        <p><span id="btrainNo">${s_btrainNo}</span> <span id="bstatnNm">${s_bstatnNm}</span>행: <span id="arvlMsg2">${s_arvlMsg2}</span></p>
+                        <p>위치: <span id="position">${s_position}</span></p>
+                        <p>지연정보 :<span id="delayinfo">${s_delayinfo}</span></p>
+                    </div>`;
+
+                    subway_group[0].insertAdjacentHTML("beforeend", s_Template);
                 });
-            }
-            else if (data.Status == 400) {
-                alert(`${a_subwayLine}의 ${a_response}역은 없습니다. 다시 검색해주세요.`)
-            }
-            else if (data.Status == 500) {
+            } else if (data.Status == 400) {
+                alert(`${a_subwayLine}의 ${a_response}역은 없습니다. 다시 검색해주세요.`);
+            } else if (data.Status == 500) {
                 alert(`${a_response}역의 운행이 종료되었습니다.`);
             }
-           
 
-
-            {/* <div class="subway-line-con lineNum_1">
+            {
+                /* <div class="subway-line-con lineNum_1">
             <div id=subwayId class="line-info">호선 정보</div>
             <div id="stationNm" class="station-info">현재 역</div>
             <div id="btrainNo class="subway-num">열차 번호</div>
@@ -246,7 +113,8 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
         <div>위치 :<span id="position"></span></div>
         <div>도착예정: <span id="arvlMsg2"></span></div>
         <div>지연정보 :<span id="delayinfo"></span></div>
-    </div> */}
+    </div> */
+            }
         })
         .catch((error) => {
             // 오류 처리
