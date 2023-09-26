@@ -6,7 +6,7 @@
                 <input class="search-input" autocomplete="off" id="station" type="text" class="form-control" placeholder="역 검색" />
                 <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기" type="reset" />
             </div>
-            <button class="search-btn" type="submit">검색</button>
+            <button class="search-btn" type="submi  t">검색</button>
         </div>
         <div class="subway-con">
                 <select id="SubwayLine" style="font-size: 20px" name="subwayLine">
@@ -32,7 +32,7 @@
                 </select>
         </div>
     </form>
-    <div class="resultSubway">
+    <div id="resultSubway" class="resultSubway">
         <div id="leftcon" class=""></div>
         <div id="midcon" class="">
             <div id=subwayId class="line-info">호선 정보</div>
@@ -40,13 +40,13 @@
         </div>
     
 
-        <div id="trainLineNm" class="">행선지</div>
+        <div id="ringthcon" class=""></div>
 
     <br>
     <div class="subway-time-info">
-        <div>열차 번호: <span id="btrainNo"></span></div>
-        <div>위치 :<span id="position"></span></div>
-        <div>도착예정: <span id="arvlMsg2"></span></div>
+        
+        <div><span id="btrainNo"></span> <span id="bstatnNm"></span>행: <span id="arvlMsg2"></span></div>
+        <div >위치: <span id="position"></span> </div>
         <div>지연정보 :<span id="delayinfo"></span></div>
     </div>
 </div>

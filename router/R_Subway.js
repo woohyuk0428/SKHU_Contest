@@ -86,9 +86,8 @@ router.post("/", (req, res_router) => {
                         //열차 불러오는 작업
                         let j = 0;
                         let i_len=new Array();
-                        for(i=0; i<s_data.length;i++){
+                        s_data.forEach((data1,index)=>{
                             
-                            const data1 = s_data[i];
                             const subwayLine = data1.subwayId;
                             const arvlMsg3 = data1.arvlMsg3;
                             const recptnDt = data1.recptnDt;
@@ -132,14 +131,16 @@ router.post("/", (req, res_router) => {
                                     list += `${convert[data2]} `;
                                 });
                                 processData.subwayList = list;
-                                const SearchSTNTimeTableByFRCodeService_url = `https://openapi.kric.go.kr/openapi/trainUseInfo/subwayTimetable?serviceKey=${fs.readFileSync(
+                                
+                                let SearchSTNTimeTableByFRCodeService_url = `https://openapi.kric.go.kr/openapi/trainUseInfo/subwayTimetable?serviceKey=${fs.readFileSync(
                                     "./kric_api.txt",
                                     "utf-8"
                                 )}&format=json&railOprIsttCd=${railOprIsttCd}&dayCd=${getDayOfWeek()}&lnCd=${InCd}&stinCd=${stinCd}`;
+                            
                                 console.log(SearchSTNTimeTableByFRCodeService_url);
                                 let url_array = new Array();
                                 url_array.push(SearchSTNTimeTableByFRCodeService_url);
-
+                                if(railOprIsttCd!=undefined&&InCd!=undefined&&stinCd!=undefined){
                                 request(
                                     {
                                         url: realTimePosition_url,
@@ -211,8 +212,8 @@ router.post("/", (req, res_router) => {
                                                 }
                                             });
                                             try {
-                                                if (btrainNo != null) {
-                                                    i_len.push(i);
+                                                if (btrainNo != null ||stinCd != undefined||InCd!=undefined|| railOprIsttCd!=undefined) {
+                                                    i_len.push(index);
                                                     request(
                                                         {
                                                             url: SearchSTNTimeTableByFRCodeService_url,
@@ -226,6 +227,7 @@ router.post("/", (req, res_router) => {
                                                             try {
                                                                 const obj = JSON.parse(body1);
                                                                 const result = obj.body;
+                                                                if (s_data.btrainNo != undefined) {
                                                                 result.sort((a, b) => {
                                                                     if (
                                                                         s_line == "1호선" ||
@@ -253,7 +255,8 @@ router.post("/", (req, res_router) => {
                                                                         b_str = String(b_parse);
                                                                         return a_str.localeCompare(b_str);
                                                                     }
-                                                                });
+                                                                    
+                                                                });}
                                                                 //delay 지연 정보 구현
                                                                 result.forEach((data2,index1) => {
                                                                     var train_no = data2.trnNo;
@@ -364,7 +367,7 @@ router.post("/", (req, res_router) => {
                                                                 console.log(i_len.length);
                                                                 if(j===i_len.length){
                                                                     console.log(subwayJson);
-                                                                    res_router.json(subwayJson.body);
+                                                                    res_router.json(subwayJson);
                                                                 }
                                                                 
                                                                
@@ -385,13 +388,13 @@ router.post("/", (req, res_router) => {
 
                                         }
                                     }
-                                );
+                                )};
 
 
                             }
                             
                             
-                        }
+                        });
                         
 
                     } else {
