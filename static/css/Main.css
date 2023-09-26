@@ -521,3 +521,6 @@ input[type="radio"] {
     position:absolute;
 }
 
+.resultSubway{
+    display:none;
+}
