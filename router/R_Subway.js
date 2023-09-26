@@ -390,7 +390,7 @@ router.post("/", (req, res_router) => {
                         });
                     } else {
                         console.log("운행종료");
-                        req_router.json(subwayJson.Status = 500);
+                        res_router.json(subwayJson.Status = 500);
 
                     }
                     //결과 반환
