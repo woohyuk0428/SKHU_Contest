@@ -71,11 +71,11 @@ function Chapter_text(chapter) {
             ex_maintext.innerHTML = "검색 버튼을 누릅니다!";
             break;
 
-        case 3:
-            remove_select();
-            ex_title.innerHTML = "3단계";
-            ex_maintext.innerHTML = "설명";
-            break;
+        // case 3:
+        //     remove_select();
+        //     ex_title.innerHTML = "3단계";
+        //     ex_maintext.innerHTML = "설명";
+        //     break;
 
         default:
             return true;
