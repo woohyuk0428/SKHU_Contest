@@ -21,22 +21,16 @@ searchInput.addEventListener("keypress", function (e) {
 });
 
 //! ------------------------------- 지도 초기화 ---------------------------------------
-if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
 
-            Mydata = { lat: latitude, lng: longitude };
+navigator.geolocation.getCurrentPosition(
+    (position) => {
+        Mydata = { lat: position.coords.latitude, lng: position.coords.longitude };
 
-            sendLocation(latitude, longitude).then((data) => {
-                console.log(Mydata);
-                M_CreateMap(Mydata);
-            });
-        },
-        (error) => {}
-    );
-}
+        M_CreateMap(Mydata);
+        console.log(Mydata);
+    },
+    (error) => {}
+);
 
 document.addEventListener("DOMContentLoaded", function () {
     //! ------------------------------- 주소 입력 필드 관련 이벤트 ---------------------------------------
@@ -141,22 +135,22 @@ function getAddress(latlng, callback) {
 }
 
 //본인 위치의 위도 경도 구하는 함수
-function sendLocation(latitude, longitude) {
-    return fetch("/mapping", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ latitude, longitude }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            return data;
-        })
-        .catch((error) => {
-            console.error("Error fetching data:", error);
-        });
-}
+// function sendLocation(latitude, longitude) {
+//     return fetch("/mapping", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ latitude, longitude }),
+//     })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             return data;
+//         })
+//         .catch((error) => {
+//             console.error("Error fetching data:", error);
+//         });
+// }
 
 //! ------------------------------- 주소 입력 필드 관련 함수 ---------------------------------------
 // 주소 자동 완성 기능 활성화
@@ -409,7 +403,6 @@ async function M_createPlaceMarkers(map, responseData, iconList) {
                 <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
                 <p>점포 id: ${placeinfo.id}</p>
                 <p>주소: ${placeinfo.vicinity}</p>
-                <p>영업 여부: ${placeinfo.opening}</p>
                 <p>태그: ${placeinfo.types}</p>
                 <p>평점: ${placeinfo.rating}</p>`;
 
