@@ -49,22 +49,26 @@ function Chapter_text(chapter) {
     switch (chapter) {
         case 0:
             remove_select();
-            ex_title.innerHTML = "길찾기 서비스";
-            ex_maintext.innerHTML = "반갑습니다.";
+            ex_title.innerHTML = "SKHU ROAD";
+            ex_maintext.innerHTML = "길찾기: 검색한 장소로 이동할 수 있는 수단을 보여줍니다."
+            +"<br>"+
+            "중간지점: 검색한 두 장소의 중간지점을 찾아줍니다."
+            +"<br>"+
+            "지하철: 지하철 역의 지연시간을 알려줍니다.";
             break;
 
         case 1:
             remove_select();
             add_select("con-search");
             ex_title.innerHTML = "1단계";
-            ex_maintext.innerHTML = "설명";
+            ex_maintext.innerHTML = "장소(지하철 역)을 검색합니다.";
             break;
 
         case 2:
             remove_select();
             add_select("search-btn");
             ex_title.innerHTML = "2단계";
-            ex_maintext.innerHTML = "설명";
+            ex_maintext.innerHTML = "검색 버튼을 누릅니다!";
             break;
 
         case 3:
