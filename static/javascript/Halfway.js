@@ -1,4 +1,3 @@
-console.log("halfway");
 const inputContainer = document.querySelector(".way-list"); // input이 들어갈 컨테이너 위치
 // const addressFunctions = new InputAddressFunctions(inputContainer);
 

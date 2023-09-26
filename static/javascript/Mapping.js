@@ -7,6 +7,7 @@ const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
 let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
 let responseData_place; // 근처 장소들에 대한 json데이터를 저장
 let Mydata = { lat: 37.4877347563341, lng: 126.82516487456813 };
+console.log(Mydata);
 
 // enter키 누를 때 버튼 클릭 처리
 searchInput = document.getElementById("textInput");
@@ -29,8 +30,8 @@ if ("geolocation" in navigator) {
             Mydata = { lat: latitude, lng: longitude };
 
             sendLocation(latitude, longitude).then((data) => {
-                console.log("실행");
-                CreateMap(Mydata);
+                console.log(Mydata);
+                M_CreateMap(Mydata);
             });
         },
         (error) => {}
@@ -38,7 +39,6 @@ if ("geolocation" in navigator) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("실행");
     //! ------------------------------- 주소 입력 필드 관련 이벤트 ---------------------------------------
     const addressInputs = document.querySelectorAll('input[name="address"]'); // 주소 입력폼
 
@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
     const Btn = document.getElementById("btn"); // 중간지점 찾기 버튼
-    console.log(Btn);
     // 중간지점 찾기 버튼 클릭 시 실행되는 핸들러
     Btn.addEventListener("click", () => {
         MappingSearch(marker_iconList, Mydata);
@@ -100,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //! ------------------------------- 지도 초기화 ---------------------------------------
-function CreateMap(address) {
+function M_CreateMap(address) {
     map = new google.maps.Map(document.getElementById("map"), {
         center: address, // 초기 위치 설정
         zoom: 14, // 확대/축소 레벨
