@@ -129,8 +129,8 @@ router.get("/PlacePhoto", async (req, res) => {
     const url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(placeId)}`;
 
     try {
-        const response = await fetch(url);
-        const html = await response.text();
+        const response = await axios.get(url);
+        const html = await response.data;
         res.json({ Html: html });
     } catch (error) {
         console.error("html을 가져올 수 없습니다. :", error);
