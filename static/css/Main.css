@@ -542,3 +542,6 @@ input[type="radio"] {
     display: none;
 }
 
+.resultSubway{
+    display:none;
+}
