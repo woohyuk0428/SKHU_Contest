@@ -187,7 +187,8 @@ input[type="radio"] {
     background-color: #8591ff;
 }
 
-.con-main, .con-main-halfway {
+.con-main,
+.con-main-halfway {
     float: left;
 }
 .search-bar {
@@ -286,7 +287,7 @@ input[type="radio"] {
 
 /* __Halfway */
 .add-address {
-    background-color: #00C92C;
+    background-color: #00c92c;
     color: white;
     font-size: 30px;
     border: none;
@@ -305,7 +306,7 @@ input[type="radio"] {
     margin-top: 10px;
 
     border: none;
-    background-color: #FF7575;
+    background-color: #ff7575;
     color: #ffffff;
 
     padding: 5px 10px;
@@ -328,8 +329,8 @@ input[type="radio"] {
     float: left;
 }
 
-
-.line-info, .subway-num {
+.line-info,
+.subway-num {
     color: black;
     font-size: 18px;
     font-weight: bold;
@@ -341,7 +342,8 @@ input[type="radio"] {
     font-weight: bold;
 }
 
-.subway-line1, .subway-line2 {
+.subway-line1,
+.subway-line2 {
     float: left;
     width: 75px;
     height: 35px;
@@ -361,7 +363,7 @@ input[type="radio"] {
     margin-left: -6px;
 }
 
-.subway-time-info{
+.subway-time-info {
     padding: 20px;
     margin: 10px;
 }
@@ -376,116 +378,132 @@ input[type="radio"] {
 /* 호선 별 색깔 style */
 /* 1호선 */
 .subway-line-con.lineNum_1 {
-    border: 15px solid #005BAC;
+    border: 15px solid #005bac;
 }
-.subway-line1.lineNum_1, .subway-line2.lineNum_1 {
-    background-color: #005BAC;
+.subway-line1.lineNum_1,
+.subway-line2.lineNum_1 {
+    background-color: #005bac;
 }
 
 /* 2호선 */
 .subway-line-con.lineNum_2 {
-    border: 15px solid #00A84D;
+    border: 15px solid #00a84d;
 }
-.subway-line1.lineNum_2, .subway-line2.lineNum_2{
-    background-color: #00A84D   ;
+.subway-line1.lineNum_2,
+.subway-line2.lineNum_2 {
+    background-color: #00a84d;
 }
 /* 3호선 */
 .subway-line-con.lineNum_3 {
-    border: 15px solid #EF7C1C;
+    border: 15px solid #ef7c1c;
 }
-.subway-line1.lineNum_3, .subway-line2.lineNum_3{
-    background-color: #EF7C1C;
+.subway-line1.lineNum_3,
+.subway-line2.lineNum_3 {
+    background-color: #ef7c1c;
 }
 /* 4호선 */
 .subway-line-con.lineNum_4 {
-    border: 15px solid #00B2E3;
+    border: 15px solid #00b2e3;
 }
-.subway-line1.lineNum_4, .subway-line2.lineNum_4{
-    background-color: #00B2E3;
+.subway-line1.lineNum_4,
+.subway-line2.lineNum_4 {
+    background-color: #00b2e3;
 }
 /* 5호선 */
 .subway-line-con.lineNum_5 {
-    border: 15px solid #996CAC;
+    border: 15px solid #996cac;
 }
-.subway-line1.lineNum_5, .subway-line2.lineNum_5{
-    background-color: #996CAC;
+.subway-line1.lineNum_5,
+.subway-line2.lineNum_5 {
+    background-color: #996cac;
 }
 /* 6호선 */
 .subway-line-con.lineNum_6 {
-    border: 15px solid #CD7C2F;
+    border: 15px solid #cd7c2f;
 }
-.subway-line1.lineNum_6, .subway-line2.lineNum_6{
-    background-color: #CD7C2F;
+.subway-line1.lineNum_6,
+.subway-line2.lineNum_6 {
+    background-color: #cd7c2f;
 }
 /* 7호선 */
 .subway-line-con.lineNum_7 {
-    border: 15px solid #747F00;
+    border: 15px solid #747f00;
 }
-.subway-line1.lineNum_7, .subway-line2.lineNum_7{
-    background-color: #747F00;
+.subway-line1.lineNum_7,
+.subway-line2.lineNum_7 {
+    background-color: #747f00;
 }
 /* 8호선 */
 .subway-line-con.lineNum_8 {
-    border: 15px solid #E6186C;
+    border: 15px solid #e6186c;
 }
-.subway-line1.lineNum_8, .subway-line2.lineNum_8{
-    background-color: #E6186C;
+.subway-line1.lineNum_8,
+.subway-line2.lineNum_8 {
+    background-color: #e6186c;
 }
 /* 9호선 */
 .subway-line-con.lineNum_9 {
-    border: 15px solid #BDB092;
+    border: 15px solid #bdb092;
 }
-.subway-line1.lineNum_9, .subway-line2.lineNum_9{
-    background-color: #BDB092;
+.subway-line1.lineNum_9,
+.subway-line2.lineNum_9 {
+    background-color: #bdb092;
 }
 /* 경의중앙선 */
 .subway-line-con.lineNum_gj {
-    border: 15px solid #77C4A3;
+    border: 15px solid #77c4a3;
 }
-.subway-line1.lineNum_gj, .subway-line2.lineNum_gj{
-    background-color: #77C4A3;
+.subway-line1.lineNum_gj,
+.subway-line2.lineNum_gj {
+    background-color: #77c4a3;
 }
 /* 경춘선 */
 .subway-line-con.lineNum_gc {
-    border: 15px solid #178C72;
+    border: 15px solid #178c72;
 }
-.subway-line1.lineNum_gc, .subway-line2.lineNum_gc{
-    background-color: #178C72;
+.subway-line1.lineNum_gc,
+.subway-line2.lineNum_gc {
+    background-color: #178c72;
 }
 /* 공항철도 */
 .subway-line-con.lineNum_ar {
-    border: 15px solid #0090D2;
+    border: 15px solid #0090d2;
 }
-.subway-line1.lineNum_ar, .subway-line2.lineNum_ar{
-    background-color: #0090D2;
+.subway-line1.lineNum_ar,
+.subway-line2.lineNum_ar {
+    background-color: #0090d2;
 }
 /* 서해선 */
 .subway-line-con.lineNum_sh {
-    border: 15px solid #8FC31F;
+    border: 15px solid #8fc31f;
 }
-.subway-line1.lineNum_sh, .subway-line2.lineNum_sh{
-    background-color: #8FC31F;
+.subway-line1.lineNum_sh,
+.subway-line2.lineNum_sh {
+    background-color: #8fc31f;
 }
 /* 수인분당선*/
 .subway-line-con.lineNum_sb {
-    border: 15px solid #FABE00;
+    border: 15px solid #fabe00;
 }
-.subway-line1.lineNum_sb, .subway-line2.lineNum_sb{
-    background-color: #FABE00;
+.subway-line1.lineNum_sb,
+.subway-line2.lineNum_sb {
+    background-color: #fabe00;
 }
 /* 신분당선*/
 .subway-line-con.lineNum_ssb {
-    border: 15px solid #D31145;
+    border: 15px solid #d31145;
 }
-.subway-line1.lineNum_ssb, .subway-line2.lineNum_ssb{
-    background-color: #D31145;
+.subway-line1.lineNum_ssb,
+.subway-line2.lineNum_ssb {
+    background-color: #d31145;
 }
 /* 우이신설선*/
 .subway-line-con.lineNum_ui {
-    border: 15px solid #B7C450;
+    border: 15px solid #b7c450;
 }
-.subway-line1.lineNum_ui, .subway-line2.lineNum_ui{
-    background-color: #B7C450;
+.subway-line1.lineNum_ui,
+.subway-line2.lineNum_ui {
+    background-color: #b7c450;
 }
 
 /* __Help */
@@ -526,10 +544,8 @@ input[type="radio"] {
 }
 
 #image-display {
-    position:absolute;
-    top: 0;
-    left: 0;
-
-    z-index: -1;
+    position: absolute;
 }
-
+.resultSubway {
+    display: none;
+}

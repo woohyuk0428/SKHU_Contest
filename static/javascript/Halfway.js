@@ -342,7 +342,7 @@ async function createPlaceMarkers(map, responseData, iconList) {
                 <hr><p>주소: ${placeinfo.vicinity}</p>
                 <p>평점: ${placeinfo.rating}</p>
                 <button class="btn btn-outline-primary btn-sm midRediscover" value='{
-                    "name":"${placeinfo.vicinity}", 
+                    "name":"${placeinfo.vicinity}",
                     "address": {
                         "lat": ${placeinfo.address.lat},
                         "lng": ${placeinfo.address.lng}
