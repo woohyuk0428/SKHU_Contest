@@ -226,7 +226,7 @@ router.post("/", (req, res_router) => {
                                                                 try {
                                                                     const obj = JSON.parse(body1);
                                                                     const result = obj.body;
-                                                                    if (s_data.btrainNo != undefined) {
+                                                                    if (s_data.btrainNo != undefined ) {
                                                                         result.sort((a, b) => {
                                                                             if (
                                                                                 s_line == "1호선" ||
@@ -258,6 +258,7 @@ router.post("/", (req, res_router) => {
                                                                     }
                                                                     //delay 지연 정보 구현
                                                                     result.forEach((data2, index1) => {
+                                                                        if(data2.arvTm != null){
                                                                         var train_no = data2.trnNo;
                                                                         if (
                                                                             s_line == "1호선" ||
@@ -285,7 +286,7 @@ router.post("/", (req, res_router) => {
                                                                         }
                                                                         if (btrainNo === train_no) {
                                                                             let trainTime = data2.arvTm;
-                                                                            let dptTm = data2.dptTm;
+                                                                            let  dptTm = data2.dptTm;
                                                                             if (trainTime != null && processData.Position) {
                                                                                 let hours = parseInt(trainTime.slice(0, 2), 10);
                                                                                 let minutes = parseInt(trainTime.slice(2, 4), 10);
@@ -356,6 +357,7 @@ router.post("/", (req, res_router) => {
                                                                             processData.btrainNo = data2.trnNo;
                                                                             processData.delayInfo = delayInfo;
                                                                         }
+                                                                    }
                                                                     });
                                                                     subwayJson.body.push(processData);
                                                                     j++;
