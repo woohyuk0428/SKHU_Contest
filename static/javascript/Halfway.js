@@ -1,14 +1,5 @@
-
-console.log('halfway');
 const inputContainer = document.querySelector(".way-list"); // input이 들어갈 컨테이너 위치
 // const addressFunctions = new InputAddressFunctions(inputContainer);
-
-
-const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
-let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
-let responseData_place; // 근처 장소들에 대한 json데이터를 저장
-
-CreateMap({ lat: 37.5665, lng: 126.978 }); // 지도 초기화
 
 document.addEventListener("DOMContentLoaded", function () {
     //! ------------------------------- 주소 입력 필드 관련 이벤트 ---------------------------------------
@@ -85,9 +76,10 @@ function CreateMap(address) {
 function addInput() {
     const addressInputTemplate = `<div class="con-search way">
         <img class="searchIcon" src="searchIcon.svg" alt="">
-        <input class="search-input" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="지점 2">
+        <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="추가 지점">
         <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기">
-    </div>`;
+    </div>
+    `;
 
     inputContainer.insertAdjacentHTML("beforeend", addressInputTemplate);
     activateRemoveButtons();
@@ -105,13 +97,12 @@ function activateRemoveButtons() {
 
 // 삭제 버튼 클릭 시 실행
 function removeAddress() {
-    const parentInputGroup = this.closest(".input-group");
-    parentInputGroup.remove();
+    inputContainer.removeChild(inputContainer.lastElementChild);
 }
 
 // 주소 자동 완성 기능 활성화
 function activateAutoAddress() {
-    const addressInputs = document.querySelectorAll('input[name="address"]');
+    const addressInputs = document.querySelectorAll(".post_input_data");
     new google.maps.places.Autocomplete(addressInputs[addressInputs.length - 1]);
 }
 
@@ -181,10 +172,11 @@ function AdrInfoFor(adrs, displayInfo) {
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function HalfwaySearch(marker_iconList, midData) {
-    console.log('hlafwayserch');
+    console.log("hlafwayserch");
     // const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
-    const addressInputs = document.querySelectorAll('input[name="address"]'); // 인풋폼 저장
+    const addressInputs = document.querySelectorAll(".post_input_data"); // 인풋폼 저장
     const inputValues = [...addressInputs].map((input) => input.value); // 주소값 저장
+    console.log(inputValues);
     const url = "http://localhost:8080/halfway"; // ajax요청 url
     let sendData = "";
 
@@ -202,9 +194,9 @@ function HalfwaySearch(marker_iconList, midData) {
 
     // 서버로 AJAX 요청을 보내기 위한 작업
     if (midData == undefined) {
-        sendData = JSON.stringify({ addresses: inputValues, range: 300 });
+        sendData = JSON.stringify({ addresses: inputValues, range: 1000 });
     } else {
-        sendData = JSON.stringify({ addresses: inputValues, range: 300, middata: midData });
+        sendData = JSON.stringify({ addresses: inputValues, range: 1000, middata: midData });
     }
     fetch(url, {
         method: "POST",
@@ -347,14 +339,10 @@ async function createPlaceMarkers(map, responseData, iconList) {
         for (const placeinfo of responseData.midplaces[placename]) {
             const contentsName = `<h5>${placeinfo.name}</h5><br>`;
             let contentsMaintext = `
-                <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
-                <p>점포 id: ${placeinfo.id}</p>
-                <p>주소: ${placeinfo.vicinity}</p>
-                <p>영업 여부: ${placeinfo.opening}</p>
-                <p>태그: ${placeinfo.types}</p>
+                <hr><p>주소: ${placeinfo.vicinity}</p>
                 <p>평점: ${placeinfo.rating}</p>
                 <button class="btn btn-outline-primary btn-sm midRediscover" value='{
-                    "name":"${placeinfo.vicinity}", 
+                    "name":"${placeinfo.vicinity}",
                     "address": {
                         "lat": ${placeinfo.address.lat},
                         "lng": ${placeinfo.address.lng}
@@ -378,7 +366,7 @@ async function createPlaceMarkers(map, responseData, iconList) {
                 } else {
                     new Promise(async function (resolve, reject) {
                         try {
-                            const photoUrl = await fetchPlacePhoto(placeinfo.name);
+                            const photoUrl = await H_fetchPlacePhoto(placeinfo.name);
 
                             P_infoWindow.setContent(contentsName + photoUrl + contentsMaintext);
                             P_infoWindow.open(map, P_marker);
@@ -465,14 +453,14 @@ function createMidMarkers(responseData, midpoint, map, marker_iconList, midconte
 }
 
 // 대표 사진을 가져오는 함수
-async function fetchPlacePhoto(placeId) {
+async function H_fetchPlacePhoto(placeId) {
     const parser = new DOMParser();
 
     const place_image_html = await fetch(`http://localhost:8080/Suggestion/PlacePhoto?placeId=${placeId}`);
     const image_html = await place_image_html.json();
 
     let doc = parser.parseFromString(image_html.Html, "text/html");
-    let imageElement = doc.getElementsByClassName("yWs4tf")[0];
+    let imageElement = doc.getElementsByClassName("DS1iW")[0];
 
     if (imageElement) {
         let imageUrl = imageElement.getAttribute("src");
@@ -485,3 +473,11 @@ async function fetchPlacePhoto(placeId) {
         alert("검색 결과를 찾을 수 없습니다.");
     }
 }
+
+// 복원 가능하게 남겨 놓았습니다.
+// let contentsMaintext = `
+//                 <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
+//                 <p>점포 id: ${placeinfo.id}</p>
+//                 <p>주소: ${placeinfo.vicinity}</p>
+//                 <p>태그: ${placeinfo.types}</p>
+//                 <p>평점: ${placeinfo.rating}</p>`;
