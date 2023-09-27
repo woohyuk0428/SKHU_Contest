@@ -105,7 +105,6 @@ async function PlaceSearch(jsonData, radius, endpoint) {
                             lat: place.geometry.location.lat,
                             lng: place.geometry.location.lng,
                         },
-                        opening: place.opening_hours.open_now,
                         types: place.types,
                         rating: place.rating,
                         vicinity: place.vicinity,
@@ -127,6 +126,7 @@ router.get("/PlacePhoto", async (req, res) => {
     const placeId = req.query.placeId;
 
     const url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(placeId)}`;
+    console.log(url);
 
     try {
         const response = await axios.get(url);

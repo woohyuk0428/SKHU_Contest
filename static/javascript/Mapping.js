@@ -1,4 +1,3 @@
-
 // const addressFunctions = new InputAddressFunctions(inputContainer);
 
 // const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
@@ -7,24 +6,31 @@
 const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
 let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
 let responseData_place; // 근처 장소들에 대한 json데이터를 저장
-let Mydata;
+let Mydata = { lat: 37.4877347563341, lng: 126.82516487456813 };
+console.log(Mydata);
+
+// enter키 누를 때 버튼 클릭 처리
+searchInput = document.getElementById("textInput");
+
+searchInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault();
+
+        MappingSearch(marker_iconList, Mydata);
+    }
+});
 
 //! ------------------------------- 지도 초기화 ---------------------------------------
-if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-        (position) => {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
 
-            Mydata = { lat: latitude, lng: longitude };
+navigator.geolocation.getCurrentPosition(
+    (position) => {
+        Mydata = { lat: position.coords.latitude, lng: position.coords.longitude };
 
-            sendLocation(latitude, longitude).then((data) => {
-                CreateMap(Mydata);
-            });
-        },
-        (error) => {}
-    );
-}
+        M_CreateMap(Mydata);
+        console.log(Mydata);
+    },
+    (error) => {}
+);
 
 document.addEventListener("DOMContentLoaded", function () {
     //! ------------------------------- 주소 입력 필드 관련 이벤트 ---------------------------------------
@@ -80,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
     const Btn = document.getElementById("btn"); // 중간지점 찾기 버튼
-
     // 중간지점 찾기 버튼 클릭 시 실행되는 핸들러
     Btn.addEventListener("click", () => {
         MappingSearch(marker_iconList, Mydata);
@@ -88,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //! ------------------------------- 지도 초기화 ---------------------------------------
-function CreateMap(address) {
+function M_CreateMap(address) {
     map = new google.maps.Map(document.getElementById("map"), {
         center: address, // 초기 위치 설정
         zoom: 14, // 확대/축소 레벨
@@ -130,22 +135,22 @@ function getAddress(latlng, callback) {
 }
 
 //본인 위치의 위도 경도 구하는 함수
-function sendLocation(latitude, longitude) {
-    return fetch("/mapping", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ latitude, longitude }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            return data;
-        })
-        .catch((error) => {
-            console.error("Error fetching data:", error);
-        });
-}
+// function sendLocation(latitude, longitude) {
+//     return fetch("/mapping", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ latitude, longitude }),
+//     })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             return data;
+//         })
+//         .catch((error) => {
+//             console.error("Error fetching data:", error);
+//         });
+// }
 
 //! ------------------------------- 주소 입력 필드 관련 함수 ---------------------------------------
 // 주소 자동 완성 기능 활성화
@@ -222,6 +227,7 @@ let save_queue = [];
 //! ------------------------------- 중간지점 찾기 관련 함수 ---------------------------------------
 // 중간지점 버튼 클릭 시 실행되는 함수
 function MappingSearch(marker_iconList, Mydata) {
+    console.log("실행");
     //---------------------------------------------
     let form_control = document.getElementById("textInput").value;
     let ulElement = document.createElement("ol");
@@ -244,13 +250,13 @@ function MappingSearch(marker_iconList, Mydata) {
 
     // const rangeValue = 300;
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
-    const url = "http://localhost:8080/Mapping/data"; // ajax요청 url
+    const M_url = "http://localhost:8080/Mapping/data"; // ajax요청 url
     let sendData = "";
 
     // 서버로 AJAX 요청을 보내기 위한 작업
-    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: 300 });
+    sendData = JSON.stringify({ startpoint: Mydata, addresses: inputValues, range: 1000 });
     console.log(sendData);
-    fetch(url, {
+    fetch(M_url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=UTF-8",
@@ -288,7 +294,7 @@ function MappingSearch(marker_iconList, Mydata) {
             const endpoint = responseData.endpoint[0].address; // 중간지점 위치
             const map = CreateMap(endpoint); // 지도 초기화
             responseData_place = responseData.places; // 중간지점 근처 장소 데이터 전역변수에 저장
-            placeMarkers = await createPlaceMarkers(map, responseData, marker_iconList);
+            placeMarkers = await M_createPlaceMarkers(map, responseData, marker_iconList);
 
             // 길찾기 인스턴스 설정
             new google.maps.DirectionsRenderer({
@@ -386,7 +392,7 @@ function createMarker(position, map, title, icon, tags, data) {
 }
 
 // 중간지점 근처 장소 마커 생성 함수
-async function createPlaceMarkers(map, responseData, iconList) {
+async function M_createPlaceMarkers(map, responseData, iconList) {
     const placetypes = ["cafe", "convenience_store", "library", "bus_station", "subway_station", "restaurant"]; // 검색할 장소 타입
     const placeMarkers = []; // 동적으로 생성된 마커가 들어갈 배열
 
@@ -394,11 +400,7 @@ async function createPlaceMarkers(map, responseData, iconList) {
         for (const placeinfo of responseData.places[placename]) {
             const contentsName = `<h5>${placeinfo.name}</h5><br>`;
             let contentsMaintext = `
-                <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
-                <p>점포 id: ${placeinfo.id}</p>
-                <p>주소: ${placeinfo.vicinity}</p>
-                <p>영업 여부: ${placeinfo.opening}</p>
-                <p>태그: ${placeinfo.types}</p>
+                <hr><p>주소: ${placeinfo.vicinity}</p>
                 <p>평점: ${placeinfo.rating}</p>`;
 
             contentsMaintext += placename === "subway_station" ? '<h6><a href="/Post">지하철 정보 검색 페이지로 이동하시겠습니까?</a></h6>' : "";
@@ -418,7 +420,7 @@ async function createPlaceMarkers(map, responseData, iconList) {
                 } else {
                     new Promise(async function (resolve, reject) {
                         try {
-                            const photoUrl = await fetchPlacePhoto(placeinfo.name);
+                            const photoUrl = await M_fetchPlacePhoto(placeinfo.name);
 
                             P_infoWindow.setContent(contentsName + photoUrl + contentsMaintext);
                             P_infoWindow.open(map, P_marker);
@@ -485,9 +487,8 @@ function createEndMarkers(responseData, endpoint, map, marker_iconList, midconte
 }
 
 // 대표 사진을 가져오는 함수
-async function fetchPlacePhoto(placeId) {
+async function M_fetchPlacePhoto(placeId) {
     const parser = new DOMParser();
-
     const place_image_html = await fetch(`http://localhost:8080/Mapping/PlacePhoto?placeId=${placeId}`);
     const image_html = await place_image_html.json();
 
@@ -511,3 +512,11 @@ async function fetchPlacePhoto(placeId) {
 
 // // 결과를 화면에 출력
 // document.getElementById("result").innerHTML = subwayTime;
+
+// 복원 가능하게 남겨 놓았습니다.
+// let contentsMaintext = `
+//                 <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
+//                 <p>점포 id: ${placeinfo.id}</p>
+//                 <p>주소: ${placeinfo.vicinity}</p>
+//                 <p>태그: ${placeinfo.types}</p>
+//                 <p>평점: ${placeinfo.rating}</p>`;
