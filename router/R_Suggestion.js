@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 
 router.get("/PlacePhoto", async (req, res) => {
     const placeId = req.query.placeId;
-    const fetch = require("node-fetch");
+
 
     const url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(placeId)}`;
 
