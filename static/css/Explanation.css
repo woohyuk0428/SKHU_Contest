@@ -2,6 +2,13 @@
     --color_main: #8591ff;
 }
 
+.close_panel {
+    z-index: 3;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+}
+
 .bg_panel {
     position: absolute;
     top: 0;
@@ -36,6 +43,7 @@
     left: 50%;
     text-align: center;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.2);
+    z-index: 4;
 }
 
 .ex_cont > div {
@@ -93,6 +101,7 @@
 /* #region x버튼 */
 .ex_X-btn {
     position: relative;
+    z-index: 4;
 }
 
 .ex_X-btn > div {
