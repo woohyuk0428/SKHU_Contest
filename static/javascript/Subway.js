@@ -85,12 +85,15 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                     let s_position = subway.Position;
                     let s_arvlMsg2 = subway.arvlMsg2;
                     let s_btrainNo = subway.btrainNo;
+                    let s_subwayList = subway.subwayList;
 
                     s_Template = `
                     <div class="subway-time-info">
                         <p><span id="btrainNo">${s_btrainNo}</span> <span id="bstatnNm">${s_bstatnNm}</span>행: <span id="arvlMsg2">${s_arvlMsg2}</span></p>
                         <p>위치: <span id="position">${s_position}</span></p>
                         <p>지연정보 :<span id="delayinfo">${s_delayinfo}</span></p>
+                        <p>환승정보: <span id="subwayinfo">${s_subwayList}</span></p>
+
                     </div>`;
 
                     subway_group[0].insertAdjacentHTML("beforeend", s_Template);
