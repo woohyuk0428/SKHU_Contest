@@ -80,6 +80,7 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                 let s_Template = "";
                 subway_group[0].innerHTML = "";
                 result.forEach((subway) => {
+                    let s_trainLineNm = subway.trainLineNm;
                     let s_bstatnNm = subway.bstatnNm;
                     let s_delayinfo = subway.delayInfo;
                     let s_position = subway.Position;
@@ -89,7 +90,7 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
 
                     s_Template = `
                     <div class="subway-time-info">
-                        <p><span id="btrainNo">${s_btrainNo}</span> <span id="bstatnNm">${s_bstatnNm}</span>행: <span id="arvlMsg2">${s_arvlMsg2}</span></p>
+                        <p><span id="btrainNo">${s_btrainNo}</span> <span id="bstatnNm">${s_trainLineNm}</span>: <span id="arvlMsg2">${s_arvlMsg2}</span></p>
                         <p>위치: <span id="position">${s_position}</span></p>
                         <p>지연정보 :<span id="delayinfo">${s_delayinfo}</span></p>
                         <p>환승정보: <span id="subwayinfo">${s_subwayList}</span></p>
