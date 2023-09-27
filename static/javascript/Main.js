@@ -92,13 +92,13 @@ gotoHalfWayBtn.addEventListener('click', () => {
     imageContainer.style.display = 'none';
 });
 
-var imageContainer = document.getElementById("image-container");
-var imagedisplay = document.getElementById("image-display");
+
+var imagedisplay = document.getElementById('image-display');
 var isDragging = false;
 var startX, startY, translateX, translateY;
 
 // 마우스 휠 이벤트 핸들러
-imageContainer.addEventListener("wheel", function (event) {
+imageContainer.addEventListener('wheel', function(event) {
     event.preventDefault();
     var scaleFactor = event.deltaY > 0 ? 1.1 : 0.9; // 확대 또는 축소 스케일 팩터
     var currentWidth = imagedisplay.width;
@@ -106,8 +106,8 @@ imageContainer.addEventListener("wheel", function (event) {
     var newWidth = currentWidth * scaleFactor;
     var newHeight = currentHeight * scaleFactor;
 
-    imagedisplay.style.width = newWidth + "px";
-    imagedisplay.style.height = newHeight + "px";
+    imagedisplay.style.width = newWidth + 'px';
+    imagedisplay.style.height = newHeight + 'px';
 
     // 이미지를 중앙으로 이동시킵니다.
     translateX += (currentWidth - newWidth) / 2;
@@ -116,7 +116,7 @@ imageContainer.addEventListener("wheel", function (event) {
 });
 
 // 이미지 드래그 시작 이벤트 핸들러
-imageContainer.addEventListener("mousedown", function (event) {
+imageContainer.addEventListener('mousedown', function(event) {
     isDragging = true;
     startX = event.clientX;
     startY = event.clientY;
@@ -125,7 +125,7 @@ imageContainer.addEventListener("mousedown", function (event) {
 });
 
 // 이미지 드래그 중 이벤트 핸들러
-document.addEventListener("mousemove", function (event) {
+document.addEventListener('mousemove', function(event) {
     if (isDragging) {
         var deltaX = event.clientX - startX;
         var deltaY = event.clientY - startY;
@@ -138,6 +138,6 @@ document.addEventListener("mousemove", function (event) {
 });
 
 // 이미지 드래그 종료 이벤트 핸들러
-document.addEventListener("mouseup", function () {
+document.addEventListener('mouseup', function() {
     isDragging = false;
 });

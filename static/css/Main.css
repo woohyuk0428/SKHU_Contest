@@ -545,6 +545,7 @@ input[type="radio"] {
 
 #image-display {
     position: absolute;
+    width: 100vw;
 }
 .resultSubway {
     display: none;
