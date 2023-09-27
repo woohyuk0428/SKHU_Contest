@@ -84,7 +84,21 @@ function removeSelectedClassFromLabels() {
     });
 }
 
-// 도움말 버튼
+//  지하철 노선도 이미지 표시를 위한 컨테이너 참조
+const imageContainer = document.getElementById('imageContainer');
+
+// 지하철 이미지 버튼을 클릭했을 때만 지하철 노선도 표시
+gotoSubwayBtn.addEventListener('click', () => {
+    imageContainer.style.display = 'block';
+});
+
+// 길찾기와 중간지점 이미지 버튼 클릭했을 때는 다시 지하철 노선도 이미지를 숨김
+gotoMappingBtn.addEventListener('click', () => {
+    imageContainer.style.display = 'none';
+});
+gotoHalfWayBtn.addEventListener('click', () => {
+    imageContainer.style.display = 'none';
+});
 
 
 
