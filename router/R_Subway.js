@@ -322,7 +322,8 @@ router.post("/", (req, res_router) => {
                                                                                     var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 운행중`;
                                                                                 }
                                                                             } else {
-                                                                                var hours = parseInt(dptTm.slice(0, 2), 10);
+                                                                                if(dptTm |= null){
+                                                                                    var hours = parseInt(dptTm.slice(0, 2), 10);
                                                                                 var minutes = parseInt(dptTm.slice(2, 4), 10);
                                                                                 var seconds = parseInt(dptTm.slice(4, 6), 10);
                                                                                 var currentDate = new Date();
@@ -353,6 +354,8 @@ router.post("/", (req, res_router) => {
                                                                                     let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
                                                                                     var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed} 분 ${secondsDelayed}초 지연 출발`;
                                                                                 }
+                                                                                }
+                                                                                
                                                                             }
                                                                             processData.btrainNo = data2.trnNo;
                                                                             processData.delayInfo = delayInfo;
