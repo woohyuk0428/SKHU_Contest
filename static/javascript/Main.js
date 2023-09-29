@@ -99,7 +99,6 @@ gotoHalfWayBtn.addEventListener('click', () => {
     imageContainer.style.display = 'none';
 });
 
-var imageContainer = document.getElementById("image-container");
 var imagedisplay = document.getElementById("image-display");
 var isDragging = false;
 var startX, startY, translateX, translateY;
