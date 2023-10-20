@@ -15,7 +15,7 @@ const app = express(); //express 객체 생성
 const xhr = new XMLHttpRequest();
 const today = new Date(); // 서버 오픈 시 기록용 현재 시간 저장
 
-const port = 8080; // 포트 번호 지정
+const port = 5000; // 포트 번호 지정
 const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저장
 
 // #region 파일 경로 지정, 옵션 설정
@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 //서버 오픈시 실행되는 함수. 현재 시간과 함께 서버가 실행됨(Mon Jul 03 2023 21:23:13 GMT+0900 (대한민국 표준시) | server reload)
 app.listen(port, () => {
     console.log(`${today} | server reload`);
-    console.log("http://localhost:8080/");
+    console.log("182.215.194.170:5000");
 });
 
 // #region Get라우팅

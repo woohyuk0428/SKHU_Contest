@@ -5,7 +5,7 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
     var a_updnLine = document.getElementById("updnLine").value;
     var a_response = document.getElementById("station").value;
     console.log(a_response);
-    let url = "http://localhost:8080/Subway";
+    let url = "http://182.215.194.170:5000/Subway";
     var data = { response: a_response, subwayLine: a_subwayLine, updnLine: a_updnLine }; // 보낼 데이터를 객체로 정의
     console.log(data);
     fetch(url, {
@@ -122,6 +122,6 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
         })
         .catch((error) => {
             // 오류 처리
-            console.error("Error:", error);
+            console.error("Error:"+error);
         });
 });
