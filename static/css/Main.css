@@ -543,6 +543,13 @@ input[type="radio"] {
     display: none;
 }
 
+#imageContainer {
+    overflow: hidden;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
 #image-display {
     position: absolute;
     width: 100vw;
