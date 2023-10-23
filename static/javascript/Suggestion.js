@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         imageContainer.innerHTML = "";
 
                         for (j = 0; j < ResultArr.length; j++) {
-                            const place_image_html = await fetch(`http://localhost:8080/Suggestion/PlacePhoto?placeId=${ResultArr[0]}`);
+                            const place_image_html = await fetch(`http://www.skhuroad.com/Suggestion/PlacePhoto?placeId=${ResultArr[0]}`);
                             const image_html = await place_image_html.json();
 
                             console.log(image_html.Html);

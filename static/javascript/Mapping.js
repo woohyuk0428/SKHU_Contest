@@ -250,7 +250,7 @@ function MappingSearch(marker_iconList, Mydata) {
 
     // const rangeValue = 300;
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
-    const M_url = "http://www.skhuload.com/Mapping/data"; // ajax요청 url
+    const M_url = "http://www.skhuroad.com/Mapping/data"; // ajax요청 url
     let sendData = "";
 
     // 서버로 AJAX 요청을 보내기 위한 작업
