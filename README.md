@@ -1,5 +1,5 @@
 <h1>SKHUPER: SKHUROAD</h1>
-성공회대학교 제 14회 IT미콘 경진대회  SKHU_ROAD팀 레포지토리 입니다.
+성공회대학교 제 14회 IT미콘 경진대회  SKHU_ROAD팀 레포지토리 입니다.<br>
 url: <a href="www.skhuload.com">www.skhuload.com</a>
 <hr>
 <h3>팀원 소개<br></h3>
