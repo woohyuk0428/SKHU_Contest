@@ -1,5 +1,6 @@
 <h1>SKHUPER: SKHUROAD</h1>
 성공회대학교 제 14회 IT미콘 경진대회  SKHU_ROAD팀 레포지토리 입니다.
+url: <a href="www.skhuload.com">www.skhuload.com</a>
 <hr>
 <h3>팀원 소개<br></h3>
 1. 황재현 (팀장, fullstack, 총괄)<br>
@@ -11,6 +12,10 @@
 <hr>
 <h3>사용언어<br></h3>
 - ejs, css, javascipt
+<h3>server</h3>
+- cpu: i3-2130
+- ram: samsung ddr3 4gb
+- os: ubuntu server 22.04.5 LTS
 <hr>
 <h3>기능 소개<br></h3>
 <h4>길찾기</h4> 
