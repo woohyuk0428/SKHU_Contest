@@ -5,7 +5,9 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
     var a_updnLine = document.getElementById("updnLine").value;
     var a_response = document.getElementById("station").value;
     console.log(a_response);
-    let url = "http://182.215.194.170:5000/Subway";
+    let url = "http://www.skhuload.com/Subway";
+    //let dns = "http://www.skhuload.com/Subway";
+    //let dns2 = "http://www.skhuload.com:8080/Subway";
     var data = { response: a_response, subwayLine: a_subwayLine, updnLine: a_updnLine }; // 보낼 데이터를 객체로 정의
     console.log(data);
     fetch(url, {
@@ -28,43 +30,67 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
             console.log(data.Status);
             if (data.Status == 200) {
                 let resurt_tag;
-                if (a_subwayLine == "1호선") {
-                    resurt_tag = "1";
-                } else if (a_subwayLine == "2호선") {
-                    resurt_tag = "2";
-                } else if (a_subwayLine == "3호선") {
-                    resurt_tag = "3";
-                } else if (a_subwayLine == "4호선") {
-                    resurt_tag = "4";
-                } else if (a_subwayLine == "5호선") {
-                    resurt_tag = "5";
-                } else if (a_subwayLine == "6호선") {
-                    resurt_tag = "6";
-                } else if (a_subwayLine == "7호선") {
-                    resurt_tag = "7";
-                } else if (a_subwayLine == "8호선") {
-                    resurt_tag = "8";
-                } else if (a_subwayLine == "9호선") {
-                    resurt_tag = "9";
-                } else if (a_subwayLine == "경의중앙선") {
-                    resurt_tag = "gj";
-                } else if (a_subwayLine == "경춘선") {
-                    resurt_tag = "gc";
-                } else if (a_subwayLine == "공항철도") {
-                    resurt_tag = "ar";
-                } else if (a_subwayLine == "서해선") {
-                    resurt_tag = "sh";
-                } else if (a_subwayLine == "수인분당선") {
-                    resurt_tag = "sb";
-                } else if (a_subwayLine == "신분당선") {
-                    resurt_tag = "ssb";
-                } else if (a_subwayLine == "우이신설선") {
-                    resurt_tag = "ui";
+                // if (a_subwayLine == "1호선") {
+                //     resurt_tag = "1";
+                // } else if (a_subwayLine == "2호선") {
+                //     resurt_tag = "2";
+                // } else if (a_subwayLine == "3호선") {
+                //     resurt_tag = "3";
+                // } else if (a_subwayLine == "4호선") {
+                //     resurt_tag = "4";
+                // } else if (a_subwayLine == "5호선") {
+                //     resurt_tag = "5";
+                // } else if (a_subwayLine == "6호선") {
+                //     resurt_tag = "6";
+                // } else if (a_subwayLine == "7호선") {
+                //     resurt_tag = "7";
+                // } else if (a_subwayLine == "8호선") {
+                //     resurt_tag = "8";
+                // } else if (a_subwayLine == "9호선") {
+                //     resurt_tag = "9";
+                // } else if (a_subwayLine == "경의중앙선") {
+                //     resurt_tag = "gj";
+                // } else if (a_subwayLine == "경춘선") {
+                //     resurt_tag = "gc";
+                // } else if (a_subwayLine == "공항철도") {
+                //     resurt_tag = "ar";
+                // } else if (a_subwayLine == "서해선") {
+                //     resurt_tag = "sh";
+                // } else if (a_subwayLine == "수인분당선") {
+                //     resurt_tag = "sb";
+                // } else if (a_subwayLine == "신분당선") {
+                //     resurt_tag = "ssb";
+                // } else if (a_subwayLine == "우이신설선") {
+                //     resurt_tag = "ui";
+                // }
+                switch(a_subwayLine){
+                    case "1호선": resurt_tag = "1"; break;
+                    case "2호선": resurt_tag = "2"; break;
+                    case "3호선": resurt_tag = "3"; break;
+                    case "4호선": resurt_tag = "4"; break;
+                    case "5호선": resurt_tag = "5"; break;
+                    case "6호선": resurt_tag = "6"; break;
+                    case "7호선": resurt_tag = "7"; break;
+                    case "8호선": resurt_tag = "8"; break;
+                    case "9호선": resurt_tag = "9"; break;
+                    case "경의중앙선": resurt_tag = "gj"; break;
+                    case "경춘선": resurt_tag = "gc"; break;
+                    case "공항철도": resurt_tag = "ar"; break;
+                    case "서해선": resurt_tag = "sh"; break;
+                    case "수인분당선": resurt_tag = "sb"; break;
+                    case "신분당선": resurt_tag = "ssb"; break;
+                    case "우이신설선": resurt_tag = "ui"; break;
                 }
+                console.log(resurt_tag);
                 let leftcon = document.getElementById("leftcon");
                 let midcon = document.getElementById("midcon");
                 let rightcon = document.getElementById("ringthcon");
                 let resultSubway = document.getElementById("resultSubway");
+                
+                leftcon.classList.remove("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
+                midcon.classList.remove("subway-line-con", `lineNum_${resurt_tag}`);
+                rightcon.classList.remove("subway-line2", `lineNum_${resurt_tag}`);
+                
                 leftcon.classList.add("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
                 midcon.classList.add("subway-line-con", `lineNum_${resurt_tag}`);
                 rightcon.classList.add("subway-line2", `lineNum_${resurt_tag}`);
