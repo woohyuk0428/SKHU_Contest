@@ -1,8 +1,3 @@
-// const addressFunctions = new InputAddressFunctions(inputContainer);
-
-// const rangeSlider = document.getElementById("rangeSlider"); // 슬라이더 위치
-// const sliderValue = document.getElementById("sliderValue"); // 슬라이더 값을 표시할 위치
-
 const marker_iconList = CreateIcon(); // 아이콘을 리스트에 저장
 let placeMarkers = []; // 동적으로 생성한 마커들을 저장할 배열
 let responseData_place; // 근처 장소들에 대한 json데이터를 저장
@@ -55,33 +50,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
 
-    // resetButton.addEventListener("click", () => {
-    //     resetRadioSelection(radioLabels);
-    // }); // 초기화 버튼 실행
-
     // 라디오 버튼들에 대해 클릭 이벤트 리스너 추가
     radioLabels.forEach((radio) => {
         radio.addEventListener("click", handleRadioClick);
     });
 
-    // 슬라이더 값 변경
-    // rangeSlider.addEventListener("input", function () {
-    //     sliderValue.textContent = `${rangeSlider.value}미터`;
-    // });
-
     //! ------------------------------- 경로 정보 삭제 관련 이벤트 ---------------------------------------
     const AdrOffBtn = document.getElementById("addressInfoOff"); // 경로 정보 끄기 버튼
     const AdrOnBtn = document.getElementById("addressInfoOn"); // 경로 정보 표시 버튼
-
-    // // 경로 정보 끄기
-    // AdrOffBtn.addEventListener("click", () => {
-    //     AdrInfo_OnOff("off");
-    // });
-
-    // // 경로 정보 표시
-    // AdrOnBtn.addEventListener("click", () => {
-    //     AdrInfo_OnOff("on");
-    // });
 
     //! ------------------------------- 중간지점 찾기 관련 이벤트 ---------------------------------------
     // 중간지점 찾기 버튼을 누를 시 실행
@@ -133,24 +109,6 @@ function getAddress(latlng, callback) {
         }
     });
 }
-
-//본인 위치의 위도 경도 구하는 함수
-// function sendLocation(latitude, longitude) {
-//     return fetch("/mapping", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ latitude, longitude }),
-//     })
-//         .then((response) => response.json())
-//         .then((data) => {
-//             return data;
-//         })
-//         .catch((error) => {
-//             console.error("Error fetching data:", error);
-//         });
-// }
 
 //! ------------------------------- 주소 입력 필드 관련 함수 ---------------------------------------
 // 주소 자동 완성 기능 활성화
@@ -506,17 +464,3 @@ async function M_fetchPlacePhoto(placeId) {
         alert("검색 결과를 찾을 수 없습니다.");
     }
 }
-// '지하철' 관련 함수
-// 선택한 호선에 대한 조회 시간을 가져옴
-// var subwayTime = subwayTimeInfo[selectedLine];
-
-// // 결과를 화면에 출력
-// document.getElementById("result").innerHTML = subwayTime;
-
-// 복원 가능하게 남겨 놓았습니다.
-// let contentsMaintext = `
-//                 <hr><p>검색 태그: ${placename} (${placeinfo.index})</p>
-//                 <p>점포 id: ${placeinfo.id}</p>
-//                 <p>주소: ${placeinfo.vicinity}</p>
-//                 <p>태그: ${placeinfo.types}</p>
-//                 <p>평점: ${placeinfo.rating}</p>`;

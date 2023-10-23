@@ -130,21 +130,6 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
             } else if (data == 500) {
                 alert(`${a_response}역의 운행이 종료되었습니다.`);
             }
-
-            {
-                /* <div class="subway-line-con lineNum_1">
-            <div id=subwayId class="line-info">호선 정보</div>
-            <div id="stationNm" class="station-info">현재 역</div>
-            <div id="btrainNo class="subway-num">열차 번호</div>
-        </div>
-
-        <div id="trainLineNm" class="subway-line2 lineNum_1">행선지</div><br>
-    <div class="subway-time-info">
-        <div>위치 :<span id="position"></span></div>
-        <div>도착예정: <span id="arvlMsg2"></span></div>
-        <div>지연정보 :<span id="delayinfo"></span></div>
-    </div> */
-            }
         })
         .catch((error) => {
             // 오류 처리
