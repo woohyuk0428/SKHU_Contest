@@ -13,9 +13,9 @@ url: <a href="www.skhuload.com">www.skhuload.com</a>
 <h3>사용언어<br></h3>
 - ejs, css, javascipt
 <h3>server</h3>
-- cpu: i3-2130
-- ram: samsung ddr3 4gb
-- os: ubuntu server 22.04.5 LTS
+- cpu: i3-2130<br>
+- ram: samsung ddr3 4gb<br>
+- os: ubuntu server 22.04.5 LTS<br>
 <hr>
 <h3>기능 소개<br></h3>
 <h4>길찾기</h4> 
