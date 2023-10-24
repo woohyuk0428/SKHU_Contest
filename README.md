@@ -23,11 +23,11 @@
 <h3>기능 소개<br></h3>
 <h4>길찾기</h4> 
 길찾기 기능은 여러분들이 목적지를 검색하면 현재 위치에서 해당 지점까지 길을 안내해줍니다.<br>
-![image](https://github.com/woohyuk0428/SKHU_Contest/assets/101261573/92ec7088-fe56-4361-9502-89b7aceaaae3)
+<img src="https://github.com/woohyuk0428/SKHU_Contest/assets/101261573/92ec7088-fe56-4361-9502-89b7aceaaae3"><br>
 
 <h4>중간지점</h4> 
 중간지점 서비스는 지점들의 좌표값을 이용하여 여러분들에게 중간지점을 알려주는 서비스입니다.</br>
-![image](https://github.com/woohyuk0428/SKHU_Contest/assets/101261573/9eaebebe-6e42-4790-9e17-3590ede04eb7)
+<ing src="https://github.com/woohyuk0428/SKHU_Contest/assets/101261573/9eaebebe-6e42-4790-9e17-3590ede04eb7"><br>
 
 <h4>지하철</h4> 
 지하철은 노선 방향과 이용하고 싶은 역을 검색하면 열차번호, 위치, 지연정보를 제공해주는 서비스입니다.<br>
@@ -39,6 +39,6 @@
 9호선 고객센터: 1544-4009<br>
 우이신설선 고객센터: 02-3499-5561<br>
 신분당선 고객센터: 031-8018-7777<br>
-![image](https://github.com/woohyuk0428/SKHU_Contest/assets/101261573/22d79869-6dd4-4c78-83f4-e5b9fa2087e7)
+<img src="https://github.com/woohyuk0428/SKHU_Contest/assets/101261573/22d79869-6dd4-4c78-83f4-e5b9fa2087e7><br>
 
 감사합니다.
