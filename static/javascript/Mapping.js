@@ -489,7 +489,7 @@ function createEndMarkers(responseData, endpoint, map, marker_iconList, midconte
 // 대표 사진을 가져오는 함수
 async function M_fetchPlacePhoto(placeId) {
     const parser = new DOMParser();
-    const place_image_html = await fetch(`http://localhost:8080/Mapping/PlacePhoto?placeId=${placeId}`);
+    const place_image_html = await fetch(`http://www.skhuroad.com/Mapping/PlacePhoto?placeId=${placeId}`);
     const image_html = await place_image_html.json();
 
     let doc = parser.parseFromString(image_html.Html, "text/html");

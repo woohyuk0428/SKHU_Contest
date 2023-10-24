@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 //서버 오픈시 실행되는 함수. 현재 시간과 함께 서버가 실행됨(Mon Jul 03 2023 21:23:13 GMT+0900 (대한민국 표준시) | server reload)
 app.listen(port, () => {
     console.log(`${today} | server reload`);
-    console.log("182.215.194.170:"+port);
+    console.log(`success open www.skhuroad.com`);
 });
 
 // #region Get라우팅

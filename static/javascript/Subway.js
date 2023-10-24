@@ -87,9 +87,9 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                 let rightcon = document.getElementById("ringthcon");
                 let resultSubway = document.getElementById("resultSubway");
                 
-                leftcon.classList.remove("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                midcon.classList.remove("subway-line-con", `lineNum_${resurt_tag}`);
-                rightcon.classList.remove("subway-line2", `lineNum_${resurt_tag}`);
+                leftcon.classList.remove(`lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
+                midcon.classList.remove(`lineNum_${resurt_tag}`);
+                rightcon.classList.remove(`lineNum_${resurt_tag}`);
                 
                 leftcon.classList.add("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
                 midcon.classList.add("subway-line-con", `lineNum_${resurt_tag}`);
