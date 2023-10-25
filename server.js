@@ -17,7 +17,22 @@ const options = {
     ca: fs.readFileSync('./secure/ssl/www.skhuroad.com_2023102536955.unified.crt.pem'),
     minVersion: "TLSv1.2"
   };
-
+//해외 ip 차단
+request('https://api.ip.pe.kr/json/', function(error, response, body){
+    if(error){
+        console.log(error);
+        return;
+    }
+    if(!error && response.statusCode==200){
+        //let ip = JSON.parse(body).ip;
+        let country_code = JSON.parse(body).country_code;
+        if(country_code != 'KR'){
+            res.write("<script>Access Denied</script>");
+            console.log(`${new Date()}\n해외 ip: ${requestIp.getClientIp(req)}`);
+            return;
+        }
+    }
+})
 const app = express(); //express 객체 생성
 const xhr = new XMLHttpRequest();
 const today = new Date(); // 서버 오픈 시 기록용 현재 시간 저장
