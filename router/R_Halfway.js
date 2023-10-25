@@ -11,12 +11,12 @@ const geocoder = nodeGeocoder({
 
 //http://localhost:8080/halfway 경로로 요청 시 Halfway.html파일 반환
 router.get("/", (req, res) => {
-    console.log(`접속한 클라이언트 IP: ${requestIp.getClientIp(req)}`);
     res.render("Halfway");
 });
 
 // 중간지점 찾기 버튼 누를 시 주소값 받아 데이터 가공
 router.post("/", async (req, res) => {
+    console.log(`접속한 클라이언트 IP: ${requestIp.getClientIp(req).substring(7)}`);
     let midpoint;
     const data = req.body;
     console.log("받은 데이터:", data);

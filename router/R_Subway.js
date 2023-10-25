@@ -373,7 +373,7 @@ router.post("/", (req, res_router) => {
                                                                     console.log(`${processData.subwayId} ${s_response}역 실시간 알림이!\n${processData.trainLineNm}: ${processData.arvlMsg2}\n열차번호: ${processData.btrainNo}\n환승정보: ${processData.subwayList}\n지연정보: ${processData.delayInfo}`);
                                                                     j++;
                                                                     if (j === i_len.length) {
-                                                                    console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req)}`);
+                                                                    console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req).substring(7)}`);
                                                                         res_router.json(subwayJson);
                                                                     }
                                                                 } catch (e) {
@@ -400,6 +400,7 @@ router.post("/", (req, res_router) => {
                             }
                         });
                     } else {
+                        console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req).substring(7)}`);
                         console.log("운행종료");
                         res_router.json(subwayJson.Status = 500);
 
@@ -411,6 +412,7 @@ router.post("/", (req, res_router) => {
             }
         );
     } else {
+        console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req).substring(7)}`);
         console.log(`${s_line}의 ${s_response}역은 없습니다. 다시 검색해주세요.`);
         res_router.json(subwayJson.Status = 400);
         // res_router.render("/Subway", {

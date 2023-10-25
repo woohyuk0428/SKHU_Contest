@@ -20,6 +20,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+    console.log(`접속한 클라이언트 IP: ${requestIp.getClientIp(req).substring(7)}`);
     console.log(req.body);
     const { latitude, longitude } = req.body;
     console.log(latitude, longitude);
