@@ -4,6 +4,7 @@ const nodeGeocoder = require("node-geocoder");
 const axios = require("axios");
 
 const express = require("express"); // express 프레임워크
+const requestIp =require("request-ip");
 
 const router = express.Router();
 const apiKey = "AIzaSyDsmoFLqupsLIZtJGrerrEuNkrnW_8NnCI";
@@ -14,6 +15,7 @@ const geocoder = nodeGeocoder({
 
 //http://localhost:8080/mapping 경로로 요청 시 Mapping.html파일 반환
 router.get("/", (req, res) => {
+    console.log(`접속한 클라이언트 IP: ${requestIp.getClientIp(req)}`);
     res.render("Mapping");
 });
 
