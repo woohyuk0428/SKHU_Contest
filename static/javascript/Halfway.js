@@ -177,7 +177,7 @@ function HalfwaySearch(marker_iconList, midData) {
     const addressInputs = document.querySelectorAll(".post_input_data"); // 인풋폼 저장
     const inputValues = [...addressInputs].map((input) => input.value); // 주소값 저장
     console.log(inputValues);
-    const url = "http://www.skhuroad.com/halfway"; // ajax요청 url
+    const url = "https://www.skhuroad.com/halfway"; // ajax요청 url
     let sendData = "";
 
     // 출발지점이 2개 이상인지 검사

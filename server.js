@@ -12,9 +12,9 @@ const XMLHttpRequest = require("xhr2");
 const jsonfile = require("jsonfile");
 const https = require(`https`);
 const options = {
-    key: fs.readFileSync('./www.skhuroad.com_2023102536955.key.pem'),
-    cert: fs.readFileSync('./www.skhuroad.com_2023102536955.crt.pem'),
-    ca: fs.readFileSync('./www.skhuroad.com_2023102536955.unified.crt.pem'),
+    key: fs.readFileSync('./secure/ssl/www.skhuroad.com_2023102536955.key.pem'),
+    cert: fs.readFileSync('./secure/ssl/www.skhuroad.com_2023102536955.crt.pem'),
+    ca: fs.readFileSync('./secure/ssl/www.skhuroad.com_2023102536955.unified.crt.pem'),
     minVersion: "TLSv1.2"
   };
 
