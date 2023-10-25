@@ -23,6 +23,7 @@ const app = express(); //express 객체 생성
 const xhr = new XMLHttpRequest();
 const today = new Date(); // 서버 오픈 시 기록용 현재 시간 저장
 
+
 const port = process.env.PORT || 8080; // 포트 번호 지정
 const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저장
 
@@ -63,13 +64,13 @@ app.use((req, res, next) => {
     if (geo && geo.country !== 'KR') { 
       res.writeHead(403, { 'Content-Type': 'text/plain' });
       res.end('403 Foridden');
-      console.log(`${new Date()}\n해외 ip: ${requestIp.getClientIp(req)}차단 성공`);
+      console.log(`${new Date()}\n해외 ip: ${requestIp.getClientIp(req).substring(7)}차단 성공`);
     } else {
       next();
     }
   });
 app.get("/", (req, res) => {
-    console.log(`${new Date}\n접속한 클라이언트 IP: ${requestIp.getClientIp(req)}`);
+    console.log(`${new Date}\n접속한 클라이언트 IP: ${requestIp.getClientIp(req).substring(7)}`);
     res.render("Main");
 });
 const server = https.createServer(options, app);

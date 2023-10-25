@@ -5,7 +5,8 @@ const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
 const requestIp = require("request-ip");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
-const key = "527078486174656e3131335074454453"
+const key = fs.readFileSync("./APIKey.txt");
+
 //요일 구분해주는 function
 function getDayOfWeek() {
     const now = new Date();
@@ -20,7 +21,7 @@ function getDayOfWeek() {
 
 // http://localhost:8080/post - post라우팅
 router.post("/", (req, res_router) => {
-    console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req)}`);
+    console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req).substring(7)}`);
     console.log("실행");
     console.log(req.body);
     var s_response = req.body.response; // XSS 공격 방어
