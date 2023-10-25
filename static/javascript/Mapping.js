@@ -250,7 +250,7 @@ function MappingSearch(marker_iconList, Mydata) {
 
     // const rangeValue = 300;
     const inputValues = document.querySelector('input[name="address"]').value; // 인풋폼 저장
-    const M_url = "http://www.skhuload.com/Mapping/data"; // ajax요청 url
+    const M_url = "http://www.skhuroad.com/Mapping/data"; // ajax요청 url
     let sendData = "";
 
     // 서버로 AJAX 요청을 보내기 위한 작업
@@ -489,7 +489,7 @@ function createEndMarkers(responseData, endpoint, map, marker_iconList, midconte
 // 대표 사진을 가져오는 함수
 async function M_fetchPlacePhoto(placeId) {
     const parser = new DOMParser();
-    const place_image_html = await fetch(`http://localhost:8080/Mapping/PlacePhoto?placeId=${placeId}`);
+    const place_image_html = await fetch(`https://www.skhuroad.com/Mapping/PlacePhoto?placeId=${placeId}`);
     const image_html = await place_image_html.json();
 
     let doc = parser.parseFromString(image_html.Html, "text/html");

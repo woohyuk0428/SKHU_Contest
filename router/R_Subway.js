@@ -3,6 +3,7 @@ const router = express.Router();
 const request = require("request"); // request 모듈
 const fs = require("fs"); // fs 모듈
 const jsonFile = require("jsonfile");
+const requestIp = require("request-ip");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
 const key = "527078486174656e3131335074454453"
 //요일 구분해주는 function
@@ -19,6 +20,7 @@ function getDayOfWeek() {
 
 // http://localhost:8080/post - post라우팅
 router.post("/", (req, res_router) => {
+    console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req)}`);
     console.log("실행");
     console.log(req.body);
     var s_response = req.body.response; // XSS 공격 방어
@@ -355,6 +357,10 @@ router.post("/", (req, res_router) => {
                                                                                     var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed} 분 ${secondsDelayed}초 지연 출발`;
                                                                                 }
                                                                                 }
+                                                                                else{
+                                                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 출발 예정`;
+
+                                                                                }
                                                                                 
                                                                             }
                                                                             processData.btrainNo = data2.trnNo;
@@ -363,11 +369,10 @@ router.post("/", (req, res_router) => {
                                                                     }
                                                                     });
                                                                     subwayJson.body.push(processData);
+                                                                    console.log(`${processData.subwayId} ${s_response}역 실시간 알림이!\n${processData.trainLineNm}: ${processData.arvlMsg2}\n열차번호: ${processData.btrainNo}\n환승정보: ${processData.subwayList}\n지연정보: ${processData.delayInfo}`);
                                                                     j++;
-                                                                    console.log(j);
-                                                                    console.log(i_len.length);
                                                                     if (j === i_len.length) {
-                                                                        console.log(subwayJson);
+                                                                    console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req)}`);
                                                                         res_router.json(subwayJson);
                                                                     }
                                                                 } catch (e) {

@@ -7,9 +7,16 @@ const request = require("request"); // request 모듈
 const cookieParser = require("cookie-parser");
 const fs = require("fs"); // fs 모듈
 const bodyParser = require("body-parser");
-
+const requestIp =require("request-ip");
 const XMLHttpRequest = require("xhr2");
 const jsonfile = require("jsonfile");
+const https = require(`https`);
+const options = {
+    key: fs.readFileSync('./www.skhuroad.com_2023102536955.key.pem'),
+    cert: fs.readFileSync('./www.skhuroad.com_2023102536955.crt.pem'),
+    ca: fs.readFileSync('./www.skhuroad.com_2023102536955.unified.crt.pem'),
+    minVersion: "TLSv1.2"
+  };
 
 const app = express(); //express 객체 생성
 const xhr = new XMLHttpRequest();
@@ -39,10 +46,7 @@ app.use(bodyParser.json());
 // #endregion
 
 //서버 오픈시 실행되는 함수. 현재 시간과 함께 서버가 실행됨(Mon Jul 03 2023 21:23:13 GMT+0900 (대한민국 표준시) | server reload)
-app.listen(port, () => {
-    console.log(`${today} | server reload`);
-    console.log("182.215.194.170:"+port);
-});
+
 
 // #region Get라우팅
 app.use("/halfway", require("./router/R_Halfway"));
@@ -51,10 +55,15 @@ app.use("/mapping", require("./router/R_Mapping"));
 app.use("/detail", require("./router/R_Detail"));
 //app.use("/post", require("./router/R_Post"));
 app.use("/Subway", require("./router/R_Subway"));
-
-//http://localhost:8080/ 경로로 요청 시 Main.html파일 반환
 app.get("/", (req, res) => {
+    console.log(`${new Date}\n접속한 클라이언트 IP: ${requestIp.getClientIp(req)}`);
     res.render("Main");
 });
-// #endregion
+const server = https.createServer(options, app);
+//http://localhost:8080/ 경로로 요청 시 Main.html파일 반환
 
+// #endregion
+server.listen(port, () => {
+    console.log(`${today} | server reload`);
+    console.log(`success open https://www.skhuroad.com`);
+});

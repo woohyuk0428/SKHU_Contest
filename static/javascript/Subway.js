@@ -5,7 +5,7 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
     var a_updnLine = document.getElementById("updnLine").value;
     var a_response = document.getElementById("station").value;
     console.log(a_response);
-    let url = "http://www.skhuload.com/Subway";
+    let url = "https://www.skhuroad.com/Subway";
     //let dns = "http://www.skhuload.com/Subway";
     //let dns2 = "http://www.skhuload.com:8080/Subway";
     var data = { response: a_response, subwayLine: a_subwayLine, updnLine: a_updnLine }; // 보낼 데이터를 객체로 정의
@@ -87,9 +87,9 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                 let rightcon = document.getElementById("ringthcon");
                 let resultSubway = document.getElementById("resultSubway");
                 
-                leftcon.classList.remove("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
-                midcon.classList.remove("subway-line-con", `lineNum_${resurt_tag}`);
-                rightcon.classList.remove("subway-line2", `lineNum_${resurt_tag}`);
+                leftcon.classList.remove(`lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
+                midcon.classList.remove(`lineNum_${resurt_tag}`);
+                rightcon.classList.remove(`lineNum_${resurt_tag}`);
                 
                 leftcon.classList.add("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
                 midcon.classList.add("subway-line-con", `lineNum_${resurt_tag}`);
