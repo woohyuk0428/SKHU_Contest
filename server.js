@@ -7,7 +7,7 @@ const request = require("request"); // request 모듈
 const cookieParser = require("cookie-parser");
 const fs = require("fs"); // fs 모듈
 const bodyParser = require("body-parser");
-const requestIp =require("request-ip");
+const requestIp = require("request-ip");
 const XMLHttpRequest = require("xhr2");
 const jsonfile = require("jsonfile");
 const https = require(`https`);
@@ -16,28 +16,14 @@ const options = {
     cert: fs.readFileSync('./secure/ssl/www.skhuroad.com_2023102536955.crt.pem'),
     ca: fs.readFileSync('./secure/ssl/www.skhuroad.com_2023102536955.unified.crt.pem'),
     minVersion: "TLSv1.2"
-  };
+};
 //해외 ip 차단
-request('https://api.ip.pe.kr/json/', function(error, response, body){
-    if(error){
-        console.log(error);
-        return;
-    }
-    if(!error && response.statusCode==200){
-        //let ip = JSON.parse(body).ip;
-        let country_code = JSON.parse(body).country_code;
-        if(country_code != 'KR'){
-            res.write("<script>Access Denied</script>");
-            console.log(`${new Date()}\n해외 ip: ${requestIp.getClientIp(req)}`);
-            return;
-        }
-    }
-})
+const geoip = require('geoip-lite');
 const app = express(); //express 객체 생성
 const xhr = new XMLHttpRequest();
 const today = new Date(); // 서버 오픈 시 기록용 현재 시간 저장
 
-const port = process.env.PORT||8080; // 포트 번호 지정
+const port = process.env.PORT || 8080; // 포트 번호 지정
 const key = fs.readFileSync("APIKey.txt", "utf8"); // 지하철 API 키값 저장
 
 // #region 파일 경로 지정, 옵션 설정
@@ -70,6 +56,18 @@ app.use("/mapping", require("./router/R_Mapping"));
 app.use("/detail", require("./router/R_Detail"));
 //app.use("/post", require("./router/R_Post"));
 app.use("/Subway", require("./router/R_Subway"));
+app.use((req, res, next) => {
+    const ip = req.connection.remoteAddress;
+    const geo = geoip.lookup(ip);
+  
+    if (geo && geo.country !== 'KR') { 
+      res.writeHead(403, { 'Content-Type': 'text/plain' });
+      res.end('403 Foridden');
+      console.log(`${new Date()}\n해외 ip: ${requestIp.getClientIp(req)}차단 성공`);
+    } else {
+      next();
+    }
+  });
 app.get("/", (req, res) => {
     console.log(`${new Date}\n접속한 클라이언트 IP: ${requestIp.getClientIp(req)}`);
     res.render("Main");
