@@ -6,7 +6,7 @@ url: <a href="https://www.skhuroad.com">www.skhuroad.com</a>
 1. 황재현 (팀장, fullstack, 총괄)<br>
 2. 강우혁 (팀원, backend, 지하철, 서버담당)<br>
 3. 김현우 (팀원, backend, 중간지점, 길찾기, 서버담당)<br>
-4. 박동준 (팀원, fullstack, 중간지점 담당)<br>
+4. 박동준 (팀원, fullstack, 길찾기, 중간지점 담당)<br>
 5. 최준혁 (팀원, frontend, 디자인 담당)<br>
 6. 김민서 (팀원, frontend, 디자인 담당)<br>
 <hr>
