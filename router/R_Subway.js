@@ -158,6 +158,7 @@ router.post("/", (req, res_router) => {
                                                     const lstcarAt = data3.lstcarAt;
                                                     let trainNo = data3.trainNo;
                                                     const trainSttus = data3.trainSttus;
+                                                    const statnTnm = data3.statnTnm;
                                                     let parseInt_trainNo = parseInt(trainNo, 10);
                                                     trainNo = String(parseInt_trainNo);
                                                     if (btrainNo === trainNo) {
@@ -209,7 +210,19 @@ router.post("/", (req, res_router) => {
                                                             processData.Position = `${statnNm}역 출발 (특급) (막차)`;
                                                         } else if (trainSttus === "3" && directAt === "7" && lstcarAt === "1") {
                                                             processData.Position = `${statnNm}역 전역출발 (특급) (막차)`;
+                                                        } else if (statnTnm === s_response) {
+                                                            processData.Position = `${s_response}역 출발 대기중`;
+
                                                         }
+                                                        else if (statnNm === s_response) {
+                                                            processData.Position = `${s_response}역 출발 대기중`;
+
+                                                        }
+                                                        else if (statnNm === s_response && trainSttus === "2" && directAt === "0" && lstcarAt === "0") {
+                                                            processData.Position = `${s_response}역 출발`;
+                                                        }
+
+
                                                         //subwayData[subwayId].push(processData);
                                                     }
                                                 });
@@ -229,7 +242,7 @@ router.post("/", (req, res_router) => {
                                                                 try {
                                                                     const obj = JSON.parse(body1);
                                                                     const result = obj.body;
-                                                                    if (s_data.btrainNo != undefined ) {
+                                                                    if (s_data.btrainNo != undefined) {
                                                                         result.sort((a, b) => {
                                                                             if (
                                                                                 s_line == "1호선" ||
@@ -261,119 +274,154 @@ router.post("/", (req, res_router) => {
                                                                     }
                                                                     //delay 지연 정보 구현
                                                                     result.forEach((data2, index1) => {
-                                                                        if(data2.arvTm != null){
-                                                                        var train_no = data2.trnNo;
-                                                                        if (
-                                                                            s_line == "1호선" ||
-                                                                            s_line == "3호선" ||
-                                                                            s_line == "4호선" ||
-                                                                            s_line == "9호선" ||
-                                                                            s_line == "경의중앙선" ||
-                                                                            s_line == "경춘선" ||
-                                                                            s_line == "수인분당선" ||
-                                                                            s_line == "신분당선" ||
-                                                                            s_line == "서해선" ||
-                                                                            s_line == "우이신설선"
-                                                                        ) {
-                                                                            train_no = train_no.substring(1);
-                                                                        }
+                                                                        if (data2.arvTm != null) {
+                                                                            var train_no = data2.trnNo;
+                                                                            if (
+                                                                                s_line == "1호선" ||
+                                                                                s_line == "3호선" ||
+                                                                                s_line == "4호선" ||
+                                                                                s_line == "9호선" ||
+                                                                                s_line == "경의중앙선" ||
+                                                                                s_line == "경춘선" ||
+                                                                                s_line == "수인분당선" ||
+                                                                                s_line == "신분당선" ||
+                                                                                s_line == "서해선" ||
+                                                                                s_line == "우이신설선"
+                                                                            ) {
+                                                                                train_no = train_no.substring(1);
+                                                                            }
 
-                                                                        if (s_line === "2호선" && btrainNo.charAt(0) == "3") {
-                                                                            btrainNo = btrainNo.replace("3", "2");
-                                                                        } else if (s_line === "2호선" && btrainNo.charAt(0) == "6") {
-                                                                            btrainNo = btrainNo.replace("6", "2");
-                                                                        } else if (s_line === "2호선" && btrainNo.charAt(0) == "7") {
-                                                                            btrainNo = btrainNo.replace("7", "2");
-                                                                        } else if (s_line === "2호선" && btrainNo.charAt(0) == "8") {
-                                                                            btrainNo = btrainNo.replace("8", "2");
-                                                                        }
-                                                                        if (btrainNo === train_no) {
-                                                                            let trainTime = data2.arvTm;
-                                                                            let  dptTm = data2.dptTm;
-                                                                            if (trainTime != null && processData.Position) {
-                                                                                let hours = parseInt(trainTime.slice(0, 2), 10);
-                                                                                let minutes = parseInt(trainTime.slice(2, 4), 10);
-                                                                                let seconds = parseInt(trainTime.slice(4, 6), 10);
-                                                                                let currentDate = new Date();
-                                                                                let trainDate = new Date(
-                                                                                    currentDate.getFullYear(),
-                                                                                    currentDate.getMonth(),
-                                                                                    currentDate.getDate(),
-                                                                                    hours,
-                                                                                    minutes,
-                                                                                    seconds
-                                                                                );
-                                                                                let recptnDate = new Date(recptnDt);
+                                                                            if (s_line === "2호선" && btrainNo.charAt(0) == "3") {
+                                                                                btrainNo = btrainNo.replace("3", "2");
+                                                                            } else if (s_line === "2호선" && btrainNo.charAt(0) == "6") {
+                                                                                btrainNo = btrainNo.replace("6", "2");
+                                                                            } else if (s_line === "2호선" && btrainNo.charAt(0) == "7") {
+                                                                                btrainNo = btrainNo.replace("7", "2");
+                                                                            } else if (s_line === "2호선" && btrainNo.charAt(0) == "8") {
+                                                                                btrainNo = btrainNo.replace("8", "2");
+                                                                            }
+                                                                            if (btrainNo === train_no) {
+                                                                                let trainTime = data2.arvTm;
+                                                                                let dptTm = data2.dptTm;
+                                                                                console.log("dptTm: " + dptTm);
+                                                                                if (trainTime != null && processData.Position) {
+                                                                                    let hours = parseInt(trainTime.slice(0, 2), 10);
+                                                                                    let minutes = parseInt(trainTime.slice(2, 4), 10);
+                                                                                    let seconds = parseInt(trainTime.slice(4, 6), 10);
+                                                                                    let currentDate = new Date();
+                                                                                    let trainDate = new Date(
+                                                                                        currentDate.getFullYear(),
+                                                                                        currentDate.getMonth(),
+                                                                                        currentDate.getDate(),
+                                                                                        hours,
+                                                                                        minutes,
+                                                                                        seconds
+                                                                                    );
+                                                                                    let recptnDate = new Date(recptnDt);
 
-                                                                                recptnDate.setHours(
-                                                                                    trainDate.getHours(),
-                                                                                    trainDate.getMinutes(),
-                                                                                    trainDate.getSeconds()
-                                                                                );
+                                                                                    recptnDate.setHours(
+                                                                                        trainDate.getHours(),
+                                                                                        trainDate.getMinutes(),
+                                                                                        trainDate.getSeconds()
+                                                                                    );
 
-                                                                                if (currentDate.getTime() > recptnDate.getTime()) {
-                                                                                    let timeDiff = currentDate - recptnDate;
-                                                                                    let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
-                                                                                    let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                                                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
-                                                                                } else if (currentDate.getTime() < recptnDate.getTime()) {
-                                                                                    let timeDiff = recptnDate - currentDate;
-                                                                                    let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
-                                                                                    let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                                                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
-                                                                                } else if (currentDate.getTime() === recptnDate.getTime()) {
-                                                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 운행중`;
+                                                                                    if (currentDate.getTime() > recptnDate.getTime()) {
+                                                                                        let timeDiff = currentDate - recptnDate;
+                                                                                        let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
+                                                                                        let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                                                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 지연 운행중`;
+                                                                                    } else if (currentDate.getTime() < recptnDate.getTime()) {
+                                                                                        let timeDiff = recptnDate - currentDate;
+                                                                                        let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
+                                                                                        let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                                                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차${minuesDelayed}분 ${secondsDelayed}초 조기 운행중`;
+                                                                                    } else if (currentDate.getTime() === recptnDate.getTime()) {
+                                                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 운행중`;
+                                                                                    }
                                                                                 }
-                                                                            } else {
-                                                                                if(dptTm |= null){
+                                                                                processData.btrainNo = data2.trnNo;
+                                                                                processData.delayInfo = delayInfo;
+
+                                                                            }
+                                                                        }
+                                                                        else if (data2.dptTm != null && data2.arvTm == null) {
+                                                                            var train_no = data2.trnNo;
+                                                                            if (
+                                                                                s_line == "1호선" ||
+                                                                                s_line == "3호선" ||
+                                                                                s_line == "4호선" ||
+                                                                                s_line == "9호선" ||
+                                                                                s_line == "경의중앙선" ||
+                                                                                s_line == "경춘선" ||
+                                                                                s_line == "수인분당선" ||
+                                                                                s_line == "신분당선" ||
+                                                                                s_line == "서해선" ||
+                                                                                s_line == "우이신설선"
+                                                                            ) {
+                                                                                train_no = train_no.substring(1);
+                                                                            }
+
+                                                                            if (s_line === "2호선" && btrainNo.charAt(0) == "3") {
+                                                                                btrainNo = btrainNo.replace("3", "2");
+                                                                            } else if (s_line === "2호선" && btrainNo.charAt(0) == "6") {
+                                                                                btrainNo = btrainNo.replace("6", "2");
+                                                                            } else if (s_line === "2호선" && btrainNo.charAt(0) == "7") {
+                                                                                btrainNo = btrainNo.replace("7", "2");
+                                                                            } else if (s_line === "2호선" && btrainNo.charAt(0) == "8") {
+                                                                                btrainNo = btrainNo.replace("8", "2");
+                                                                            }
+                                                                            if (btrainNo === train_no) {
+                                                                                let dptTm = data2.dptTm;
+                                                                                console.log("dptTm: " + dptTm);
+                                                                                if (dptTm != undefined || dptTm != null) {
                                                                                     var hours = parseInt(dptTm.slice(0, 2), 10);
-                                                                                var minutes = parseInt(dptTm.slice(2, 4), 10);
-                                                                                var seconds = parseInt(dptTm.slice(4, 6), 10);
-                                                                                var currentDate = new Date();
-                                                                                var trainDate = new Date(
-                                                                                    currentDate.getFullYear(),
-                                                                                    currentDate.getMonth(),
-                                                                                    currentDate.getDate(),
-                                                                                    hours,
-                                                                                    minutes,
-                                                                                    seconds
-                                                                                );
-                                                                                var recptnDate = new Date(recptnDt);
-                                                                                recptnDate.setHours(
-                                                                                    trainDate.getHours(),
-                                                                                    trainDate.getMinutes(),
-                                                                                    trainDate.getSeconds()
-                                                                                );
-                                                                                if (currentDate.getTime() < recptnDate.getTime()) {
-                                                                                    let timeDiff = recptnDate - currentDate;
-                                                                                    let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
-                                                                                    let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                                                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 후 출발 예정`;
-                                                                                } else if (currentDate.getTime() == recptnDate.getTime()) {
-                                                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 출발`;
-                                                                                } else if (currentDate.getTime() > recptnDate.getTime()) {
-                                                                                    let timeDiff = currentDate - recptnDate;
-                                                                                    let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
-                                                                                    let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                                                                                    var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed} 분 ${secondsDelayed}초 지연 출발`;
+                                                                                    var minutes = parseInt(dptTm.slice(2, 4), 10);
+                                                                                    var seconds = parseInt(dptTm.slice(4, 6), 10);
+                                                                                    var currentDate = new Date();
+                                                                                    var trainDate = new Date(
+                                                                                        currentDate.getFullYear(),
+                                                                                        currentDate.getMonth(),
+                                                                                        currentDate.getDate(),
+                                                                                        hours,
+                                                                                        minutes,
+                                                                                        seconds
+                                                                                    );
+                                                                                    var recptnDate = new Date(recptnDt);
+                                                                                    recptnDate.setHours(
+                                                                                        trainDate.getHours(),
+                                                                                        trainDate.getMinutes(),
+                                                                                        trainDate.getSeconds()
+                                                                                    );
+                                                                                    if (currentDate.getTime() < recptnDate.getTime()) {
+                                                                                        let timeDiff = recptnDate - currentDate;
+                                                                                        let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
+                                                                                        let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                                                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed}분 ${secondsDelayed}초 후 출발 예정`;
+                                                                                    } else if (currentDate.getTime() == recptnDate.getTime()) {
+                                                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 정시 출발`;
+                                                                                    } else if (currentDate.getTime() > recptnDate.getTime()) {
+                                                                                        let timeDiff = currentDate - recptnDate;
+                                                                                        let minuesDelayed = Math.floor(timeDiff / (1000 * 60));
+                                                                                        let secondsDelayed = Math.floor((timeDiff % (1000 * 60)) / 1000);
+                                                                                        var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 ${minuesDelayed} 분 ${secondsDelayed}초 지연 출발`;
+                                                                                    }
                                                                                 }
-                                                                                }
-                                                                                else{
+                                                                                else {
                                                                                     var delayInfo = `${data2.trnNo} ${bstatnNm}행 열차 출발 예정`;
 
                                                                                 }
-                                                                                
+                                                                                processData.btrainNo = data2.trnNo;
+                                                                                processData.delayInfo = delayInfo;
+
                                                                             }
-                                                                            processData.btrainNo = data2.trnNo;
-                                                                            processData.delayInfo = delayInfo;
                                                                         }
-                                                                    }
+
                                                                     });
                                                                     subwayJson.body.push(processData);
                                                                     console.log(`${processData.subwayId} ${s_response}역 실시간 알림이!\n${processData.trainLineNm}: ${processData.arvlMsg2}\n열차번호: ${processData.btrainNo}\n환승정보: ${processData.subwayList}\n지연정보: ${processData.delayInfo}`);
                                                                     j++;
                                                                     if (j === i_len.length) {
-                                                                    console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req).substring(7)}`);
+                                                                        console.log(`${new Date}\n접속한 클라이언트의 IP : ${requestIp.getClientIp(req).substring(7)}`);
                                                                         res_router.json(subwayJson);
                                                                     }
                                                                 } catch (e) {
