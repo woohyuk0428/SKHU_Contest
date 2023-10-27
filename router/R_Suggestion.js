@@ -1,5 +1,6 @@
 const express = require("express"); // express 프레임워크
 const router = express.Router();
+const fetch = require("node-fetch");
 
 //http://localhost:8080/suggestion 경로로 요청 시 Suggestion.html파일 반환
 router.get("/", (req, res) => {
@@ -8,6 +9,7 @@ router.get("/", (req, res) => {
 
 router.get("/PlacePhoto", async (req, res) => {
     const placeId = req.query.placeId;
+    console.log(placeId)
 
 
     const url = `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(placeId)}`;
