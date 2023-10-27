@@ -307,7 +307,7 @@ function MappingSearch(marker_iconList, Mydata) {
 
                 const markerPromises = dynamicMarkers.map(function (markerInfo, index) {
                     return new Promise(function (resolve, reject) {
-                        const colorCode = "#" + Math.round(Math.random() * 0xffffff).toString(16); // 경로 랜덤 색깔
+                        const colorCode = getRandomColor(); // 경로 랜덤 색깔
                         const marker = createMarker(markerInfo.position, map, markerInfo.title, markerInfo.icon, markerInfo.tags); // 시작지점 마커 생성
 
                         // 길찾기 옵션 설정
@@ -323,6 +323,7 @@ function MappingSearch(marker_iconList, Mydata) {
                             suppressMarkers: true,
                             polylineOptions: {
                                 strokeColor: colorCode,
+                                strokeWeight: 7,
                             },
                         });
 
@@ -330,11 +331,12 @@ function MappingSearch(marker_iconList, Mydata) {
                         directionsService.route(request, function (response, status) {
                             if (status == google.maps.DirectionsStatus.OK) {
                                 const contents_info = `
-                                <p>출발 시간: ${response.routes[0].legs[0].departure_time.text}</p>
-                                <p>도착 시간: ${response.routes[0].legs[0].arrival_time.text}</p>
-                                <p>이동 거리: ${response.routes[0].legs[0].distance.text}</p>
-                                <p>이동 시간: ${response.routes[0].legs[0].duration.text}</p>`;
-                                midcontent += `<br><p>${index + 1}. ${markerInfo.title}</p><br> ${contents_info} <br><hr>`; //  MID마커에 표시될 데이터 저장
+                                <ul class="start_end_ul">
+                                    <li>${response.routes[0].legs[0].departure_time.text} 출발 ~ ${response.routes[0].legs[0].arrival_time.text} 도착</li>
+                                    <li>약 ${response.routes[0].legs[0].duration.text} 소요 예정</li>
+                                    <li>총 이동 거리: ${response.routes[0].legs[0].distance.text}</li>
+                                </ul>`;
+                                midcontent += `<h3 class="adr_title">${markerInfo.title}</h3> ${contents_info} <hr>`; //  MID마커에 표시될 데이터 저장
 
                                 createRoute(contents_info, response, markerInfo, map, marker, directionsRenderer); // 경로 생성
                                 resolve(); // 비동기 작업 완료
@@ -398,12 +400,11 @@ async function M_createPlaceMarkers(map, responseData, iconList) {
 
     for (const placename of placetypes) {
         for (const placeinfo of responseData.places[placename]) {
-            const contentsName = `<h5>${placeinfo.name}</h5><br>`;
+            const contentsName = `<h1 class="place_name">${placeinfo.name}</h1>`;
             let contentsMaintext = `
-                <hr><p>주소: ${placeinfo.vicinity}</p>
-                <p>평점: ${placeinfo.rating}</p>`;
-
-            contentsMaintext += placename === "subway_station" ? '<h6><a href="/Post">지하철 정보 검색 페이지로 이동하시겠습니까?</a></h6>' : "";
+                <hr>
+                <ul class="place_ul"><li>주소: ${placeinfo.vicinity}</li>
+                <li>평점: <div class="stars" id="stars">${updateStars(placeinfo.rating)}</div></li></ul>`;
 
             const P_marker = createMarker(placeinfo.address, map, placeinfo.name, iconList[placename], placename, { get_image: false }); // 마커 생성
 
@@ -447,8 +448,8 @@ async function M_createPlaceMarkers(map, responseData, iconList) {
 // 길찾기 경로 생성 함수
 function createRoute(contents_info, response, markerInfo, map, marker, directionsRenderer) {
     const infoWindowContent = `
-    <h5>${markerInfo.title}</h5>
-    <p>사용자님이 검색하신 ${markerInfo.content}</p><hr>
+    <div class="m_start">출발지점</div>
+    <h2 class="m_title">${markerInfo.title}</h2><hr>
     ${contents_info}
     `;
 
@@ -466,9 +467,8 @@ function createRoute(contents_info, response, markerInfo, map, marker, direction
 // 중간지점 마커 생성 함수
 function createEndMarkers(responseData, endpoint, map, marker_iconList, midcontent) {
     const midcontent_name = `
-        <h5>${responseData.endpoint[0].name}</h5>
-        <p>도착지점입니다.</p><hr>
-        `;
+            <div class="m_end">도착지점</div>
+            <h2 class="m_title">${responseData.endpoint[0].name}</h2><hr>`;
 
     const markerEnd = new google.maps.Marker({
         position: endpoint,

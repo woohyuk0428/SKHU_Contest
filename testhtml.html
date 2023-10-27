@@ -3,31 +3,31 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>그라데이션 효과</title>
+        <title>가로 타원형 테스트</title>
         <style>
-            .gradient-box {
-                width: 200px;
-                height: 200px;
-                background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.95) 100%);
-            }
-            .gradient-box:hover {
-                width: 200px;
-                height: 200px;
-                background-image: linear-gradient(to top, #000, transparent);
-                animation: gradientAnimation 2s ease-in-out infinite alternate;
+            .m_end,
+            .m_start {
+                width: 140px; /* 가로 크기 */
+                height: 50px; /* 세로 크기 */
+                border-radius: 25px; /* border-radius를 사용하여 가로 타원형 생성 */
+                font-size: x-large;
+                color: white;
+                text-align: center;
+                line-height: 50px;
+                font-weight: 700;
+                margin: 0 auto;
             }
 
-            @keyframes gradientAnimation {
-                0% {
-                    background-position: 0 100%;
-                }
-                100% {
-                    background-position: 0 0;
-                }
+            .m_end {
+                background-color: rgb(117, 126, 255); /* 배경 색상 */
+            }
+            .m_start {
+                background-color: rgb(255, 104, 142); /* 배경 색상 */
             }
         </style>
     </head>
     <body>
-        <div class="gradient-box"></div>
+        <div class="m_start">출발지점</div>
+        <div class="m_end">도착지점</div>
     </body>
 </html>

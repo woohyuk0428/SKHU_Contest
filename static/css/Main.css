@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "GmarketSansMedium";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
 
@@ -557,3 +564,103 @@ input[type="radio"] {
 .resultSubway {
     display: none;
 }
+
+/* place 디자인 */
+/* 제목 디자인 */
+.place_name {
+    font-family: "GmarketSansMedium", sans-serif;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgb(180, 180, 180);
+}
+
+.place_name + img {
+    display: block;
+    border-radius: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.place_ul {
+    font-family: "GmarketSansMedium", sans-serif;
+    font-weight: 500;
+    width: 300px;
+}
+
+/* 별점 디자인 */
+.stars {
+    display: inline;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.stars i {
+    cursor: pointer;
+}
+
+.stars .filled {
+    color: #fdd835;
+}
+
+/* 재검색 버튼 디자인 */
+button.midRediscover {
+    background-color: #65c0fd; /* 배경 색상 */
+    color: #fff; /* 텍스트 색상 */
+    padding: 5px 10px; /* 내부 여백 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 커서 모양 */
+    font-size: 16px; /* 글꼴 크기 */
+    font-weight: bold; /* 글꼴 두께 */
+    text-align: center; /* 가운데 정렬 */
+    text-decoration: none; /* 밑줄 없음 */
+    display: block;
+    transition: background-color 0.3s; /* 배경 색상 변경 효과 */
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+button.midRediscover:hover {
+    background-color: #1399f3; /* 마우스 오버 시 배경 색상 변경 */
+}
+/* place 디자인 */
+
+/* 시작, 도착 지점 마커 디자인 */
+.m_end,
+.m_start {
+    width: 140px; /* 가로 크기 */
+    height: 40px; /* 세로 크기 */
+    border-radius: 20px; /* border-radius를 사용하여 가로 타원형 생성 */
+    font-size: large;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 900;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.m_end {
+    background-color: rgb(117, 126, 255); /* 배경 색상 */
+}
+.m_start {
+    background-color: rgb(255, 104, 142); /* 배경 색상 */
+}
+
+.adr_title,
+.m_title,
+.start_end_ul {
+    width: 350px;
+    font-family: "GmarketSansMedium", sans-serif;
+}
+
+.adr_title,
+.m_title {
+    font-weight: 700;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+/* 시작, 도착 지점 마커 디자인 */

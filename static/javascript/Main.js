@@ -3,7 +3,6 @@ function showMap() {
         center: { lat: 37.5665, lng: 126.978 }, // 초기 위치 설정
         zoom: 14, // 확대/축소 레벨
     });
-
 }
 
 // 초기설정 화면(구글 지도) 적용
@@ -45,27 +44,26 @@ function toggleSection(sectionShow, buttonHighlight) {
     buttonHighlight.classList.add("on");
 }
 
-gotoMappingBtn.addEventListener('click', () => {
+gotoMappingBtn.addEventListener("click", () => {
     showMap();
 
-  toggleSection(section1, gotoMappingBtn);
-  imageDisplay.classList.remove("hiddenMap");
-  subwayMap.classList.add("hiddenMap");
-})
+    toggleSection(section1, gotoMappingBtn);
+    imageDisplay.classList.remove("hiddenMap");
+    subwayMap.classList.add("hiddenMap");
+});
 
-gotoHalfWayBtn.addEventListener('click', () => {
+gotoHalfWayBtn.addEventListener("click", () => {
     showMap();
 
-  toggleSection(section2, gotoHalfWayBtn);
-  imageDisplay.classList.remove("hiddenMap");
-  subwayMap.classList.add("hiddenMap");
-})
+    toggleSection(section2, gotoHalfWayBtn);
+    imageDisplay.classList.remove("hiddenMap");
+    subwayMap.classList.add("hiddenMap");
+});
 
-gotoSubwayBtn.addEventListener('click', () => {
-
-  toggleSection(section3, gotoSubwayBtn);
-  imageDisplay.classList.add("hiddenMap");
-  subwayMap.classList.remove("hiddenMap");
+gotoSubwayBtn.addEventListener("click", () => {
+    toggleSection(section3, gotoSubwayBtn);
+    imageDisplay.classList.add("hiddenMap");
+    subwayMap.classList.remove("hiddenMap");
 });
 //--------------------------------------
 const radioLabels = document.querySelectorAll(".radio-label input[type='radio']"); // 주변 장소 필터버튼 선택
@@ -75,7 +73,6 @@ radioLabels.forEach((radio) => {
     radio.addEventListener("click", handleRadioClick);
 });
 
-
 // 버튼 클래스 중 "selected"를 제거하는 함수 (선택된 버튼 초기화)
 function removeSelectedClassFromLabels() {
     document.querySelectorAll(".radio-label").forEach((label) => {
@@ -84,28 +81,27 @@ function removeSelectedClassFromLabels() {
 }
 
 //  지하철 노선도 이미지 표시를 위한 컨테이너 참조
-const imageContainer = document.getElementById('imageContainer');
+const imageContainer = document.getElementById("imageContainer");
 
 // 지하철 이미지 버튼을 클릭했을 때만 지하철 노선도 표시
-gotoSubwayBtn.addEventListener('click', () => {
-    imageContainer.style.display = 'block';
+gotoSubwayBtn.addEventListener("click", () => {
+    imageContainer.style.display = "block";
 });
 
 // 길찾기와 중간지점 이미지 버튼 클릭했을 때는 다시 지하철 노선도 이미지를 숨김
-gotoMappingBtn.addEventListener('click', () => {
-    imageContainer.style.display = 'none';
+gotoMappingBtn.addEventListener("click", () => {
+    imageContainer.style.display = "none";
 });
-gotoHalfWayBtn.addEventListener('click', () => {
-    imageContainer.style.display = 'none';
+gotoHalfWayBtn.addEventListener("click", () => {
+    imageContainer.style.display = "none";
 });
 
-var imageContainer = document.getElementById("image-container");
 var imagedisplay = document.getElementById("image-display");
 var isDragging = false;
 var startX, startY, translateX, translateY;
 
 // 마우스 휠 이벤트 핸들러
-imageContainer.addEventListener('wheel', function(event) {
+imageContainer.addEventListener("wheel", function (event) {
     event.preventDefault();
     var scaleFactor = event.deltaY > 0 ? 1.1 : 0.9; // 확대 또는 축소 스케일 팩터
     var currentWidth = imagedisplay.width;
@@ -113,8 +109,8 @@ imageContainer.addEventListener('wheel', function(event) {
     var newWidth = currentWidth * scaleFactor;
     var newHeight = currentHeight * scaleFactor;
 
-    imagedisplay.style.width = newWidth + 'px';
-    imagedisplay.style.height = newHeight + 'px';
+    imagedisplay.style.width = newWidth + "px";
+    imagedisplay.style.height = newHeight + "px";
 
     // 이미지를 중앙으로 이동시킵니다.
     translateX += (currentWidth - newWidth) / 2;
@@ -123,7 +119,7 @@ imageContainer.addEventListener('wheel', function(event) {
 });
 
 // 이미지 드래그 시작 이벤트 핸들러
-imageContainer.addEventListener('mousedown', function(event) {
+imageContainer.addEventListener("mousedown", function (event) {
     isDragging = true;
     startX = event.clientX;
     startY = event.clientY;
@@ -132,7 +128,7 @@ imageContainer.addEventListener('mousedown', function(event) {
 });
 
 // 이미지 드래그 중 이벤트 핸들러
-document.addEventListener('mousemove', function(event) {
+document.addEventListener("mousemove", function (event) {
     if (isDragging) {
         var deltaX = event.clientX - startX;
         var deltaY = event.clientY - startY;
@@ -145,6 +141,6 @@ document.addEventListener('mousemove', function(event) {
 });
 
 // 이미지 드래그 종료 이벤트 핸들러
-document.addEventListener('mouseup', function() {
+document.addEventListener("mouseup", function () {
     isDragging = false;
 });
