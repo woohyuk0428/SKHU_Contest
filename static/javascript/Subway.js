@@ -63,7 +63,7 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                 // } else if (a_subwayLine == "우이신설선") {
                 //     resurt_tag = "ui";
                 // }
-                switch(a_subwayLine){
+                switch (a_subwayLine) {
                     case "1호선": resurt_tag = "1"; break;
                     case "2호선": resurt_tag = "2"; break;
                     case "3호선": resurt_tag = "3"; break;
@@ -86,11 +86,11 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                 let midcon = document.getElementById("midcon");
                 let rightcon = document.getElementById("ringthcon");
                 let resultSubway = document.getElementById("resultSubway");
-                
+
                 leftcon.classList.remove(`lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
                 midcon.classList.remove(`lineNum_${resurt_tag}`);
                 rightcon.classList.remove(`lineNum_${resurt_tag}`);
-                
+
                 leftcon.classList.add("subway-line1", `lineNum_${resurt_tag}`); // 여러 클래스를 추가할 때는 ,를 사용합니다
                 midcon.classList.add("subway-line-con", `lineNum_${resurt_tag}`);
                 rightcon.classList.add("subway-line2", `lineNum_${resurt_tag}`);
@@ -107,6 +107,15 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                 let s_info = "";
                 const info = document.getElementById("info");
                 subway_group[0].innerHTML = "";
+                let today = new Date();
+                let year = today.getFullYear(); // 년도
+                let month = today.getMonth() + 1;  // 월
+                let date = today.getDate();  // 날짜
+                let hours = today.getHours(); // 시
+                let minutes = today.getMinutes();  // 분
+                let seconds = today.getSeconds();  // 초
+                
+
                 result.forEach((subway) => {
                     let s_trainLineNm = subway.trainLineNm;
                     let s_bstatnNm = subway.bstatnNm;
@@ -125,7 +134,7 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                     </div>`;
                     subway_group[0].insertAdjacentHTML("beforeend", s_Template);
                 });
-                switch(a_subwayLine){
+                switch (a_subwayLine) {
                     case '1호선':
                     case '3호선':
                     case '4호선':
@@ -154,9 +163,12 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                     case "우이신설선":
                         s_info = "우이신설경전철 고객센터: 02-3499-5561";
                         break;
-                    
+
                 }
+                let time = `<p> ${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분 ${seconds}초 기준</p>`
+                subway_group[0].insertAdjacentHTML("beforeend",time);
                 subway_group[0].insertAdjacentHTML("beforeend", s_info);
+
                 console.log(info);
                 console.log(s_info);
             } else if (data == 400) {
@@ -182,6 +194,6 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
         })
         .catch((error) => {
             // 오류 처리
-            console.error("Error:"+error);
+            console.error("Error:" + error);
         });
 });
