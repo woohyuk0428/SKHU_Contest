@@ -6,6 +6,16 @@ const jsonFile = require("jsonfile");
 const requestIp = require("request-ip");
 const reverse = jsonFile.readFileSync("./static/json/line_reverse.json");
 const key = fs.readFileSync("./APIKey.txt");
+const macaddress = require("node-macaddress");
+function f_macaddress(){
+    let mac = macaddress.one(function (err , mac){
+        console.log(`MacAddress 주소 : ${mac}`);
+        return mac;
+     });
+    return mac;
+
+}
+console.log(`function mac: ${f_macaddress()}`);
 
 //요일 구분해주는 function
 function getDayOfWeek() {

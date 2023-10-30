@@ -73,3 +73,20 @@ input[type="range"]::-webkit-slider-thumb {
     border: 2px solid rgb(49, 162, 255);
     box-shadow: -10007px 0 0 10000px rgb(49, 162, 255);
 }
+
+.inform input {
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid #e5e9f5;
+    background-color: #f6f7fa;
+    padding: 20px;
+    margin-top: 10px;
+    margin: 0 auto;
+    border-radius: 10px;
+    width: 30%;
+}
+
+.inform label {
+    color: #7369ab;
+    text-align: center;
+}

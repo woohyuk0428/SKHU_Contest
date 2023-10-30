@@ -69,27 +69,28 @@ function Chapter_text(chapter, result_id) {
             case 0:
                 remove_select();
                 title = "길찾기 서비스";
-                maintext = "검색한 장소로 이동할 수 있는 수단을 보여줍니다." + "<br>" + "사용 방법을 알고 싶으시면 next부분을 클릭하시고 빛이 나는 부분과 상호작용 해 주세요.";
+                maintext = "검색한 장소로 이동할 수 있는 수단을 보여줍니다." + "<br>" + "사용 방법을 알고 싶으시면 next부분을 클릭 후 빛이 나는 부분과 상호작용 해 주세요.";
                 break;
 
             case 1:
                 remove_select();
                 add_select("con-search");
-                title = "1단계";
+                title = "Step 1.";
                 maintext = "목적지를 검색합니다. <br> (주소 자동완성 기능 제공)";
                 break;
 
             case 2:
                 remove_select();
                 add_select("search-btn");
-                title = "2단계";
+                title = "Step 2.";
                 maintext = "검색 버튼을 눌러 위치를 검색합니다.";
                 break;
 
             case 3:
                 remove_select();
                 title = "Step 3.";
-                maintext = "오른쪽 지도에서 검색 결과를 확인합니다. <br> 무지개 마커: 목적지 <br> 빨간색 마커: 출발지";
+                maintext = `오른쪽 지도에서 검색 <br>결과를 확인합니다. <br><br> <span><img src="mid_icon.png" width="20px" alt="" /> 무지개 마커: 목적지 <br />
+                <img src="start_icon.png" width="20px" alt="" /> 빨간색 마커: 출발지</span>`;
                 break;
 
             default:
@@ -100,8 +101,8 @@ function Chapter_text(chapter, result_id) {
         switch (chapter) {
             case 0:
                 remove_select();
-                title = "중간지점 찾기 서비스";
-                maintext = "검색한 두 장소의 중간지점을 찾아줍니다." + "<br>" + "사용 방법을 알고 싶으시면 next부분을 클릭하시고 빛이 나는 부분과 상호작용 해 주세요.";
+                title = "중간지점 찾기!";
+                maintext = "검색한 두 장소의 중간지점을 찾아줍니다." + "<br>" + "사용 방법을 알고 싶으시면 next부분을 클릭 후 빛이 나는 부분과 상호작용 해 주세요.";
                 break;
 
             case 1:
@@ -115,34 +116,35 @@ function Chapter_text(chapter, result_id) {
                 remove_select();
                 add_select("remove-address");
                 title = "Step 2.";
-                maintext = "필요없는 출발지를 삭제합니다.";
+                maintext = "필요없는 출발지를 <br>삭제합니다.";
                 break;
 
             case 3:
                 remove_select();
                 add_select("con-search");
                 title = "Step 3.";
-                maintext = "각 사용자별 출발지를 입력합니다.";
+                maintext = "각 사용자별 출발지를 <br>입력합니다.";
                 break;
 
             case 4:
                 remove_select();
                 add_select("search-btn");
                 title = "Step 4.";
-                maintext = "검색 버튼을 눌러 검색 결과를 확인합니다.";
+                maintext = "검색 버튼을 눌러 검색 결과를 <br>확인합니다.";
                 break;
 
             case 5:
                 remove_select();
                 add_select("radio-label");
                 title = "Step 5.";
-                maintext = "중간지점 근처 편의점, 카페 등을 확인하고 사진, 평점등을 볼 수 있습니다.";
+                maintext = "중간지점 근처 편의점, 카페 등을 확인하고 사진, 평점등을 <br>볼 수 있습니다.";
                 break;
 
             case 6:
                 remove_select();
                 title = "Step 6.";
-                maintext = "오른쪽 지도에서 검색 결과를 확인합니다. <br> 무지개 마커: 목적지 <br> 빨간색 마커: 출발지";
+                maintext = `오른쪽 지도에서 검색 <br>결과를 확인합니다. <br><br> <span><img src="mid_icon.png" width="20px" alt="" /> 무지개 마커: 목적지 <br />
+                <img src="start_icon.png" width="20px" alt="" /> 빨간색 마커: 출발지</span>`;
                 break;
 
             default:
@@ -154,7 +156,7 @@ function Chapter_text(chapter, result_id) {
             case 0:
                 remove_select();
                 title = "지하철 지연정보";
-                maintext = "지하철 역의 지연시간을 알려줍니다." + "<br>" + "사용 방법을 알고 싶으시면 next부분을 클릭하시고 빛이 나는 부분과 상호작용 해 주세요.";
+                maintext = "지하철 역의 지연시간을 알려줍니다." + "<br>" + "사용 방법을 알고 싶으시면 next부분을 클릭 후빛이 나는 부분과 상호작용 해 주세요.";
                 break;
 
             case 1:
@@ -168,7 +170,7 @@ function Chapter_text(chapter, result_id) {
                 remove_select();
                 add_select("updnLine_no");
                 title = "Step 2.";
-                maintext = "지연정보를 검색할 역의 상행, 하행 정보를 확인할지 입력합니다.<br>상행: 현위치의 역보다 위쪽을 말합니다.<br>하행: 현위치의 역보다 아래쪽을 말합니다.";
+                maintext = "지연정보를 검색할 역의 상행, 하행 정보를 확인할지 입력합니다.";
                 break;
 
             case 3:
