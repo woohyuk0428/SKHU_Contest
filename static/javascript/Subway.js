@@ -104,6 +104,8 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
 
                 const subway_group = document.getElementsByClassName("subway_text_group");
                 let s_Template = "";
+                let s_info = "";
+                const info = document.getElementById("info");
                 subway_group[0].innerHTML = "";
                 result.forEach((subway) => {
                     let s_trainLineNm = subway.trainLineNm;
@@ -120,11 +122,43 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                         <p>위치: <span id="position">${s_position}</span></p>
                         <p>지연정보 :<span id="delayinfo">${s_delayinfo}</span></p>
                         <p>환승정보: <span id="subwayinfo">${s_subwayList}</span></p>
-
                     </div>`;
-
                     subway_group[0].insertAdjacentHTML("beforeend", s_Template);
                 });
+                switch(a_subwayLine){
+                    case '1호선':
+                    case '3호선':
+                    case '4호선':
+                        s_info = "코레일 고객센터: 1544-7788<br>서울교통공사 고객센터: 1577-1234";
+                        break;
+                    case '2호선':
+                    case '5호선':
+                    case '6호선':
+                    case '7호선':
+                    case "8호선":
+                        s_info = "서울교통공사 고객센터: 1577-1234";
+                        break;
+                    case '9호선':
+                        s_info = "메트로 9호선 고객센터 :02-2656-0009";
+                        break;
+                    case "경의중앙선":
+                    case '경춘선':
+                    case "수인분당선":
+                    case "서해선":
+                    case "경강선":
+                        s_info = "코레일 고객센터: 1544-7788";
+                        break;
+                    case "신분당선":
+                        s_info = "신분당선 고객센터: 031-8018-7777";
+                        break;
+                    case "우이신설선":
+                        s_info = "우이신설경전철 고객센터: 02-3499-5561";
+                        break;
+                    
+                }
+                subway_group[0].insertAdjacentHTML("beforeend", s_info);
+                console.log(info);
+                console.log(s_info);
             } else if (data == 400) {
                 alert(`${a_subwayLine}에 ${a_response}은 없습니다. 다시 검색해주세요.`);
             } else if (data == 500) {
