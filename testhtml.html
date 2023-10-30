@@ -3,31 +3,51 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>가로 타원형 테스트</title>
+        <title>텍스트 복사 예제</title>
         <style>
-            .m_end,
-            .m_start {
-                width: 140px; /* 가로 크기 */
-                height: 50px; /* 세로 크기 */
-                border-radius: 25px; /* border-radius를 사용하여 가로 타원형 생성 */
-                font-size: x-large;
-                color: white;
-                text-align: center;
-                line-height: 50px;
-                font-weight: 700;
-                margin: 0 auto;
+            .container {
+                margin: 20px;
             }
-
-            .m_end {
-                background-color: rgb(117, 126, 255); /* 배경 색상 */
+            textarea {
+                width: 100%;
+                min-height: 100px;
+                resize: none;
+                border: 1px solid #ccc;
+                padding: 10px;
+                font-size: 16px;
+                box-sizing: border-box;
             }
-            .m_start {
-                background-color: rgb(255, 104, 142); /* 배경 색상 */
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
             }
         </style>
     </head>
     <body>
-        <div class="m_start">출발지점</div>
-        <div class="m_end">도착지점</div>
+        <div class="container">
+            <textarea id="myText" placeholder="여기에 복사할 텍스트를 입력하세요."></textarea>
+            <button onclick="copyText()">복사</button>
+            <button onclick="dd()">dd</button>
+        </div>
+
+        <script>
+            function copyText() {
+                var text = document.getElementById("myText");
+                text.select();
+                document.execCommand("copy");
+                alert("텍스트가 복사되었습니다.");
+            }
+
+            function dd() {
+                var text = document.getElementById("myText");
+                text.value = "wefewfewf";
+            }
+
+            document.getElementById("myText").addEventListener("input", function () {
+                this.style.height = "auto";
+                this.style.height = this.scrollHeight + "px";
+            });
+        </script>
     </body>
 </html>

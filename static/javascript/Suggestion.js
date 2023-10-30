@@ -48,10 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var xhr_sights = new XMLHttpRequest();
                 var url_sights = "http://apis.data.go.kr/1613000/SubwayInfoService/getSubwaySttnExitAcctoCfrFcltyList";
                 var queryParams_sights =
-                    "?" +
-                    encodeURIComponent("serviceKey") +
-                    "=" +
-                    "XXsK%2F1XwVTPaVFfkrpoBQapqSlNiziqMMJJRcS549BH3B2gH1ph4mkRwBJgDbI20uZDnt9SiLbsVlFT5%2FAHCBQ%3D%3D";
+                    "?" + encodeURIComponent("serviceKey") + "=" + "XXsK%2F1XwVTPaVFfkrpoBQapqSlNiziqMMJJRcS549BH3B2gH1ph4mkRwBJgDbI20uZDnt9SiLbsVlFT5%2FAHCBQ%3D%3D";
                 queryParams_sights += "&" + encodeURIComponent("_type") + "=" + encodeURIComponent("json");
                 queryParams_sights += "&" + encodeURIComponent("subwayStationId") + "=" + encodeURIComponent(`${code}`);
 

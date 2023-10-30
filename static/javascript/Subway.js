@@ -125,3 +125,13 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
             console.error("Error:", error);
         });
 });
+
+// 이미지 클릭 시 입력 내용 삭제 함수
+function subwayDeleteInputText() {
+    var inputElement = document.getElementById("station");
+    inputElement.value = "";
+}
+
+// 이미지를 클릭할 때 deleteInputText 함수 호출
+let subwayImageElement = document.getElementById("subway_reset-button");
+document.querySelector("#subway_reset-button").addEventListener("click", subwayDeleteInputText);

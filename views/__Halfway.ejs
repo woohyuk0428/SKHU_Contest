@@ -10,24 +10,46 @@
         </div>
     </div>
     <div>
-        <header class="search-bar">
-            <div class="con-search">
-                <img class="searchIcon" src="searchIcon.svg" alt="" />
-                <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="지점 1" />
-                <img id="reset-button" class="xMark xMark_event" src="xMark.svg" alt="지우기" />
+        <div class="way-list">
+            <div class="search-bar">
+                <div class="con-search way">
+                    <img class="searchIcon" src="searchIcon.svg" alt="" />
+                    <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="출발 지점" />
+                    <img id="reset-button" class="xMark plus_input" src="xMark.svg" alt="지우기" />
+                </div>
+                <button id="" class="remove-btn remove-address" type="button">삭제</button>
             </div>
-            <button id="mid_btn" class="search-btn" type="button">찾기</button>
-        </header>
-        <div class="search-bar">
-            <div class="con-search way">
-                <img class="searchIcon" src="searchIcon.svg" alt="" />
-                <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="지점 2" />
-                <img id="reset-button" class="xMark xMark_event" src="xMark.svg" alt="지우기" />
+            <div class="search-bar">
+                <div class="con-search way">
+                    <img class="searchIcon" src="searchIcon.svg" alt="" />
+                    <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="출발 지점" />
+                    <img id="reset-button" class="xMark plus_input" src="xMark.svg" alt="지우기" />
+                </div>
+                <button id="" class="remove-btn remove-address" type="button">삭제</button>
             </div>
-            <button id="" class="remove-btn remove-address" type="button">삭제</button>
         </div>
-        <div class="way-list"></div>
-        <button class="add-address" type="button">+</button>
+        <div class="btn_list">
+            <div class="search-bar">
+                <button id="mid_btn" class="search-btn" type="button">중간지점 찾기</button>
+                <button class="add-address" type="button">+</button>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br />
+    <div class="inform">
+        <h2>중간지점 공지 만들기</h2>
+        <form>
+            <p>일시</p>
+            <input type="text" id="inform_time" placeholder="일시를 입력해주세요." />
+            <p>내용</p>
+            <input type="text" id="inform_info" placeholder="내용을 입력해주세요." /> <br />
+            <input type="button" value="공지 생성하기" class="inform_btn" /><br />
+        </form>
+        <br />
+        <div class="inform_return inform_return_off">
+            <textarea id="coptText"></textarea>
+            <input type="button" value="공지 복사하기" id="coptText_btn" class="inform_btn" />
+        </div>
     </div>
 </main>
 <script src="Halfway.js"></script>

@@ -81,10 +81,13 @@ function CreateMap(address) {
 //! ------------------------------- 주소 입력 필드 관련 함수 ---------------------------------------
 // 새 인풋필드 추가
 function addInput() {
-    const addressInputTemplate = `<div class="con-search way">
-        <img class="searchIcon" src="searchIcon.svg" alt="">
-        <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="추가 지점">
-        <img id="reset-button" class="xMark plus_input" src="xMark.svg" alt="지우기">
+    const addressInputTemplate = `<div class="search-bar">
+        <div class="con-search way">
+            <img class="searchIcon" src="searchIcon.svg" alt="">
+            <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="출발 지점">
+            <img id="reset-button" class="xMark plus_input" src="xMark.svg" alt="지우기">
+        </div>
+        <button id="" class="remove-btn remove-address" type="button">삭제</button>
     </div>
     `;
 
@@ -95,16 +98,12 @@ function addInput() {
 
 // 삭제 버튼 활성화
 function activateRemoveButtons() {
-    const removeButtons = document.querySelectorAll(".remove-address");
-
-    removeButtons.forEach(function (button) {
-        button.addEventListener("click", removeAddress);
+    const removeButtons = document.querySelectorAll(".remove-btn");
+    removeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            button.parentElement.remove(); // 해당 버튼의 부모 엘리먼트를 삭제
+        });
     });
-}
-
-// 삭제 버튼 클릭 시 실행
-function removeAddress() {
-    inputContainer.removeChild(inputContainer.lastElementChild);
 }
 
 // 주소 자동 완성 기능 활성화
@@ -197,6 +196,9 @@ function AdrInfoFor(adrs, displayInfo) {
 // 중간지점 버튼 클릭 시 실행되는 함수
 function HalfwaySearch(marker_iconList, midData) {
     console.log("hlafwayserch");
+    const inform_return_class = document.querySelector(".inform_return");
+    inform_return_class.classList.add("inform_return_off");
+
     // const rangeValue = document.getElementById("rangeSlider").value; // 근처 장소 반경 저장
     const addressInputs = document.querySelectorAll(".post_input_data"); // 인풋폼 저장
     const inputValues = [...addressInputs].map((input) => input.value); // 주소값 저장
@@ -258,6 +260,8 @@ function HalfwaySearch(marker_iconList, midData) {
             const map = CreateMap(midpoint); // 지도 초기화
             responseData_place = responseData.midplaces; // 중간지점 근처 장소 데이터 전역변수에 저장
             placeMarkers = await createPlaceMarkers(map, responseData, marker_iconList);
+
+            copytext_midAdr = responseData.midpoint.name; // 중간지점 공지 생성용 어드레스
 
             // 길찾기 인스턴스 설정
             new google.maps.DirectionsRenderer({
@@ -533,3 +537,33 @@ async function H_fetchPlacePhoto(placeId) {
 //                 <p>주소: ${placeinfo.vicinity}</p>
 //                 <p>태그: ${placeinfo.types}</p>
 //                 <p>평점: ${placeinfo.rating}</p>`;
+
+//!------------------------ 공지 생성 ---------------------------------
+let copytext_midAdr = "";
+
+document.querySelector(".inform_btn").addEventListener("click", () => {
+    const inform_time_v = document.getElementById("inform_time").value;
+    const inform_info_v = document.getElementById("inform_info").value;
+    const coptTextArea = document.getElementById("coptText");
+    const inform_return_class = document.querySelector(".inform_return_off");
+    inform_return_class ? inform_return_class.classList.remove("inform_return_off") : null;
+
+    coptTextArea.value = `[모임 공지]
+일시: ${inform_time_v}
+장소: ${copytext_midAdr} 
+내용: ${inform_info_v}
+
+지도: https://www.google.co.kr/maps/place/${encodeURIComponent(copytext_midAdr)}`;
+});
+
+document.getElementById("coptText_btn").addEventListener("click", function () {
+    let text = document.getElementById("coptText");
+    text.select();
+    document.execCommand("Copy");
+    alert("성공적으로 복사되었습니다.");
+});
+
+document.getElementById("coptText").addEventListener("input", function () {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+});
