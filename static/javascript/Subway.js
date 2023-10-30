@@ -165,9 +165,10 @@ document.getElementById("SubwayForm").addEventListener("submit", function (event
                         break;
 
                 }
-                let time = `<p> ${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분 ${seconds}초 기준</p>`
-                subway_group[0].insertAdjacentHTML("beforeend",time);
+                let time = `<p>${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분 ${seconds}초 기준</p>`
+                subway_group[0].insertAdjacentHTML("beforeend", time);
                 subway_group[0].insertAdjacentHTML("beforeend", s_info);
+                console.log(time);
 
                 console.log(info);
                 console.log(s_info);

@@ -170,7 +170,7 @@ function Chapter_text(chapter, result_id) {
                 remove_select();
                 add_select("updnLine_no");
                 title = "Step 2.";
-                maintext = "지연정보를 검색할 역의 상행, 하행 정보를 확인할지 입력합니다.";
+                maintext = "지연정보를 검색할 역의 상행, 하행 정보를 확인할지 입력합니다.<br>상행: 현재 역보다 위로 가면 상행입니다.<br>하행: 현재 역보다 아래로 가면 하행입니다.";
                 break;
 
             case 3:
