@@ -230,22 +230,22 @@ function MappingSearch(marker_iconList, Mydata) {
     console.log("실행");
     //---------------------------------------------
     let form_control = document.getElementById("textInput").value;
-    let ulElement = document.createElement("ol");
+    let olElement = document.querySelector(".form_control_ol");
 
     save_queue.length >= 5 ? save_queue.pop() : null;
     save_queue.unshift(form_control);
     console.log(save_queue);
     console.log(save_queue.length);
 
+    while (olElement.firstChild) {
+        olElement.removeChild(olElement.firstChild); // ol 안의 모든 자식 요소를 제거
+    }
+
     save_queue.forEach((data) => {
         var liElement = document.createElement("li");
         liElement.textContent = data;
-        ulElement.appendChild(liElement);
+        olElement.appendChild(liElement);
     });
-    form_control_element = document.getElementById("form_control_text");
-    form_control_element.removeChild(form_control_element.firstChild);
-    form_control_element.appendChild(ulElement);
-
     //-----------------------------
 
     // const rangeValue = 300;
