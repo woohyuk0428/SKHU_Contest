@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "GmarketSansMedium";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
 
@@ -183,6 +190,27 @@ input[type="radio"] {
     display: none;
 }
 
+/* 사이드바 스크롤 설정 */
+.halfway-section {
+    height: 79%;
+    overflow: auto;
+}
+.halfway-section::-webkit-scrollbar {
+    width: 7px;
+}
+.halfway-section::-webkit-scrollbar-thumb {
+    background-color: #50555e;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+}
+.halfway-section::-webkit-scrollbar-track {
+    background-color: rgb(179, 179, 179);
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+/* 사이드바 스크롤 설정 */
+
 .on {
     background-color: #8591ff;
 }
@@ -191,6 +219,11 @@ input[type="radio"] {
 .con-main-halfway {
     float: left;
 }
+
+.con-main-halfway {
+    width: 440px;
+}
+
 .search-bar {
     display: flex;
     justify-content: center;
@@ -286,19 +319,43 @@ input[type="radio"] {
 }
 
 /* __Halfway */
-.add-address {
-    background-color: #00c92c;
-    color: white;
-    font-size: 30px;
-    border: none;
-    width: 65px;
-    height: 40px;
-    border-radius: 10px;
-    opacity: 0.7;
-    padding-bottom: 2px;
-
-    margin: 10px;
+.btn_list {
+    margin-top: 10px;
 }
+
+.btn_list .add-address {
+    font-size: 20px;
+    height: 48px;
+    margin-left: 10px;
+    width: 60px;
+
+    border: none;
+    background-color: #3de762;
+    color: #ffffff;
+
+    padding: 5px 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.btn_list .add-address:hover {
+    background-color: #15df40;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn_list .search-btn:hover {
+    background-color: #8591ff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background-color: #ff5353;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
 .remove-btn {
     font-size: 20px;
     height: 48px;
@@ -313,7 +370,20 @@ input[type="radio"] {
     border-radius: 10px;
     display: inline-block;
 }
+.btn_list .search-btn {
+    font-size: 20px;
+    height: 48px;
+    margin-left: 20px;
+    width: 350px;
 
+    border: none;
+    background-color: #b5b9ff;
+    color: #ffffff;
+
+    padding: 5px 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
 /* __Subway */
 .subway-con {
     display: inline-block;
@@ -557,3 +627,170 @@ input[type="radio"] {
 .resultSubway {
     display: none;
 }
+
+/* place 디자인 */
+/* 제목 디자인 */
+.place_name {
+    font-family: "GmarketSansMedium", sans-serif;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 2px 2px 2px rgb(180, 180, 180);
+}
+
+.place_name + img {
+    display: block;
+    border-radius: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.place_ul {
+    font-family: "GmarketSansMedium", sans-serif;
+    font-weight: 500;
+    width: 300px;
+}
+
+/* 별점 디자인 */
+.stars {
+    display: inline;
+    font-size: 12px;
+    color: #ccc;
+}
+
+.stars i {
+    cursor: pointer;
+}
+
+.stars .filled {
+    color: #fdd835;
+}
+
+/* 재검색 버튼 디자인 */
+button.midRediscover {
+    background-color: #65c0fd; /* 배경 색상 */
+    color: #fff; /* 텍스트 색상 */
+    padding: 5px 10px; /* 내부 여백 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 커서 모양 */
+    font-size: 16px; /* 글꼴 크기 */
+    font-weight: bold; /* 글꼴 두께 */
+    text-align: center; /* 가운데 정렬 */
+    text-decoration: none; /* 밑줄 없음 */
+    display: block;
+    transition: background-color 0.3s; /* 배경 색상 변경 효과 */
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+
+button.midRediscover:hover {
+    background-color: #1399f3; /* 마우스 오버 시 배경 색상 변경 */
+}
+/* place 디자인 */
+
+/* 시작, 도착 지점 마커 디자인 */
+.m_end,
+.m_start {
+    width: 140px; /* 가로 크기 */
+    height: 40px; /* 세로 크기 */
+    border-radius: 20px; /* border-radius를 사용하여 가로 타원형 생성 */
+    font-size: large;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 900;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.m_end {
+    background-color: rgb(117, 126, 255); /* 배경 색상 */
+}
+.m_start {
+    background-color: rgb(255, 104, 142); /* 배경 색상 */
+}
+
+.adr_title,
+.m_title,
+.start_end_ul {
+    width: 350px;
+    font-family: "GmarketSansMedium", sans-serif;
+}
+
+.adr_title,
+.m_title {
+    font-weight: 700;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+/* 시작, 도착 지점 마커 디자인 */
+
+/* 중간지점 공지생성 */
+.inform {
+    width: 90%;
+    border: 1px #8591ff solid;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0px 0px 7px #8591ff;
+}
+
+.inform input[type="text"] {
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid #e5e9f5;
+    background-color: #f6f7fa;
+    padding: 15px;
+    margin-top: 10px;
+    margin: 0 auto;
+    border-radius: 10px;
+    width: 80%;
+}
+
+.inform_btn {
+    background-color: #aab3ff; /* 배경 색상 */
+    color: #fff; /* 텍스트 색상 */
+    padding: 5px 10px; /* 내부 여백 */
+    border: none; /* 테두리 없음 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    cursor: pointer; /* 커서 모양 */
+    font-size: 16px; /* 글꼴 크기 */
+    font-weight: bold; /* 글꼴 두께 */
+    text-align: center; /* 가운데 정렬 */
+    text-decoration: none; /* 밑줄 없음 */
+    display: block;
+    transition: background-color 0.5s; /* 배경 색상 변경 효과 */
+    margin: 0 auto;
+    margin-bottom: 5px;
+    width: 10em;
+    height: 2em;
+}
+.inform_btn:hover {
+    background-color: #7987ff; /* 마우스 오버 시 배경 색상 변경 */
+}
+
+.inform p {
+    color: #8591ff;
+    text-align: left;
+    margin-bottom: 5px;
+    padding-left: 7%;
+    font-weight: bold;
+}
+
+.inform_return > textarea {
+    width: 80%;
+    min-height: 20em;
+    resize: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 12px;
+    box-sizing: border-box;
+    font-family: "GmarketSansMedium", sans-serif;
+}
+
+.inform_return_off {
+    display: none;
+}
+/* 중간지점 공지생성 */

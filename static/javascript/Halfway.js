@@ -13,6 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector(".add-address").addEventListener("click", addInput); // 추가 버튼 클릭 시 실행
 
+    const adr_inputs = document.querySelectorAll(".xMark_event");
+    for (const adr_input of adr_inputs) {
+        adr_input.addEventListener("click", (event) => {
+            handleXMarkClick(event);
+        });
+    }
+
     //! ------------------------------- 상단 필터 관련 이벤트 ---------------------------------------
     const resetButton = document.querySelector(".reset-button"); // 초기화 버튼
 
@@ -74,10 +81,13 @@ function CreateMap(address) {
 //! ------------------------------- 주소 입력 필드 관련 함수 ---------------------------------------
 // 새 인풋필드 추가
 function addInput() {
-    const addressInputTemplate = `<div class="con-search way">
-        <img class="searchIcon" src="searchIcon.svg" alt="">
-        <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="추가 지점">
-        <img id="reset-button" class="xMark" src="xMark.svg" alt="지우기">
+    const addressInputTemplate = `<div class="search-bar">
+        <div class="con-search way">
+            <img class="searchIcon" src="searchIcon.svg" alt="">
+            <input class="search-input post_input_data" autocomplete="none" type="text" id="textInput" class="form-control" name="address" placeholder="출발 지점">
+            <img id="reset-button" class="xMark plus_input" src="xMark.svg" alt="지우기">
+        </div>
+        <button id="" class="remove-btn remove-address" type="button">삭제</button>
     </div>
     `;
 
@@ -88,16 +98,12 @@ function addInput() {
 
 // 삭제 버튼 활성화
 function activateRemoveButtons() {
-    const removeButtons = document.querySelectorAll(".remove-address");
-
-    removeButtons.forEach(function (button) {
-        button.addEventListener("click", removeAddress);
+    const removeButtons = document.querySelectorAll(".remove-btn");
+    removeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            button.parentElement.remove(); // 해당 버튼의 부모 엘리먼트를 삭제
+        });
     });
-}
-
-// 삭제 버튼 클릭 시 실행
-function removeAddress() {
-    inputContainer.removeChild(inputContainer.lastElementChild);
 }
 
 // 주소 자동 완성 기능 활성화
@@ -105,6 +111,23 @@ function activateAutoAddress() {
     const addressInputs = document.querySelectorAll(".post_input_data");
     new google.maps.places.Autocomplete(addressInputs[addressInputs.length - 1]);
 }
+
+//! ----------------------------------- input내부 X버튼 활성화 -----------------------------
+// xMark 버튼이 클릭되었을 때의 동작을 정의하는 함수
+function handleXMarkClick(event) {
+    var button = event.target;
+    var conSearch = button.closest(".con-search");
+    var input = conSearch.querySelector(".search-input");
+
+    input.value = "";
+}
+
+// xMark 버튼이 속한 .con-search 요소의 부모 요소인 .way-list에 이벤트 리스너를 등록
+document.querySelector(".way-list").addEventListener("click", function (event) {
+    if (event.target.classList.contains("xMark")) {
+        handleXMarkClick(event);
+    }
+});
 
 //! ------------------------------- 상단 필터 관련 함수 ---------------------------------------
 // 버튼 선택을 초기화하는 함수
@@ -177,7 +200,7 @@ function HalfwaySearch(marker_iconList, midData) {
     const addressInputs = document.querySelectorAll(".post_input_data"); // 인풋폼 저장
     const inputValues = [...addressInputs].map((input) => input.value); // 주소값 저장
     console.log(inputValues);
-    const url = "http://www.skhuload.com/halfway"; // ajax요청 url
+    const url = "https://www.skhuroad.com/halfway"; // ajax요청 url
     let sendData = "";
 
     // 출발지점이 2개 이상인지 검사
@@ -235,6 +258,8 @@ function HalfwaySearch(marker_iconList, midData) {
             responseData_place = responseData.midplaces; // 중간지점 근처 장소 데이터 전역변수에 저장
             placeMarkers = await createPlaceMarkers(map, responseData, marker_iconList);
 
+            copytext_midAdr = responseData.midpoint.name; // 중간지점 공지 생성용 어드레스
+
             // 길찾기 인스턴스 설정
             new google.maps.DirectionsRenderer({
                 map,
@@ -246,7 +271,7 @@ function HalfwaySearch(marker_iconList, midData) {
 
                 const markerPromises = dynamicMarkers.map(function (markerInfo, index) {
                     return new Promise(function (resolve, reject) {
-                        const colorCode = "#" + Math.round(Math.random() * 0xffffff).toString(16); // 경로 랜덤 색깔
+                        const colorCode = getRandomColor(); // 경로 랜덤 색깔
                         const marker = createMarker(markerInfo.position, map, markerInfo.title, markerInfo.icon, markerInfo.tags); // 시작지점 마커 생성
 
                         // 길찾기 옵션 설정
@@ -262,6 +287,7 @@ function HalfwaySearch(marker_iconList, midData) {
                             suppressMarkers: true,
                             polylineOptions: {
                                 strokeColor: colorCode,
+                                strokeWeight: 7,
                             },
                         });
 
@@ -269,11 +295,12 @@ function HalfwaySearch(marker_iconList, midData) {
                         directionsService.route(request, function (response, status) {
                             if (status == google.maps.DirectionsStatus.OK) {
                                 const contents_info = `
-                                <p>출발 시간: ${response.routes[0].legs[0].departure_time.text}</p>
-                                <p>도착 시간: ${response.routes[0].legs[0].arrival_time.text}</p>
-                                <p>이동 거리: ${response.routes[0].legs[0].distance.text}</p>
-                                <p>이동 시간: ${response.routes[0].legs[0].duration.text}</p>`;
-                                midcontent += `<br><p>${index + 1}. ${markerInfo.title}</p><br> ${contents_info} <br><hr>`; //  MID마커에 표시될 데이터 저장
+                                <ul class="start_end_ul">
+                                    <li>${response.routes[0].legs[0].departure_time.text} 출발 ~ ${response.routes[0].legs[0].arrival_time.text} 도착</li>
+                                    <li>약 ${response.routes[0].legs[0].duration.text} 소요 예정</li>
+                                    <li>총 이동 거리: ${response.routes[0].legs[0].distance.text}</li>
+                                </ul>`;
+                                midcontent += `<h3 class="adr_title">${markerInfo.title}</h3> ${contents_info} <hr>`; //  MID마커에 표시될 데이터 저장
 
                                 createRoute(contents_info, response, markerInfo, map, marker, directionsRenderer); // 경로 생성
                                 resolve(); // 비동기 작업 완료
@@ -297,6 +324,21 @@ function HalfwaySearch(marker_iconList, midData) {
         .catch((error) => {
             console.error("fetch 작업 중 문제가 발생했습니다:", error);
         });
+}
+
+// 랜덤 색상을 추출하는 함수
+function getRandomColor() {
+    const r = Math.floor(Math.random() * 255)
+        .toString(16)
+        .padStart(2, "0"); // 빨간색 값
+    const g = Math.floor(Math.random() * 64)
+        .toString(16)
+        .padStart(2, "0"); // 녹색 값
+    const b = Math.floor(Math.random() * 64)
+        .toString(16)
+        .padStart(2, "0"); // 파란색 값
+
+    return `#${r}${g}${b}`;
 }
 
 // 시작할 때 마커에 들어갈 아이콘을 생성하는 함수
@@ -337,19 +379,18 @@ async function createPlaceMarkers(map, responseData, iconList) {
 
     for (const placename of placetypes) {
         for (const placeinfo of responseData.midplaces[placename]) {
-            const contentsName = `<h5>${placeinfo.name}</h5><br>`;
+            const contentsName = `<h1 class="place_name">${placeinfo.name}</h1>`;
             let contentsMaintext = `
-                <hr><p>주소: ${placeinfo.vicinity}</p>
-                <p>평점: ${placeinfo.rating}</p>
-                <button class="btn btn-outline-primary btn-sm midRediscover" value='{
+                <hr>
+                <ul class="place_ul"><li>주소: ${placeinfo.vicinity}</li>
+                <li>평점: <div class="stars" id="stars">${updateStars(placeinfo.rating)}</div></li></ul>
+                <button class="midRediscover" value='{
                     "name":"${placeinfo.vicinity}",
                     "address": {
                         "lat": ${placeinfo.address.lat},
                         "lng": ${placeinfo.address.lng}
                     }
                 }'>현재 지점을 중심으로 재검색</button>`;
-
-            contentsMaintext += placename === "subway_station" ? '<h6><a href="/Post">지하철 정보 검색 페이지로 이동하시겠습니까?</a></h6>' : "";
 
             const P_marker = createMarker(placeinfo.address, map, placeinfo.name, iconList[placename], placename, { get_image: false }); // 마커 생성
 
@@ -390,6 +431,19 @@ async function createPlaceMarkers(map, responseData, iconList) {
     return placeMarkers;
 }
 
+// 중간지점 별점 기능 추가
+function updateStars(rating) {
+    let contents = "";
+    for (let i = 0; i < 5; i++) {
+        if (i < rating) {
+            contents += `<i class="fas fa-star filled"></i>`;
+        } else {
+            contents += `<i class="fas fa-star"></i>`;
+        }
+    }
+    return contents;
+}
+
 async function setMidAdrEvent() {
     const midRediscoverButtons = document.querySelectorAll(".midRediscover");
 
@@ -413,8 +467,8 @@ async function setMidAdrEvent() {
 // 길찾기 경로 생성 함수
 function createRoute(contents_info, response, markerInfo, map, marker, directionsRenderer) {
     const infoWindowContent = `
-    <h5>${markerInfo.title}</h5>
-    <p>사용자님이 검색하신 ${markerInfo.content}</p><hr>
+    <div class="m_start">출발지점</div>
+    <h2 class="m_title">${markerInfo.title}</h2><hr>
     ${contents_info}
     `;
 
@@ -432,9 +486,8 @@ function createRoute(contents_info, response, markerInfo, map, marker, direction
 // 중간지점 마커 생성 함수
 function createMidMarkers(responseData, midpoint, map, marker_iconList, midcontent) {
     const midcontent_name = `
-        <h5>${responseData.midpoint.name}</h5>
-        <p>중간지점입니다.</p><hr>
-        `;
+        <div class="m_end">중간지점</div>
+        <h2 class="m_title">${responseData.midpoint.name}</h2><hr>`;
 
     const markerMid = new google.maps.Marker({
         position: midpoint,
@@ -456,7 +509,7 @@ function createMidMarkers(responseData, midpoint, map, marker_iconList, midconte
 async function H_fetchPlacePhoto(placeId) {
     const parser = new DOMParser();
 
-    const place_image_html = await fetch(`http://localhost:8080/Suggestion/PlacePhoto?placeId=${placeId}`);
+    const place_image_html = await fetch(`https://www.skhuroad.com/Suggestion/PlacePhoto?placeId=${placeId}`);
     const image_html = await place_image_html.json();
 
     let doc = parser.parseFromString(image_html.Html, "text/html");
@@ -481,3 +534,32 @@ async function H_fetchPlacePhoto(placeId) {
 //                 <p>주소: ${placeinfo.vicinity}</p>
 //                 <p>태그: ${placeinfo.types}</p>
 //                 <p>평점: ${placeinfo.rating}</p>`;
+//!------------------------ 공지 생성 ---------------------------------
+let copytext_midAdr = "";
+
+document.querySelector(".inform_btn").addEventListener("click", () => {
+    const inform_time_v = document.getElementById("inform_time").value;
+    const inform_info_v = document.getElementById("inform_info").value;
+    const coptTextArea = document.getElementById("coptText");
+    const inform_return_class = document.querySelector(".inform_return_off");
+    inform_return_class ? inform_return_class.classList.remove("inform_return_off") : null;
+
+    coptTextArea.value = `[모임 공지]
+일시: ${inform_time_v}
+장소: ${copytext_midAdr} 
+내용: ${inform_info_v}
+
+지도: https://www.google.co.kr/maps/place/${encodeURIComponent(copytext_midAdr)}`;
+});
+
+document.getElementById("coptText_btn").addEventListener("click", function () {
+    let text = document.getElementById("coptText");
+    text.select();
+    document.execCommand("Copy");
+    alert("성공적으로 복사되었습니다.");
+});
+
+document.getElementById("coptText").addEventListener("input", function () {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+});
